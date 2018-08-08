@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{00F20872-C38E-48F7-92DB-A551E7B85D3B}</ProjectGuid>
+    <ProjectGuid>{E57A1140-ED31-480B-AD74-3C321BE98883}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Aplikacia_Motion_Detect.V1</RootNamespace>
     <AssemblyName>Aplikacia_Motion_Detect.V1</AssemblyName>
@@ -34,8 +34,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\CommonServiceLocator.2.0.3\lib\net45\CommonServiceLocator.dll</HintPath>
+    <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.2.0.2\lib\net45\CommonServiceLocator.dll</HintPath>
     </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=5.4.1.0, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
@@ -45,9 +45,6 @@
     </Reference>
     <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.4.1.0, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.ServiceLocation, Version=3.1.0.0, Culture=neutral, PublicKeyToken=66e714e1d006389c, processorArchitecture=MSIL">
-      <HintPath>..\packages\DocSpace.Microsoft.Practices.ServiceLocation.3.1.0\lib\net45\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -72,8 +69,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -113,6 +108,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Aplikacia_Motion_Detect.API\Aplikacia_Motion_Detect.API.csproj">
+      <Project>{7df60db2-b11f-4581-9467-db9eae2b0891}</Project>
+      <Name>Aplikacia_Motion_Detect.API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aplikacia_Motion_Detect.UI\Aplikacia_Motion_Detect.UI.csproj">
+      <Project>{079cf28d-1aa8-4c40-87e4-4bf53e007d49}</Project>
+      <Name>Aplikacia_Motion_Detect.UI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

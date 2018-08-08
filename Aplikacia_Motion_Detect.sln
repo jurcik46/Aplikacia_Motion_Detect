@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aplikacia_Motion_Detect.V1", "Aplikacia_Motion_Detec.V1\Aplikacia_Motion_Detect.V1.csproj", "{E57A1140-ED31-480B-AD74-3C321BE98883}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aplikacia_Motion_Detect.V1", "Aplikacia_Motion_Detect.V1\Aplikacia_Motion_Detect.V1.csproj", "{E57A1140-ED31-480B-AD74-3C321BE98883}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aplikacia_Motion_Detect.UI", "Aplikacia_Motion_Detect.UI\Aplikacia_Motion_Detect.UI.csproj", "{079CF28D-1AA8-4C40-87E4-4BF53E007D49}"
 EndProject
