@@ -8,7 +8,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
 	<Grid>
-		<TextBlock HorizontalAlignment="Left" Margin="59,62,0,0" TextWrapping="Wrap" Text="{Binding TestService.Test}" VerticalAlignment="Top"/>
+		<TextBlock HorizontalAlignment="Left" Margin="59,62,0,0" TextWrapping="Wrap" Text="{Binding TestData, Mode=TwoWay}" VerticalAlignment="Top" />
+
+		<Button Content="Button" HorizontalAlignment="Left" Margin="601,203,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
 
 	</Grid>
 </Window>

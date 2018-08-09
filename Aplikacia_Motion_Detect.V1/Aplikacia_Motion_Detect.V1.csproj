@@ -114,6 +114,10 @@
       <Project>{7df60db2-b11f-4581-9467-db9eae2b0891}</Project>
       <Name>Aplikacia_Motion_Detect.API</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Aplikacia_Motion_Detect.Interfaces\Aplikacia_Motion_Detect.Interfaces.csproj">
+      <Project>{9ee0b07a-52a8-47c2-91b6-789c515e6b7c}</Project>
+      <Name>Aplikacia_Motion_Detect.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Aplikacia_Motion_Detect.UI\Aplikacia_Motion_Detect.UI.csproj">
       <Project>{079cf28d-1aa8-4c40-87e4-4bf53e007d49}</Project>
       <Name>Aplikacia_Motion_Detect.UI</Name>

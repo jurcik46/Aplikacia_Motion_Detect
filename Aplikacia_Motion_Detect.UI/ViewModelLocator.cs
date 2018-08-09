@@ -29,7 +29,6 @@ namespace Aplikacia_Motion_Detect.UI
             else
             {
                 // Create run time view services and models
-                //SimpleIoc.Default.Register<ITestService, DataService>();
                 SimpleIoc.Default.Register<ITestService, TestService>();
 
 
