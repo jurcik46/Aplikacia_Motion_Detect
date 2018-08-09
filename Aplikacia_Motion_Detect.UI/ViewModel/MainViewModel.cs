@@ -3,6 +3,7 @@ using Aplikacia_Motion_Detect.Interfaces.Messages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 using CommonServiceLocator;
+using GalaSoft.MvvmLight.CommandWpf;
 
 namespace Aplikacia_Motion_Detect.UI.ViewModel
 {
@@ -24,6 +25,9 @@ namespace Aplikacia_Motion_Detect.UI.ViewModel
             }
         }
 
+        public RelayCommand TestCommand { get; private set; }
+
+
         public MainViewModel()
         {
             ITestService a = ServiceLocator.Current.GetInstance<ITestService>();
@@ -38,8 +42,24 @@ namespace Aplikacia_Motion_Detect.UI.ViewModel
                 // test.Test = message.ButtonText;
             });
 
+            this.TestCommand = new RelayCommand(this.DisplayMessage, this.CnaDisplayMessage);
+
 
         }
+
+        public bool CnaDisplayMessage()
+        {
+
+            return true;
+        }
+
+        public void DisplayMessage()
+        {
+            Messenger.Default.Send<Testmessage>(new Testmessage() { ButtonText = "1111111111111111111111111111111" });
+
+        }
+
+
 
     }
 }

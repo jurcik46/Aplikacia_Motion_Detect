@@ -13,9 +13,6 @@ namespace Aplikacia_Motion_Detect.V1
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Messenger.Default.Send<Testmessage>(new Testmessage() { ButtonText = "1111111111111111111111111111111" });
-        }
+
     }
 }
