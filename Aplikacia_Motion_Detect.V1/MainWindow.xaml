@@ -3,14 +3,26 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:views="clr-namespace:Aplikacia_Motion_Detect.UI.View.MainWindow;assembly=Aplikacia_Motion_Detect.UI"
 		xmlns:ui="clr-namespace:Aplikacia_Motion_Detect.UI;assembly=Aplikacia_Motion_Detect.UI"
 		DataContext="{Binding Source={x:Static ui:ViewModelLocator.MainViewModel}}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-	<Grid>
-		<TextBlock HorizontalAlignment="Left" Margin="59,62,0,0" TextWrapping="Wrap" Text="{Binding TestData, Mode=TwoWay}" VerticalAlignment="Top" />
+        Title="MainWindow" Height="600" Width="900" MinWidth="850">
+	<Grid Margin="15">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
 
-		<Button Content="Button" HorizontalAlignment="Left" Margin="601,203,0,0" VerticalAlignment="Top" Width="75" Command="{Binding TestCommand}"/>
+		<views:VideoSettingControl Grid.Row="0" />
+		<views:VideoControl Grid.Row="1" />
+
+		<!--<TextBlock HorizontalAlignment="Left" Margin="59,62,0,0" TextWrapping="Wrap" Text="{Binding TestData, Mode=TwoWay}" VerticalAlignment="Top" />-->
+
+		<!--<Button Content="Button" HorizontalAlignment="Left" Margin="601,203,0,0" VerticalAlignment="Top" Width="75" Command="{Binding TestCommand}"/>-->
 
 	</Grid>
 </Window>

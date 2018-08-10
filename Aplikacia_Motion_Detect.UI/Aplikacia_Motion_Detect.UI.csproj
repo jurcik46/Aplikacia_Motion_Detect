@@ -66,6 +66,15 @@
   <ItemGroup>
     <Compile Include="ViewModelLocator.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MainWindow\MainViewModel.cs" />
+    <Compile Include="ViewModel\MainWindow\VideoSettingViewModel.cs" />
+    <Compile Include="ViewModel\MainWindow\VideoViewModel.cs" />
+    <Compile Include="View\MainWindow\VideoControl.xaml.cs">
+      <DependentUpon>VideoControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainWindow\VideoSettingControl.xaml.cs">
+      <DependentUpon>VideoSettingControl.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -91,9 +100,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="View\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Aplikacia_Motion_Detect.Backend\Aplikacia_Motion_Detect.Backend.csproj">
       <Project>{38b5bffd-a459-4c1c-bd11-cecb8510b9d8}</Project>
@@ -107,6 +114,16 @@
       <Project>{bad22669-5de9-4d2b-be28-c6053e175d37}</Project>
       <Name>Aplikacia_Motion_Detect.Resources</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="View\MainWindow\VideoControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainWindow\VideoSettingControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
