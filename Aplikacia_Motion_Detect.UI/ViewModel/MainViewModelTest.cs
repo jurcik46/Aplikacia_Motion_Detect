@@ -8,7 +8,7 @@ using GalaSoft.MvvmLight.CommandWpf;
 namespace Aplikacia_Motion_Detect.UI.ViewModel
 {
 
-    public class MainViewModel : ViewModelBase
+    public class MainViewModelTest : ViewModelBase
     {
 
         private string _testdata;
@@ -28,7 +28,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModel
         public RelayCommand TestCommand { get; private set; }
 
 
-        public MainViewModel()
+        public MainViewModelTest()
         {
             ITestService a = ServiceLocator.Current.GetInstance<ITestService>();
             TestData = a.Test;
