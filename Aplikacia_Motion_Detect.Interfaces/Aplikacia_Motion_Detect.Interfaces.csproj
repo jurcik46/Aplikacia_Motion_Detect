@@ -56,12 +56,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interface\ITestService.cs" />
+    <Compile Include="Interface\MainWindow\IVideoCaptureSetting.cs" />
     <Compile Include="Messages\Testmessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Enum\" />
-    <Folder Include="Interface\MainWindow\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
