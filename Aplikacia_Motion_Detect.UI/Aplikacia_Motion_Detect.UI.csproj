@@ -65,7 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ViewModelLocator.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModelTest.cs" />
     <Compile Include="ViewModel\MainWindow\MainViewModel.cs" />
     <Compile Include="ViewModel\MainWindow\VideoSettingViewModel.cs" />
     <Compile Include="ViewModel\MainWindow\VideoViewModel.cs" />

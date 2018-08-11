@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 namespace Aplikacia_Motion_Detect.UI.ViewModel.MainWindow
 {
-    class MainViewModel : ViewModelBase
+    public class MainViewModel : ViewModelBase
     {
     }
 }

@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GalaSoft.MvvmLight;
 
-namespace Aplikacia_Motion_Detect.UI.ViewModel.MainWindow
+namespace Aplikacia_Motion_Detect.Backend.Service.MainWindow
 {
-    public class VideoViewModel
+    public class VideoSetting
     {
+
+
     }
 }
