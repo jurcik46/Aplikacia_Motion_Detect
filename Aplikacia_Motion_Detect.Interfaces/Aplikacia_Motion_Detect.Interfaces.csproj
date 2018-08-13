@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Enum\" />
+    <Folder Include="Interface\VideoCapture\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

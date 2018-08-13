@@ -69,11 +69,31 @@
     <Compile Include="ViewModel\MainWindow\MainViewModel.cs" />
     <Compile Include="ViewModel\MainWindow\VideoSettingViewModel.cs" />
     <Compile Include="ViewModel\MainWindow\VideoViewModel.cs" />
+    <Compile Include="ViewModel\VideoCapture\IpCameraViewModel.cs" />
+    <Compile Include="ViewModel\VideoCapture\SaveOutputViewModel.cs" />
+    <Compile Include="ViewModel\VideoCapture\VideoCaptureViewModel.cs" />
+    <Compile Include="ViewModel\VideoCapture\VideoDeviceViewModel.cs" />
+    <Compile Include="ViewModel\VideoCapture\VideoFileViewModel.cs" />
     <Compile Include="View\MainWindow\VideoControl.xaml.cs">
       <DependentUpon>VideoControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow\VideoSettingControl.xaml.cs">
       <DependentUpon>VideoSettingControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\VideoCapture\IpCameraControl.xaml.cs">
+      <DependentUpon>IpCameraControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\VideoCapture\SaveOutputControl.xaml.cs">
+      <DependentUpon>SaveOutputControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\VideoCapture\VideoCaptureWindow.xaml.cs">
+      <DependentUpon>VideoCaptureWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\VideoCapture\VideoDeviceControl.xaml.cs">
+      <DependentUpon>VideoDeviceControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\VideoCapture\VideoFileControl.xaml.cs">
+      <DependentUpon>VideoFileControl.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +141,26 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MainWindow\VideoSettingControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\VideoCapture\IpCameraControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\VideoCapture\SaveOutputControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\VideoCapture\VideoCaptureWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\VideoCapture\VideoDeviceControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\VideoCapture\VideoFileControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

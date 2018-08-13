@@ -52,5 +52,9 @@
       <Name>Aplikacia_Motion_Detect.Interfaces</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Design\VideoCapture\" />
+    <Folder Include="Service\VideoCapture\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
