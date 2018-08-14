@@ -25,7 +25,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModel.MainWindow
         private string _frames;
         private string _fps;
         private string _active;
-        private VideoCaptureWindow VideoCaptureWindow = null;
+        private VideoCaptureWindow VideoCaptureWindow;
 
         private RelayCommand _addVideo;
 
@@ -37,13 +37,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModel.MainWindow
 
         private void MessageRegister()
         {
-            Messenger.Default.Register<ClosedWindowMessage>(this, (message) =>
-            {
-                if (message.Closed)
-                {
-                    this.VideoCaptureWindow = null;
-                }
-            });
+
         }
 
         private void CommandInit()
@@ -54,7 +48,10 @@ namespace Aplikacia_Motion_Detect.UI.ViewModel.MainWindow
 
         public bool CanShowVideoCaptureWindow()
         {
-            return (this.VideoCaptureWindow == null) ? true : false;
+            if (this.VideoCaptureWindow != null)
+                return (this.VideoCaptureWindow.IsLoaded) ? false : true;
+            else
+                return true;
         }
 
         public void ShowVideoCaptureWindow()

@@ -8,11 +8,6 @@
         xmlns:local="clr-namespace:Aplikacia_Motion_Detect.UI.View.VideoCapture"
         mc:Ignorable="d"
         Title="VideoCaptureWindow" Height="700" Width="800">
-	<i:Interaction.Triggers>
-		<i:EventTrigger EventName="Closing">
-			<cmd:EventToCommand Command="{Binding ClosingWindow}" PassEventArgsToCommand="True" />
-		</i:EventTrigger>
-	</i:Interaction.Triggers>
 	<Grid Margin="10">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition x:Name="colum0" Width="*"/>

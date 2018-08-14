@@ -12,9 +12,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModel.VideoCapture
     public class VideoCaptureViewModel
     {
 
-        private RelayCommand _closingWindow;
 
-        public RelayCommand ClosingWindow { get => _closingWindow; set => _closingWindow = value; }
 
         public VideoCaptureViewModel()
         {
@@ -25,13 +23,6 @@ namespace Aplikacia_Motion_Detect.UI.ViewModel.VideoCapture
 
         public void CommandInit()
         {
-            this.ClosingWindow = new RelayCommand(this.CloseWindow);
-
-        }
-
-        public void CloseWindow()
-        {
-            Messenger.Default.Send<ClosedWindowMessage>(new ClosedWindowMessage() { Closed = true });
 
         }
 
