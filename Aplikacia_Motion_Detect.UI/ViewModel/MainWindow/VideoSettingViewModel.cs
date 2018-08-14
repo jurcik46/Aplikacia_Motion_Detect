@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Aplikacia_Motion_Detect.UI.View.VideoCapture;
+using System.Windows;
+using System.Windows.Input;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
 
 namespace Aplikacia_Motion_Detect.UI.ViewModel.MainWindow
 {
@@ -19,11 +23,47 @@ namespace Aplikacia_Motion_Detect.UI.ViewModel.MainWindow
         private string _frames;
         private string _fps;
         private string _active;
+        private VideoCaptureWindow VideoCaptureWindow = null;
+
+        private RelayCommand _addVideo;
 
         public VideoSettingViewModel()
         {
+            this.AddVideo = new RelayCommand(this.ShowVideoCaptureWindow, this.CanShowVideoCaptureWindow);
+
 
         }
+
+        public ICommand AddVideoWindow
+        {
+            get
+            {
+                return AddVideo ?? (AddVideo = new RelayCommand(() =>
+                {
+                    this.VideoCaptureWindow = new VideoCaptureWindow();
+                    this.VideoCaptureWindow.Show();
+                }, () =>
+                {
+                    return (this.VideoCaptureWindow == null) ? true : false;
+                }, true));
+
+            }
+        }
+
+        public bool CanShowVideoCaptureWindow()
+        {
+
+            return (this.VideoCaptureWindow == null) ? true : false;
+        }
+
+        public void ShowVideoCaptureWindow()
+        {
+            VideoCaptureWindow VideoCaptureWindow = new VideoCaptureWindow();
+            VideoCaptureWindow.Show();
+        }
+
+
+
 
         public string Active { get => _active; set => _active = value; }
         public string Fps { get => _fps; set => _fps = value; }
@@ -35,5 +75,6 @@ namespace Aplikacia_Motion_Detect.UI.ViewModel.MainWindow
         public string State { get => _state; set => _state = value; }
         public string Description { get => _description; set => _description = value; }
         public string Name { get => _name; set => _name = value; }
+        public RelayCommand AddVideo { get => _addVideo; set => _addVideo = value; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
 using Aplikacia_Motion_Detect.UI.ViewModel.MainWindow;
+using Aplikacia_Motion_Detect.UI.ViewModel.VideoCapture;
 using GalaSoft.MvvmLight;
 using Aplikacia_Motion_Detect.Interfaces.Interface;
 using Aplikacia_Motion_Detect.Backend.Design;
@@ -31,7 +32,6 @@ namespace Aplikacia_Motion_Detect.UI
                 // Create run time view services and models
                 SimpleIoc.Default.Register<ITestService, TestService>();
 
-
             }
 
             RegisterViewModels();
@@ -43,6 +43,11 @@ namespace Aplikacia_Motion_Detect.UI
             if (!SimpleIoc.Default.IsRegistered<MainViewModel>())
             {
                 SimpleIoc.Default.Register<MainViewModel>();
+            }
+
+            if (!SimpleIoc.Default.IsRegistered<VideoSettingViewModel>())
+            {
+                SimpleIoc.Default.Register<VideoSettingViewModel>();
             }
         }
 
@@ -56,6 +61,7 @@ namespace Aplikacia_Motion_Detect.UI
         }
 
         public static MainViewModel MainViewModel => ServiceLocator.Current.GetInstance<MainViewModel>();
+        public static VideoSettingViewModel VideoSettingViewModel => ServiceLocator.Current.GetInstance<VideoSettingViewModel>();
 
 
     }
