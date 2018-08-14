@@ -1,7 +1,6 @@
 ﻿using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
 using Aplikacia_Motion_Detect.UI.ViewModel.MainWindow;
-using Aplikacia_Motion_Detect.UI.ViewModel;
 using GalaSoft.MvvmLight;
 using Aplikacia_Motion_Detect.Interfaces.Interface;
 using Aplikacia_Motion_Detect.Backend.Design;
