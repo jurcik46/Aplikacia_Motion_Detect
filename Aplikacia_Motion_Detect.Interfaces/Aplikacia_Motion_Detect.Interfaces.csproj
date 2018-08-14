@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Interface\ITestService.cs" />
     <Compile Include="Interface\MainWindow\IVideoCaptureSetting.cs" />
+    <Compile Include="Messages\ClosedWindowMessage.cs" />
     <Compile Include="Messages\Testmessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

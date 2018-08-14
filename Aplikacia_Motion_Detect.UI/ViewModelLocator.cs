@@ -45,10 +45,10 @@ namespace Aplikacia_Motion_Detect.UI
                 SimpleIoc.Default.Register<MainViewModel>();
             }
 
-            if (!SimpleIoc.Default.IsRegistered<VideoSettingViewModel>())
-            {
-                SimpleIoc.Default.Register<VideoSettingViewModel>();
-            }
+            //if (!SimpleIoc.Default.IsRegistered<VideoSettingViewModel>())
+            //{
+            //    SimpleIoc.Default.Register<VideoSettingViewModel>();
+            //}
         }
 
 
@@ -61,7 +61,7 @@ namespace Aplikacia_Motion_Detect.UI
         }
 
         public static MainViewModel MainViewModel => ServiceLocator.Current.GetInstance<MainViewModel>();
-        public static VideoSettingViewModel VideoSettingViewModel => ServiceLocator.Current.GetInstance<VideoSettingViewModel>();
+        //  public static VideoSettingViewModel VideoSettingViewModel => ServiceLocator.Current.GetInstance<VideoSettingViewModel>();
 
 
     }

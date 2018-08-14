@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace Aplikacia_Motion_Detect.Interfaces.Messages
 {
-    public class Testmessage
+    class ClosedWindowMessage
     {
-        public string ButtonText { get; set; }
+        private bool _closed;
+        public bool Closed { get => _closed; set => _closed = value; }
     }
 }

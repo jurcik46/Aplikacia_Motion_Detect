@@ -30,7 +30,7 @@
 			<StackPanel Orientation="Horizontal">
 				<TextBlock Margin="10 10 50 10" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Text="Video Sources:" />
 
-				<Button Margin="10" Content="Add" HorizontalAlignment="Left" MinWidth="100" Command="{Binding AddVideoWindow}" />
+				<Button Margin="10" Content="Add" HorizontalAlignment="Left" MinWidth="100" Command="{Binding AddVideo}" />
 				<Button Margin="10"  Content="Modify" HorizontalAlignment="Left" MinWidth="100"/>
 				<Button Margin="10" Content="Delete" HorizontalAlignment="Left" MinWidth="100"/>
 			</StackPanel>

@@ -34,32 +34,32 @@ namespace Aplikacia_Motion_Detect.UI.ViewModel.MainWindow
 
         }
 
-        public ICommand AddVideoWindow
-        {
-            get
-            {
-                return AddVideo ?? (AddVideo = new RelayCommand(() =>
-                {
-                    this.VideoCaptureWindow = new VideoCaptureWindow();
-                    this.VideoCaptureWindow.Show();
-                }, () =>
-                {
-                    return (this.VideoCaptureWindow == null) ? true : false;
-                }, true));
+        //public ICommand AddVideoWindow
+        //{
+        //    get
+        //    {
+        //        return AddVideo ?? (AddVideo = new RelayCommand(() =>
+        //        {
+        //            this.VideoCaptureWindow = new VideoCaptureWindow();
+        //            this.VideoCaptureWindow.Show();
+        //        }, () =>
+        //        {
+        //            return false;
+        //            return (this.VideoCaptureWindow == null) ? true : false;
+        //        }, true));
 
-            }
-        }
+        //    }
+        //}
 
         public bool CanShowVideoCaptureWindow()
         {
-
             return (this.VideoCaptureWindow == null) ? true : false;
         }
 
         public void ShowVideoCaptureWindow()
         {
-            VideoCaptureWindow VideoCaptureWindow = new VideoCaptureWindow();
-            VideoCaptureWindow.Show();
+            this.VideoCaptureWindow = new VideoCaptureWindow();
+            this.VideoCaptureWindow.Show();
         }
 
 
