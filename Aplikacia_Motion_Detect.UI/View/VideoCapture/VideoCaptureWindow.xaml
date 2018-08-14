@@ -6,15 +6,25 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Aplikacia_Motion_Detect.UI.View.VideoCapture"
         mc:Ignorable="d"
-        Title="VideoCaptureWindow" Height="450" Width="800">
-	<Grid>
+        Title="VideoCaptureWindow" Height="700" Width="800">
+	<Grid Margin="10">
+		<Grid.ColumnDefinitions>
 
-		<StackPanel>
+
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="60"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="0.4*"/>
+			<RowDefinition Height="60"/>
+
+		</Grid.RowDefinitions>
+		<StackPanel Grid.Row="0">
 			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" />
 			<TextBox HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" />
 		</StackPanel>
 
-		<GroupBox Header="Video Source" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100">
+		<GroupBox Grid.Row="1" Header="Video Source" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100">
 
 			<Grid HorizontalAlignment="Left"  VerticalAlignment="Top">
 				<views:IpCameraControl/>
@@ -23,9 +33,14 @@
 			</Grid>
 		</GroupBox>
 
-		<GroupBox Header="Save Output">
+		<GroupBox Grid.Row="2" Header="Save Output">
 			<views:SaveOutputControl/>
 		</GroupBox>
+
+		<Grid Margin="10" Grid.Row="3">
+			<Button HorizontalAlignment="Left" Content="Cancel" Width="150"/>
+			<Button HorizontalAlignment="Right" Content="OK" Width="150"/>
+		</Grid>
 
 	</Grid>
 </Window>
