@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace Aplikacia_Motion_Detect.Interfaces.Messages
 {
-    class ClosedWindowMessage
+    public class ClosedWindowMessage
     {
+
         private bool _closed;
         public bool Closed { get => _closed; set => _closed = value; }
+
     }
 }

@@ -8,6 +8,8 @@ using System.Windows;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using Aplikacia_Motion_Detect.Interfaces.Messages;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Aplikacia_Motion_Detect.UI.ViewModel.MainWindow
 {
@@ -29,27 +31,26 @@ namespace Aplikacia_Motion_Detect.UI.ViewModel.MainWindow
 
         public VideoSettingViewModel()
         {
-            this.AddVideo = new RelayCommand(this.ShowVideoCaptureWindow, this.CanShowVideoCaptureWindow);
-
-
+            this.CommandInit();
+            this.MessageRegister();
         }
 
-        //public ICommand AddVideoWindow
-        //{
-        //    get
-        //    {
-        //        return AddVideo ?? (AddVideo = new RelayCommand(() =>
-        //        {
-        //            this.VideoCaptureWindow = new VideoCaptureWindow();
-        //            this.VideoCaptureWindow.Show();
-        //        }, () =>
-        //        {
-        //            return false;
-        //            return (this.VideoCaptureWindow == null) ? true : false;
-        //        }, true));
+        private void MessageRegister()
+        {
+            Messenger.Default.Register<ClosedWindowMessage>(this, (message) =>
+            {
+                if (message.Closed)
+                {
+                    this.VideoCaptureWindow = null;
+                }
+            });
+        }
 
-        //    }
-        //}
+        private void CommandInit()
+        {
+            this.AddVideo = new RelayCommand(this.ShowVideoCaptureWindow, this.CanShowVideoCaptureWindow);
+        }
+
 
         public bool CanShowVideoCaptureWindow()
         {

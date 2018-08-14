@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Aplikacia_Motion_Detect.UI.ViewModel.MainWindow;
 
 namespace Aplikacia_Motion_Detect.UI.View.MainWindow
 {
@@ -23,6 +24,7 @@ namespace Aplikacia_Motion_Detect.UI.View.MainWindow
         public VideoSettingControl()
         {
             InitializeComponent();
+            this.DataContext = new VideoSettingViewModel();
         }
     }
 }

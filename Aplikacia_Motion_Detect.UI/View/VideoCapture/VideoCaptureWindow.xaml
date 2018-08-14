@@ -3,9 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
         xmlns:local="clr-namespace:Aplikacia_Motion_Detect.UI.View.VideoCapture"
         mc:Ignorable="d"
         Title="VideoCaptureWindow" Height="700" Width="800">
+	<i:Interaction.Triggers>
+		<i:EventTrigger EventName="Closing">
+			<cmd:EventToCommand Command="{Binding ClosingWindow}" PassEventArgsToCommand="True" />
+		</i:EventTrigger>
+	</i:Interaction.Triggers>
 	<Grid Margin="10">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition x:Name="colum0" Width="*"/>
