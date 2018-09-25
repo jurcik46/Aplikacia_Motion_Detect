@@ -4,8 +4,6 @@ using Aplikacia_Motion_Detect.UI.ViewModel.MainWindow;
 using Aplikacia_Motion_Detect.UI.ViewModel.VideoCapture;
 using GalaSoft.MvvmLight;
 using Aplikacia_Motion_Detect.Interfaces.Interface;
-using Aplikacia_Motion_Detect.Interfaces.Design;
-using Aplikacia_Motion_Detect.Interfaces.Service;
 
 
 
@@ -25,12 +23,12 @@ namespace Aplikacia_Motion_Detect.UI
             if (ViewModelBase.IsInDesignModeStatic)
             {
                 // Create design time view services and models
-                SimpleIoc.Default.Register<ITestService, DesignTestService>();
+                //SimpleIoc.Default.Register<ITestService, DesignTestService>();
             }
             else
             {
                 // Create run time view services and models
-                SimpleIoc.Default.Register<ITestService, TestService>();
+                //SimpleIoc.Default.Register<ITestService, TestService>();
 
             }
 
