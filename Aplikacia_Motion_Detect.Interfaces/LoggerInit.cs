@@ -1,5 +1,6 @@
 ﻿using Aplikacia_Motion_Detect.Interfaces.Enums;
 using Aplikacia_Motion_Detect.Interfaces.Extensions;
+using Destructurama;
 using Serilog;
 using Serilog.Core;
 using Serilog.Events;
