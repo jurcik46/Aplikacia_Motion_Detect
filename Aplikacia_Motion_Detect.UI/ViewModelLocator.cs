@@ -4,8 +4,8 @@ using Aplikacia_Motion_Detect.UI.ViewModel.MainWindow;
 using Aplikacia_Motion_Detect.UI.ViewModel.VideoCapture;
 using GalaSoft.MvvmLight;
 using Aplikacia_Motion_Detect.Interfaces.Interface;
-using Aplikacia_Motion_Detect.Backend.Design;
-using Aplikacia_Motion_Detect.Backend.Service;
+using Aplikacia_Motion_Detect.Interfaces.Design;
+using Aplikacia_Motion_Detect.Interfaces.Service;
 
 
 
