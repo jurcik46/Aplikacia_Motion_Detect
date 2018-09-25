@@ -1,5 +1,5 @@
 ﻿using Aplikacia_Motion_Detect.API.Enums;
-using Aplikacia_Motion_Detect.Backend.Extensions;
+using Aplikacia_Motion_Detect.Interfaces.Extensions;
 using GalaSoft.MvvmLight.Messaging;
 using RestSharp;
 using Serilog;
@@ -8,7 +8,7 @@ using System.Net;
 
 namespace Aplikacia_Motion_Detect.API
 {
-    class Api
+     public class Api
     {
         private Uri _apiLink;
         private string _apiKey;
@@ -22,13 +22,13 @@ namespace Aplikacia_Motion_Detect.API
         public string UserID { get => _userId; set => _userId = value; }
         public string Apikey { get => _apiKey; set => _apiKey = value; }
 
-        public Api(IApiOptionModel apiOption)
+        public Api(/*IApiOptionModel apiOption*/)
         {
-            Logger.Debug(ApiEvents.Create, "Creating new instance of API with {ApiLink} and {Apikey}", apiOption.ApiLink, apiOption.Apikey);
-            this.ApiLink = new Uri(apiOption.ApiLink, UriKind.Absolute);
-            this.Apikey = apiOption.Apikey;
-            this.ObjectID = apiOption.ObjectID;
-            this.UserID = apiOption.UserID;
+            //Logger.Debug(ApiEvents.Create, "Creating new instance of API with {ApiLink} and {Apikey}", apiOption.ApiLink, apiOption.Apikey);
+            //this.ApiLink = new Uri(apiOption.ApiLink, UriKind.Absolute);
+            //this.Apikey = apiOption.Apikey;
+            //this.ObjectID = apiOption.ObjectID;
+            //this.UserID = apiOption.UserID;
         }
 
 
@@ -41,7 +41,7 @@ namespace Aplikacia_Motion_Detect.API
             if (response.ErrorException != null)
             {
                 if (response.StatusCode == 0)
-                    Messenger.Default.Send<NotifiMessage>(new NotifiMessage() { Title = ViewModels.ViewModelLocator.rm.GetString("connectionTitle"), Msg = ViewModels.ViewModelLocator.rm.GetString("connectionMsg"), IconType = Notifications.Wpf.NotificationType.Error, ExpTime = 10 });
+                    //Messenger.Default.Send<NotifiMessage>(new NotifiMessage() { Title = ViewModels.ViewModelLocator.rm.GetString("connectionTitle"), Msg = ViewModels.ViewModelLocator.rm.GetString("connectionMsg"), IconType = Notifications.Wpf.NotificationType.Error, ExpTime = 10 });
 
                 Logger.With("Request", request)
                     .With("Response", response)
