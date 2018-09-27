@@ -8,11 +8,11 @@ namespace Aplikacia_Motion_Detect.Interfaces.Enums
 {
     public enum ApplicationEvents
     {
-        //       DispatcherThread,
+        DispatcherThread,
 
-        //          CheckErrors,
+        CheckErrors,
 
-        //          CheckUpdate,
+        CheckUpdate,
 
         //[Description("Last check for update was less than 12 hours ago.")]
         //CheckUpdateCheckActual,
@@ -35,7 +35,7 @@ namespace Aplikacia_Motion_Detect.Interfaces.Enums
 
         ApplicationStarted,
 
-        //           DispatcherUnhandledException,
+        DispatcherUnhandledException,
 
         //UnobservedTaskException,
 
