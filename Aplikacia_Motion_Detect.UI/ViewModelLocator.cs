@@ -4,14 +4,14 @@ using Aplikacia_Motion_Detect.UI.ViewModel.MainWindow;
 using Aplikacia_Motion_Detect.UI.ViewModel.VideoCapture;
 using GalaSoft.MvvmLight;
 using Aplikacia_Motion_Detect.Interfaces.Interface;
-
-
+using Serilog.Core;
 
 namespace Aplikacia_Motion_Detect.UI
 {
     public static class ViewModelLocator
     {
 
+        private static LoggingLevelSwitch _loggingLevelSwitch;
 
         /// <summary>
         /// Initializes a new instance of the ViewModelLocator class.
@@ -57,6 +57,8 @@ namespace Aplikacia_Motion_Detect.UI
         {
             // TODO Clear the ViewModels
         }
+
+        public static LoggingLevelSwitch LoggingLevelSwitch => _loggingLevelSwitch ?? (_loggingLevelSwitch = new LoggingLevelSwitch());
 
         public static MainViewModel MainViewModel => ServiceLocator.Current.GetInstance<MainViewModel>();
         //  public static VideoSettingViewModel VideoSettingViewModel => ServiceLocator.Current.GetInstance<VideoSettingViewModel>();
