@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Aplikacia_Motion_Detect.Interfaces
 {
-    class LoggerInit
+    public class LoggerInit
     {
 
         public static readonly DateTime DateStart = DateTime.Now;
