@@ -130,7 +130,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Aplikacia_Motion_Detect.Interfaces\Aplikacia_Motion_Detect.Interfaces.csproj">
+      <Project>{9ee0b07a-52a8-47c2-91b6-789c515e6b7c}</Project>
+      <Name>Aplikacia_Motion_Detect.Interfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

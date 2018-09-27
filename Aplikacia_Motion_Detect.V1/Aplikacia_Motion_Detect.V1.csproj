@@ -74,7 +74,10 @@
       <HintPath>..\packages\SerilogMetrics.2.0.3\lib\net45\SerilogMetrics.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -96,6 +99,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Extensions\ApplicationExtensions.cs" />
+    <Compile Include="SingleInstance.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -140,6 +145,10 @@
     <ProjectReference Include="..\Aplikacia_Motion_Detect.API\Aplikacia_Motion_Detect.API.csproj">
       <Project>{7df60db2-b11f-4581-9467-db9eae2b0891}</Project>
       <Name>Aplikacia_Motion_Detect.API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aplikacia_Motion_Detect.Backend\Aplikacia_Motion_Detect.Backend.csproj">
+      <Project>{38b5bffd-a459-4c1c-bd11-cecb8510b9d8}</Project>
+      <Name>Aplikacia_Motion_Detect.Backend</Name>
     </ProjectReference>
     <ProjectReference Include="..\Aplikacia_Motion_Detect.Interfaces\Aplikacia_Motion_Detect.Interfaces.csproj">
       <Project>{9ee0b07a-52a8-47c2-91b6-789c515e6b7c}</Project>

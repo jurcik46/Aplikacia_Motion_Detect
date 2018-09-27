@@ -13,10 +13,10 @@ namespace Aplikacia_Motion_Detect.Backend.Service
 
     class RestService : IRestService
     {
-        private Api _api;
+        //private Api _api;
 
 
-        internal Api Api => _api ?? (_api = new Api(/*this.OptionsService.ApiOptions*/));
-        public ILogger Logger => Log.Logger.ForContext<RestService>();
+        //internal Api Api => _api ?? (_api = new Api(/*this.OptionsService.ApiOptions*/));
+        //public ILogger Logger => Log.Logger.ForContext<RestService>();
     }
 }

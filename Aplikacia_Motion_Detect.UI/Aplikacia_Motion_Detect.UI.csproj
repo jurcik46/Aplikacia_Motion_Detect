@@ -91,6 +91,8 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Design\DesignTestService.cs" />
+    <Compile Include="Design\MainWindow\DesignVideoSetting.cs" />
     <Compile Include="ViewModelLocator.cs" />
     <Compile Include="ViewModel\MainViewModelTest.cs" />
     <Compile Include="ViewModel\MainWindow\MainViewModel.cs" />
@@ -148,7 +150,9 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Design\VideoCapture\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Aplikacia_Motion_Detect.Backend\Aplikacia_Motion_Detect.Backend.csproj">
       <Project>{38b5bffd-a459-4c1c-bd11-cecb8510b9d8}</Project>
