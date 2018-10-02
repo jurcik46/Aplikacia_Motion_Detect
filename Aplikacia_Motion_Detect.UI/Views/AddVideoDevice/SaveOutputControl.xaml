@@ -4,9 +4,54 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Aplikacia_Motion_Detect.UI.Views.AddVideoDevice"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+             d:DesignHeight="230" d:DesignWidth="800">
+    <Grid Margin="10">
+        <CheckBox Content="Save Video File"/>
+
+        <Grid Margin="15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0,25*"/>
+                <RowDefinition Height="0,25*"/>
+                <RowDefinition Height="0,25*"/>
+                <RowDefinition Height="0,25*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0,2*"/>
+                <ColumnDefinition Width="0,3*"/>
+                <ColumnDefinition Width="0,4*"/>
+                <ColumnDefinition Width="0,1*"/>
+            </Grid.ColumnDefinitions>
+            <Label Margin="10"  Grid.Row="0" Grid.Column="0" Content="Output file name: "/>
+            <TextBox Margin="10" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Width="470" HorizontalAlignment="Left"/>
+            <Button Margin="10" Grid.Row="0" Grid.Column="3"  Content="..."/>
+            <Label  Margin="10" Grid.Row="1" Grid.Column="1" Content="Split when file size greater than: " />
+
+            <StackPanel Grid.Row="1" Grid.Column="2" Margin="10" Orientation="Horizontal">
+                <TextBox Width="100" />
+                <Label Content="Mb (0 - no limit)"/>
+            </StackPanel>
+
+            <Label Margin="10" Grid.Row="2" Grid.Column="1" Content="Split when file size greater than: " />
+            <StackPanel Grid.Row="2" Grid.Column="2" Margin="10" Orientation="Horizontal">
+                <TextBox Width="100" />
+
+                <Label Content="Seconds (0 - no limit)"/>
+
+            </StackPanel>
+
+            <Label  Margin="10" Grid.Row="3" Grid.Column="0" Content="Codec: "/>
+
+            <ListBox Margin="10"  Grid.Row="3" Grid.Column="1">
+
+            </ListBox>
+
+            <Button Grid.Row="3" Grid.Column="2" Margin="10" Width="100" Content="Codec Options" HorizontalAlignment="Left"/>
+
+
+        </Grid>
+
+
     </Grid>
 </UserControl>

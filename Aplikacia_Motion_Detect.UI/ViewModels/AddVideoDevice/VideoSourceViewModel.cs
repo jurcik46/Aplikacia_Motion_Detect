@@ -7,7 +7,7 @@ using GalaSoft.MvvmLight;
 
 namespace Aplikacia_Motion_Detect.UI.ViewModels.AddVideoDevice
 {
-    public class SaveOutputViewModel : ViewModelBase
+    public class VideoSourceViewModel : ViewModelBase
     {
     }
 }

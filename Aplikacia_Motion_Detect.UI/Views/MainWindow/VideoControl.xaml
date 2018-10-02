@@ -10,20 +10,31 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="0,2*" />
+            <ColumnDefinition Width="0,9*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel x:Name="stack" Grid.Row="2">
+        <Label Margin="10" Grid.Row="0" Grid.Column="0" Content="Video Source: " HorizontalAlignment="Right"/>
+        <ComboBox Width="400" Margin="10 15" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left">
+            <ComboBoxItem>asd</ComboBoxItem>
+            <ComboBoxItem>asdasdsa</ComboBoxItem>
+        </ComboBox>
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+            <CheckBox Margin="10 10" Content="Show Motion Zones"/>
+            <CheckBox Margin="10 10" Content="Show Video"/>
+        </StackPanel>
+
+        <StackPanel x:Name="stack" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
             <!--<MediaElement Height="200"/>-->
             <WindowsFormsHost>
                 <wf:VideoDisplayControl/>
             </WindowsFormsHost>
         </StackPanel>
-        
+
     </Grid>
 </UserControl>

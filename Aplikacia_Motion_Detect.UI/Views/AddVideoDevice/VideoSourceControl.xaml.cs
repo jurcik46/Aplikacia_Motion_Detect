@@ -17,14 +17,14 @@ using Aplikacia_Motion_Detect.UI.ViewModels.AddVideoDevice;
 namespace Aplikacia_Motion_Detect.UI.Views.AddVideoDevice
 {
     /// <summary>
-    /// Interaction logic for SaveOutputControl.xaml
+    /// Interaction logic for VideoSourceControl.xaml
     /// </summary>
-    public partial class SaveOutputControl : UserControl
+    public partial class VideoSourceControl : UserControl
     {
-        public SaveOutputControl()
+        public VideoSourceControl()
         {
             InitializeComponent();
-            this.DataContext = new SaveOutputViewModel();
+            this.DataContext = new VideoSourceViewModel();
 
         }
     }

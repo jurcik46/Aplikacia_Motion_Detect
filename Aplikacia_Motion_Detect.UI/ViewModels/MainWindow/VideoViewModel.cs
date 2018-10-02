@@ -11,14 +11,17 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
     public class VideoViewModel : ViewModelBase
     {
 
-        public VideoDisplayControl test;
+        private VideoDisplayControl _videoDisplay;
+
+        public VideoDisplayControl VideoDispplay { get => _videoDisplay; set => _videoDisplay = value; }
+
         public VideoViewModel()
         {
-            // create new VideoCapture instance
+
             VideoCapture videoCapture = new VideoCapture();
 
 
-            //videoCapture.FrameReceived += FormMain_FrameReceived;
+            ////videoCapture.FrameReceived += FormMain_FrameReceived;
 
 
             VideoCaptureUtils utils = new VideoCaptureUtils();
@@ -35,20 +38,10 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
             // start capture process
             videoCapture.StartCapture();
 
-  
-            test = new VideoDisplayControl();
-            test.VideoCaptureSource = videoCapture;
-            //host.Child = (System.Windows.Forms.Control)aa;
-            //stack.Children.Add(host);
-            //Task.Run(() =>
-            //{
-            //    while(true)
-            //    {
-            //        Console.WriteLine(videoCapture.State);
 
-            //    }
+            VideoDispplay = new VideoDisplayControl();
+            VideoDispplay.VideoCaptureSource = videoCapture;
 
-            //});
         }
 
     }

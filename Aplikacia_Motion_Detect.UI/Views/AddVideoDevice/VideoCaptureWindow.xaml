@@ -7,41 +7,38 @@
         xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
         xmlns:local="clr-namespace:Aplikacia_Motion_Detect.UI.Views.AddVideoDevice"
         mc:Ignorable="d"
-        Title="VideoCaptureWindow" Height="700" Width="800">
-	<Grid Margin="10">
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition x:Name="colum0" Width="*"/>
+        Title="VideoCaptureWindow" ResizeMode="NoResize" Height="880" Width="800"
+        WindowStartupLocation="CenterScreen"
+        >
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="Colum0" Width="*"/>
 
-		</Grid.ColumnDefinitions>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="60"/>
-			<RowDefinition x:Name="row1" Height="*"/>
-			<RowDefinition Height="0.4*"/>
-			<RowDefinition Height="60"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition x:Name="Row1" Height="*"/>
+            <RowDefinition Height="0.6*"/>
+            <RowDefinition Height="50"/>
 
-		</Grid.RowDefinitions>
-		<StackPanel Margin="20" Orientation="Horizontal" Grid.Row="0">
-			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Name:" VerticalAlignment="Top" />
-			<TextBox Margin="30 0 0 0" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="350" />
-		</StackPanel>
+        </Grid.RowDefinitions>
+        <StackPanel Margin="20" Orientation="Horizontal" Grid.Row="0">
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Name:" VerticalAlignment="Top" />
+            <TextBox Margin="30 0 0 0" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="350" />
+        </StackPanel>
 
-		<GroupBox Grid.Row="1" Header="Video Source" HorizontalAlignment="Left" Height="{Binding ElementName=row1, Path=ActualHeight}" Width="{Binding ElementName=colum0, Path=ActualWidth}" VerticalAlignment="Top" >
+        <GroupBox Grid.Row="1" Header="Video Source"  >
+            <local:VideoSourceControl/>
+        </GroupBox>
 
-			<Grid Height="0" VerticalAlignment="Top" HorizontalAlignment="Left" >
-				<local:IpCameraControl/>
-				<local:VideoDeviceControl/>
-				<local:VideoFileControl/>
-			</Grid>
-		</GroupBox>
+        <GroupBox Grid.Row="2" Header="Save Output">
+            <local:SaveOutputControl/>
+        </GroupBox>
 
-		<GroupBox Grid.Row="2" Header="Save Output">
-			<local:SaveOutputControl/>
-		</GroupBox>
+        <Grid Margin="10" Grid.Row="3">
+            <Button HorizontalAlignment="Left" Content="Cancel" Width="150"/>
+            <Button HorizontalAlignment="Right" Content="OK" Width="150"/>
+        </Grid>
 
-		<Grid Margin="10" Grid.Row="3">
-			<Button HorizontalAlignment="Left" Content="Cancel" Width="150"/>
-			<Button HorizontalAlignment="Right" Content="OK" Width="150"/>
-		</Grid>
-
-	</Grid>
+    </Grid>
 </Window>

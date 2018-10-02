@@ -106,15 +106,16 @@
     <Compile Include="Design\DesignTestService.cs" />
     <Compile Include="Design\MainWindow\DesignVideoSetting.cs" />
     <Compile Include="ViewModelLocator.cs" />
+    <Compile Include="ViewModels\AddVideoDevice\VideoSourceViewModel.cs" />
     <Compile Include="ViewModels\MainViewModelTest.cs" />
     <Compile Include="ViewModels\MainWindow\MainViewModel.cs" />
     <Compile Include="ViewModels\MainWindow\VideoSettingViewModel.cs" />
     <Compile Include="ViewModels\MainWindow\VideoViewModel.cs" />
-    <Compile Include="ViewModels\AddVideoDevice\IpCameraViewModel.cs" />
     <Compile Include="ViewModels\AddVideoDevice\SaveOutputViewModel.cs" />
     <Compile Include="ViewModels\AddVideoDevice\VideoCaptureViewModel.cs" />
-    <Compile Include="ViewModels\AddVideoDevice\VideoDeviceViewModel.cs" />
-    <Compile Include="ViewModels\AddVideoDevice\VideoFileViewModel.cs" />
+    <Compile Include="Views\AddVideoDevice\VideoSourceControl.xaml.cs">
+      <DependentUpon>VideoSourceControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainWindow\VideoControl.xaml.cs">
       <DependentUpon>VideoControl.xaml</DependentUpon>
     </Compile>
@@ -127,20 +128,11 @@
     <Compile Include="Views\MainWindow\VideoSettingControl.xaml.cs">
       <DependentUpon>VideoSettingControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\AddVideoDevice\IpCameraControl.xaml.cs">
-      <DependentUpon>IpCameraControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\AddVideoDevice\SaveOutputControl.xaml.cs">
       <DependentUpon>SaveOutputControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AddVideoDevice\VideoCaptureWindow.xaml.cs">
       <DependentUpon>VideoCaptureWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\AddVideoDevice\VideoDeviceControl.xaml.cs">
-      <DependentUpon>VideoDeviceControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\AddVideoDevice\VideoFileControl.xaml.cs">
-      <DependentUpon>VideoFileControl.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -189,6 +181,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\AddVideoDevice\VideoSourceControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow\VideoControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -197,23 +193,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\AddVideoDevice\IpCameraControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\AddVideoDevice\SaveOutputControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AddVideoDevice\VideoCaptureWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\AddVideoDevice\VideoDeviceControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\AddVideoDevice\VideoFileControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
