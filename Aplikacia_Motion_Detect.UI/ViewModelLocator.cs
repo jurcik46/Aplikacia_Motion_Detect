@@ -1,7 +1,7 @@
 ﻿using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
-using Aplikacia_Motion_Detect.UI.ViewModel.MainWindow;
-using Aplikacia_Motion_Detect.UI.ViewModel.VideoCapture;
+using Aplikacia_Motion_Detect.UI.ViewModels.MainWindow;
+using Aplikacia_Motion_Detect.UI.ViewModels.AddVideoDevice;
 using GalaSoft.MvvmLight;
 using Aplikacia_Motion_Detect.Interfaces.Interface;
 using Serilog.Core;
@@ -43,6 +43,17 @@ namespace Aplikacia_Motion_Detect.UI
                 SimpleIoc.Default.Register<MainViewModel>();
             }
 
+            if (!SimpleIoc.Default.IsRegistered<VideoViewModel>())
+            {
+                SimpleIoc.Default.Register<VideoViewModel>();
+            }
+
+            //if (!SimpleIoc.Default.IsRegistered<OptionsViewModel>())
+            //{
+            //    SimpleIoc.Default.Register(() => new OptionsViewModel(ServiceLocator.Current.GetInstance<IOptionsService>()));
+            //}
+
+
             //if (!SimpleIoc.Default.IsRegistered<VideoSettingViewModel>())
             //{
             //    SimpleIoc.Default.Register<VideoSettingViewModel>();
@@ -61,6 +72,7 @@ namespace Aplikacia_Motion_Detect.UI
         public static LoggingLevelSwitch LoggingLevelSwitch => _loggingLevelSwitch ?? (_loggingLevelSwitch = new LoggingLevelSwitch());
 
         public static MainViewModel MainViewModel => ServiceLocator.Current.GetInstance<MainViewModel>();
+        public static VideoViewModel VideoViewModel => ServiceLocator.Current.GetInstance<VideoViewModel>();
         //  public static VideoSettingViewModel VideoSettingViewModel => ServiceLocator.Current.GetInstance<VideoSettingViewModel>();
 
 

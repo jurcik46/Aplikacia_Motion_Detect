@@ -8,12 +8,13 @@
     <OutputType>library</OutputType>
     <RootNamespace>Aplikacia_Motion_Detect.UI</RootNamespace>
     <AssemblyName>Aplikacia_Motion_Detect.UI</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -23,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,22 +33,29 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DelaySign>false</DelaySign>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\CommonServiceLocator.2.0.2\lib\net45\CommonServiceLocator.dll</HintPath>
+    <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.2.0.4\lib\net47\CommonServiceLocator.dll</HintPath>
     </Reference>
-    <Reference Include="Destructurama.Attributed, Version=1.0.0.0, Culture=neutral, PublicKeyToken=2ad38909bb3e5c02, processorArchitecture=MSIL">
-      <HintPath>..\packages\Destructurama.Attributed.1.0.2\lib\portable-net45+win+wp80\Destructurama.Attributed.dll</HintPath>
+    <Reference Include="Destructurama.Attributed, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Destructurama.Attributed.2.0.0\lib\netstandard1.1\Destructurama.Attributed.dll</HintPath>
     </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=5.4.1.0, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmLightLibs.5.4.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
     </Reference>
     <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.4.1.0, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmLightLibs.5.4.1\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
     </Reference>
     <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.4.1.0, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmLightLibs.5.4.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
     </Reference>
     <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <HintPath>..\packages\Serilog.2.7.1\lib\net46\Serilog.dll</HintPath>
@@ -74,8 +83,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmLightLibs.5.4.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -89,39 +100,46 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Design\DesignTestService.cs" />
     <Compile Include="Design\MainWindow\DesignVideoSetting.cs" />
     <Compile Include="ViewModelLocator.cs" />
-    <Compile Include="ViewModel\MainViewModelTest.cs" />
-    <Compile Include="ViewModel\MainWindow\MainViewModel.cs" />
-    <Compile Include="ViewModel\MainWindow\VideoSettingViewModel.cs" />
-    <Compile Include="ViewModel\MainWindow\VideoViewModel.cs" />
-    <Compile Include="ViewModel\VideoCapture\IpCameraViewModel.cs" />
-    <Compile Include="ViewModel\VideoCapture\SaveOutputViewModel.cs" />
-    <Compile Include="ViewModel\VideoCapture\VideoCaptureViewModel.cs" />
-    <Compile Include="ViewModel\VideoCapture\VideoDeviceViewModel.cs" />
-    <Compile Include="ViewModel\VideoCapture\VideoFileViewModel.cs" />
-    <Compile Include="View\MainWindow\VideoControl.xaml.cs">
+    <Compile Include="ViewModels\MainViewModelTest.cs" />
+    <Compile Include="ViewModels\MainWindow\MainViewModel.cs" />
+    <Compile Include="ViewModels\MainWindow\VideoSettingViewModel.cs" />
+    <Compile Include="ViewModels\MainWindow\VideoViewModel.cs" />
+    <Compile Include="ViewModels\AddVideoDevice\IpCameraViewModel.cs" />
+    <Compile Include="ViewModels\AddVideoDevice\SaveOutputViewModel.cs" />
+    <Compile Include="ViewModels\AddVideoDevice\VideoCaptureViewModel.cs" />
+    <Compile Include="ViewModels\AddVideoDevice\VideoDeviceViewModel.cs" />
+    <Compile Include="ViewModels\AddVideoDevice\VideoFileViewModel.cs" />
+    <Compile Include="Views\MainWindow\VideoControl.xaml.cs">
       <DependentUpon>VideoControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MainWindow\VideoSettingControl.xaml.cs">
+    <Compile Include="Views\MainWindow\VideoDisplayControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\MainWindow\VideoDisplayControl.Designer.cs">
+      <DependentUpon>VideoDisplayControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainWindow\VideoSettingControl.xaml.cs">
       <DependentUpon>VideoSettingControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\VideoCapture\IpCameraControl.xaml.cs">
+    <Compile Include="Views\AddVideoDevice\IpCameraControl.xaml.cs">
       <DependentUpon>IpCameraControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\VideoCapture\SaveOutputControl.xaml.cs">
+    <Compile Include="Views\AddVideoDevice\SaveOutputControl.xaml.cs">
       <DependentUpon>SaveOutputControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\VideoCapture\VideoCaptureWindow.xaml.cs">
+    <Compile Include="Views\AddVideoDevice\VideoCaptureWindow.xaml.cs">
       <DependentUpon>VideoCaptureWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\VideoCapture\VideoDeviceControl.xaml.cs">
+    <Compile Include="Views\AddVideoDevice\VideoDeviceControl.xaml.cs">
       <DependentUpon>VideoDeviceControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\VideoCapture\VideoFileControl.xaml.cs">
+    <Compile Include="Views\AddVideoDevice\VideoFileControl.xaml.cs">
       <DependentUpon>VideoFileControl.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -142,6 +160,9 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MainWindow\VideoDisplayControl.resx">
+      <DependentUpon>VideoDisplayControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="packages.config" />
@@ -168,34 +189,62 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="View\MainWindow\VideoControl.xaml">
+    <Page Include="Views\MainWindow\VideoControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MainWindow\VideoSettingControl.xaml">
+    <Page Include="Views\MainWindow\VideoSettingControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\VideoCapture\IpCameraControl.xaml">
+    <Page Include="Views\AddVideoDevice\IpCameraControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\VideoCapture\SaveOutputControl.xaml">
+    <Page Include="Views\AddVideoDevice\SaveOutputControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\VideoCapture\VideoCaptureWindow.xaml">
+    <Page Include="Views\AddVideoDevice\VideoCaptureWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\VideoCapture\VideoDeviceControl.xaml">
+    <Page Include="Views\AddVideoDevice\VideoDeviceControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\VideoCapture\VideoFileControl.xaml">
+    <Page Include="Views\AddVideoDevice\VideoFileControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AxDTKVideoCapLib">
+      <Guid>{DFBC2AA8-1626-4109-9195-8FA39AC7C980}</Guid>
+      <VersionMajor>3</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="DTKVideoCapLib">
+      <Guid>{DFBC2AA8-1626-4109-9195-8FA39AC7C980}</Guid>
+      <VersionMajor>3</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
