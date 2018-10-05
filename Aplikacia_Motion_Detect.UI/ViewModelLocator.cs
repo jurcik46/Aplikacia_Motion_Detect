@@ -48,6 +48,12 @@ namespace Aplikacia_Motion_Detect.UI
                 SimpleIoc.Default.Register<VideoViewModel>();
             }
 
+            if (!SimpleIoc.Default.IsRegistered<VideoSettingViewModel>())
+            {
+                SimpleIoc.Default.Register<VideoSettingViewModel>();
+            }
+
+
             //if (!SimpleIoc.Default.IsRegistered<OptionsViewModel>())
             //{
             //    SimpleIoc.Default.Register(() => new OptionsViewModel(ServiceLocator.Current.GetInstance<IOptionsService>()));
@@ -63,7 +69,6 @@ namespace Aplikacia_Motion_Detect.UI
 
 
 
-
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
@@ -73,6 +78,7 @@ namespace Aplikacia_Motion_Detect.UI
 
         public static MainViewModel MainViewModel => ServiceLocator.Current.GetInstance<MainViewModel>();
         public static VideoViewModel VideoViewModel => ServiceLocator.Current.GetInstance<VideoViewModel>();
+        public static VideoSettingViewModel VideoSettingViewModel => ServiceLocator.Current.GetInstance<VideoSettingViewModel>();
         //  public static VideoSettingViewModel VideoSettingViewModel => ServiceLocator.Current.GetInstance<VideoSettingViewModel>();
 
 

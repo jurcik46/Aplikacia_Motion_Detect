@@ -31,7 +31,7 @@
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -65,10 +65,6 @@
     </Reference>
     <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.4.1.0, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
-    </Reference>
-    <Reference Include="Interop.DTKVideoCapLib">
-      <HintPath>..\Aplikacia_Motion_Detect.UI\obj\Debug\Interop.DTKVideoCapLib.dll</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <HintPath>..\packages\Serilog.2.7.1\lib\net46\Serilog.dll</HintPath>
@@ -164,10 +160,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Aplikacia_Motion_Detect.API\Aplikacia_Motion_Detect.API.csproj">
-      <Project>{7df60db2-b11f-4581-9467-db9eae2b0891}</Project>
-      <Name>Aplikacia_Motion_Detect.API</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Aplikacia_Motion_Detect.Backend\Aplikacia_Motion_Detect.Backend.csproj">
       <Project>{38b5bffd-a459-4c1c-bd11-cecb8510b9d8}</Project>
       <Name>Aplikacia_Motion_Detect.Backend</Name>
@@ -194,15 +186,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="DTKVideoCapLib">
-      <Guid>{DFBC2AA8-1626-4109-9195-8FA39AC7C980}</Guid>
-      <VersionMajor>3</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
     <COMReference Include="stdole">
       <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
       <VersionMajor>2</VersionMajor>

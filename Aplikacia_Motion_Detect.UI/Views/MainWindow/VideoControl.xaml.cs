@@ -14,7 +14,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Forms;
-using DTKVideoCapLib;
 
 namespace Aplikacia_Motion_Detect.UI.Views.MainWindow
 {
@@ -28,10 +27,10 @@ namespace Aplikacia_Motion_Detect.UI.Views.MainWindow
         {
             InitializeComponent();
             this.DataContext = ViewModelLocator.VideoViewModel;
-            
+
 
         }
 
-   
+
     }
 }

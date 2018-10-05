@@ -5,12 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Aplikacia_Motion_Detect.UI.Views.AddVideoDevice;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using Aplikacia_Motion_Detect.Interfaces.Messages;
 using GalaSoft.MvvmLight.Messaging;
-using DTKVideoCapLib;
 
 namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
 {
@@ -27,13 +27,24 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
         private string _fps;
         private string _active;
         private VideoCaptureWindow VideoCaptureWindow;
-
+        public List<Class1> B { get; set; }
         private RelayCommand _addVideo;
 
         public VideoSettingViewModel()
         {
             this.CommandInit();
             this.MessageRegister();
+
+            B = new List<Class1>();
+            B.Add(new Class1("test", "test"));
+            B.Add(new Class1("test", "test"));
+            B.Add(new Class1("test", "test"));
+            B.Add(new Class1("test", "test"));
+            B.Add(new Class1("test", "test"));
+            B.Add(new Class1("test", "test"));
+            B.Add(new Class1("test", "test"));
+
+
 
 
         }

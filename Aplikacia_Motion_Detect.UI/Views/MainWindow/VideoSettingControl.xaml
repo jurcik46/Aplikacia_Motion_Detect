@@ -5,56 +5,55 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
 			 d:DesignHeight="450" d:DesignWidth="800">
-	<Grid>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*" x:Name="Column1"/>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" x:Name="Column1"/>
 
-		</Grid.ColumnDefinitions>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="50"/>
-			<RowDefinition Height="*" x:Name="Row2"/>
-			<RowDefinition Height="50"/>
-		</Grid.RowDefinitions>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*" x:Name="Row2"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
 
-		<Grid Grid.Row="0">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="2*"/>
-				<ColumnDefinition Width="*"/>
-			</Grid.ColumnDefinitions>
-			<!-- Video source control buttons -->
-			<StackPanel Orientation="Horizontal">
-				<TextBlock Margin="10 10 50 10" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Text="Video Sources:" />
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!-- Video source control buttons -->
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin="10 10 50 10" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Text="Video Sources:" />
 
-				<Button Margin="10" Content="Add" HorizontalAlignment="Left" MinWidth="100" Command="{Binding AddVideo}" />
-				<Button Margin="10"  Content="Modify" HorizontalAlignment="Left" MinWidth="100"/>
-				<Button Margin="10" Content="Delete" HorizontalAlignment="Left" MinWidth="100"/>
-			</StackPanel>
-
-
-		</Grid>
-		<!-- Table with cameras-->
-		<DataGrid  SelectionMode="Extended" SelectionUnit="FullRow" Width="{Binding ElementName=Column1, Path=ActualWidth}" Height="{Binding ElementName=Row2, Path=ActualHeight}" AlternatingRowBackground="Gainsboro"  AlternationCount="2" HorizontalAlignment="Left"  Grid.Row="1" VerticalAlignment="Top" >
-		</DataGrid>
+                <Button Margin="10" Content="Add" HorizontalAlignment="Left" MinWidth="100" Command="{Binding AddVideo}" />
+                <Button Margin="10"  Content="Modify" HorizontalAlignment="Left" MinWidth="100"/>
+                <Button Margin="10" Content="Delete" HorizontalAlignment="Left" MinWidth="100"/>
+            </StackPanel>
 
 
-		<!-- Button under table -->
+        </Grid>
+        <!-- Table with cameras-->
+        <DataGrid  ItemsSource="{Binding B}" RowHeight="30" CanUserAddRows="false"  Width="800" Height="450"  Grid.Row="1" />
 
-		<Grid Grid.Row="2">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="1.3*"/>
-				<ColumnDefinition Width="*"/>
-			</Grid.ColumnDefinitions>
-			<StackPanel Grid.Column="0" Orientation="Horizontal" >
-				<Button Padding="5" Margin="10 10 10 10" Content="Start Capture" HorizontalAlignment="Left" />
-				<Button Padding="5" Margin="10 10 10 10" Content="Stop Capture" HorizontalAlignment="Left" />
-				<Button Padding="5" Margin="10 10 10 10" Content="Start capute ALL" HorizontalAlignment="Left" />
-				<Button Padding="5" Margin="10 10 10 10" Content="Stop capute ALL" HorizontalAlignment="Left" />
-			</StackPanel>
-			<StackPanel Grid.Column="1">
-				<Button Padding="5" Margin="10 10 10 10" Content="Define Motion Zones" HorizontalAlignment="Right" />
-			</StackPanel>
 
-		</Grid>
+        <!-- Button under table -->
 
-	</Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.3*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Horizontal" >
+                <Button Padding="5" Margin="10 10 10 10" Content="Start Capture" HorizontalAlignment="Left" />
+                <Button Padding="5" Margin="10 10 10 10" Content="Stop Capture" HorizontalAlignment="Left" />
+                <Button Padding="5" Margin="10 10 10 10" Content="Start capute ALL" HorizontalAlignment="Left" />
+                <Button Padding="5" Margin="10 10 10 10" Content="Stop capute ALL" HorizontalAlignment="Left" />
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+                <Button Padding="5" Margin="10 10 10 10" Content="Define Motion Zones" HorizontalAlignment="Right" />
+            </StackPanel>
+
+        </Grid>
+
+    </Grid>
 </UserControl>

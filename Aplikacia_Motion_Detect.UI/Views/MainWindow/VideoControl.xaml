@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:dtkVideoCapLib="clr-namespace:DTKVideoCapLib;assembly=Interop.DTKVideoCapLib"
              xmlns:wf="clr-namespace:Aplikacia_Motion_Detect.UI.Views.MainWindow"
              mc:Ignorable="d" 
              d:DesignHeight="360" d:DesignWidth="800">
@@ -30,9 +29,8 @@
         </StackPanel>
 
         <StackPanel x:Name="stack" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
-            <!--<MediaElement Height="200"/>-->
             <WindowsFormsHost>
-                <wf:VideoDisplayControl/>
+                <wf:VideoDisplay/>
             </WindowsFormsHost>
         </StackPanel>
 

@@ -24,7 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -108,6 +108,7 @@
     <Compile Include="ViewModelLocator.cs" />
     <Compile Include="ViewModels\AddVideoDevice\VideoSourceViewModel.cs" />
     <Compile Include="ViewModels\MainViewModelTest.cs" />
+    <Compile Include="ViewModels\MainWindow\Class1.cs" />
     <Compile Include="ViewModels\MainWindow\MainViewModel.cs" />
     <Compile Include="ViewModels\MainWindow\VideoSettingViewModel.cs" />
     <Compile Include="ViewModels\MainWindow\VideoViewModel.cs" />
@@ -116,14 +117,14 @@
     <Compile Include="Views\AddVideoDevice\VideoSourceControl.xaml.cs">
       <DependentUpon>VideoSourceControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MainWindow\VideoControl.xaml.cs">
-      <DependentUpon>VideoControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\MainWindow\VideoDisplayControl.cs">
+    <Compile Include="Views\MainWindow\VideoDisplay.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\MainWindow\VideoDisplayControl.Designer.cs">
-      <DependentUpon>VideoDisplayControl.cs</DependentUpon>
+    <Compile Include="Views\MainWindow\VideoDisplay.Designer.cs">
+      <DependentUpon>VideoDisplay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainWindow\VideoControl.xaml.cs">
+      <DependentUpon>VideoControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainWindow\VideoSettingControl.xaml.cs">
       <DependentUpon>VideoSettingControl.xaml</DependentUpon>
@@ -153,8 +154,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\MainWindow\VideoDisplayControl.resx">
-      <DependentUpon>VideoDisplayControl.cs</DependentUpon>
+    <EmbeddedResource Include="Views\MainWindow\VideoDisplay.resx">
+      <DependentUpon>VideoDisplay.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="packages.config" />

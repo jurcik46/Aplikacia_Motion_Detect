@@ -1,6 +1,6 @@
 ﻿namespace Aplikacia_Motion_Detect.UI.Views.MainWindow
 {
-    partial class VideoDisplayControl
+    partial class VideoDisplay
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VideoDisplayControl));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VideoDisplay));
             this.axVideoDisplayControl1 = new AxDTKVideoCapLib.AxVideoDisplayControl();
             ((System.ComponentModel.ISupportInitialize)(this.axVideoDisplayControl1)).BeginInit();
             this.SuspendLayout();
@@ -39,16 +39,16 @@
             this.axVideoDisplayControl1.Location = new System.Drawing.Point(0, 0);
             this.axVideoDisplayControl1.Name = "axVideoDisplayControl1";
             this.axVideoDisplayControl1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axVideoDisplayControl1.OcxState")));
-            this.axVideoDisplayControl1.Size = new System.Drawing.Size(800, 280);
+            this.axVideoDisplayControl1.Size = new System.Drawing.Size(746, 443);
             this.axVideoDisplayControl1.TabIndex = 0;
             // 
-            // VideoDisplayControl
+            // VideoDisplay
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.axVideoDisplayControl1);
-            this.Name = "VideoDisplayControl";
-            this.Size = new System.Drawing.Size(800, 280);
+            this.Name = "VideoDisplay";
+            this.Size = new System.Drawing.Size(744, 440);
             ((System.ComponentModel.ISupportInitialize)(this.axVideoDisplayControl1)).EndInit();
             this.ResumeLayout(false);
 

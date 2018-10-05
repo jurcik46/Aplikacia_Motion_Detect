@@ -7,20 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DTKVideoCapLib;
 
 namespace Aplikacia_Motion_Detect.UI.Views.MainWindow
 {
-    public partial class VideoDisplayControl : UserControl
+    public partial class VideoDisplay : UserControl
     {
-
-        public VideoDisplayControl()
+        public VideoDisplay()
         {
             InitializeComponent();
 
-            this.axVideoDisplayControl1.VideoCaptureSource = ViewModelLocator.VideoViewModel.VideoDispplay.VideoCaptureSource;
+            this.axVideoDisplayControl1.VideoCaptureSource =
+                ViewModelLocator.VideoViewModel.VideoDispplay.VideoCaptureSource;
         }
-
-      
     }
 }

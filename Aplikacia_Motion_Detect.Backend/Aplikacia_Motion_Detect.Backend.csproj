@@ -21,7 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -91,10 +91,6 @@
     <Compile Include="Service\TestService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Aplikacia_Motion_Detect.API\Aplikacia_Motion_Detect.API.csproj">
-      <Project>{7df60db2-b11f-4581-9467-db9eae2b0891}</Project>
-      <Name>Aplikacia_Motion_Detect.API</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Aplikacia_Motion_Detect.Interfaces\Aplikacia_Motion_Detect.Interfaces.csproj">
       <Project>{9ee0b07a-52a8-47c2-91b6-789c515e6b7c}</Project>
       <Name>Aplikacia_Motion_Detect.Interfaces</Name>
