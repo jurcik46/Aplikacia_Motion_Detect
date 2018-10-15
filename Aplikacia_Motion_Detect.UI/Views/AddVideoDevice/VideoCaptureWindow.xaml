@@ -1,4 +1,5 @@
 ﻿<Window x:Class="Aplikacia_Motion_Detect.UI.Views.AddVideoDevice.VideoCaptureWindow"
+        x:Name="VideoCaptureWin"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,8 +8,9 @@
         xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
         xmlns:local="clr-namespace:Aplikacia_Motion_Detect.UI.Views.AddVideoDevice"
         mc:Ignorable="d"
-        Title="VideoCaptureWindow" ResizeMode="NoResize" Height="880" Width="800"
+        Title="VideoDeviceWindow" ResizeMode="NoResize" Height="880" Width="800"
         WindowStartupLocation="CenterScreen"
+        Closing="VideoCaptureWindow_OnClosing"
         >
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
@@ -24,7 +26,7 @@
         </Grid.RowDefinitions>
         <StackPanel Margin="20" Orientation="Horizontal" Grid.Row="0">
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Name:" VerticalAlignment="Top" />
-            <TextBox Margin="30 0 0 0" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="350" />
+            <TextBox Text="{Binding VideoCaptureName, Mode=TwoWay}" Margin="30 0 0 0" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="350" />
         </StackPanel>
 
         <GroupBox Grid.Row="1" Header="Video Source"  >
@@ -36,8 +38,8 @@
         </GroupBox>
 
         <Grid Margin="10" Grid.Row="3">
-            <Button HorizontalAlignment="Left" Content="Cancel" Width="150"/>
-            <Button HorizontalAlignment="Right" Content="OK" Width="150"/>
+            <Button HorizontalAlignment="Left" Content="Cancel" Width="150" Command="{Binding CloseVideoCaptureCommand}" CommandParameter="{Binding ElementName=VideoCaptureWin}"/>
+            <Button HorizontalAlignment="Right" Content="OK" Width="150" Command="{Binding SavieVideoCaptureCommand}" CommandParameter="{Binding ElementName=VideoCaptureWin}" />
         </Grid>
 
     </Grid>

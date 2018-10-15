@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aplikacia_Motion_Detect.API
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aplikacia_Motion_Detect.Resources", "Aplikacia_Motion_Detect.Resources\Aplikacia_Motion_Detect.Resources.csproj", "{BAD22669-5DE9-4D2B-BE28-C6053E175D37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aplikacia_Motion_Detect.Backend", "Aplikacia_Motion_Detect.Backend\Aplikacia_Motion_Detect.Backend.csproj", "{38B5BFFD-A459-4C1C-BD11-CECB8510B9D8}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aplikacia_Motion_Detect.Interfaces", "Aplikacia_Motion_Detect.Interfaces\Aplikacia_Motion_Detect.Interfaces.csproj", "{9EE0B07A-52A8-47C2-91B6-789C515E6B7C}"
 EndProject
 Global
@@ -90,22 +88,6 @@ Global
 		{BAD22669-5DE9-4D2B-BE28-C6053E175D37}.Release|x64.Build.0 = Release|Any CPU
 		{BAD22669-5DE9-4D2B-BE28-C6053E175D37}.Release|x86.ActiveCfg = Release|Any CPU
 		{BAD22669-5DE9-4D2B-BE28-C6053E175D37}.Release|x86.Build.0 = Release|Any CPU
-		{38B5BFFD-A459-4C1C-BD11-CECB8510B9D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{38B5BFFD-A459-4C1C-BD11-CECB8510B9D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{38B5BFFD-A459-4C1C-BD11-CECB8510B9D8}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{38B5BFFD-A459-4C1C-BD11-CECB8510B9D8}.Debug|ARM.Build.0 = Debug|Any CPU
-		{38B5BFFD-A459-4C1C-BD11-CECB8510B9D8}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{38B5BFFD-A459-4C1C-BD11-CECB8510B9D8}.Debug|x64.Build.0 = Debug|Any CPU
-		{38B5BFFD-A459-4C1C-BD11-CECB8510B9D8}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{38B5BFFD-A459-4C1C-BD11-CECB8510B9D8}.Debug|x86.Build.0 = Debug|Any CPU
-		{38B5BFFD-A459-4C1C-BD11-CECB8510B9D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{38B5BFFD-A459-4C1C-BD11-CECB8510B9D8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{38B5BFFD-A459-4C1C-BD11-CECB8510B9D8}.Release|ARM.ActiveCfg = Release|Any CPU
-		{38B5BFFD-A459-4C1C-BD11-CECB8510B9D8}.Release|ARM.Build.0 = Release|Any CPU
-		{38B5BFFD-A459-4C1C-BD11-CECB8510B9D8}.Release|x64.ActiveCfg = Release|Any CPU
-		{38B5BFFD-A459-4C1C-BD11-CECB8510B9D8}.Release|x64.Build.0 = Release|Any CPU
-		{38B5BFFD-A459-4C1C-BD11-CECB8510B9D8}.Release|x86.ActiveCfg = Release|Any CPU
-		{38B5BFFD-A459-4C1C-BD11-CECB8510B9D8}.Release|x86.Build.0 = Release|Any CPU
 		{9EE0B07A-52A8-47C2-91B6-789C515E6B7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9EE0B07A-52A8-47C2-91B6-789C515E6B7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EE0B07A-52A8-47C2-91B6-789C515E6B7C}.Debug|ARM.ActiveCfg = Debug|Any CPU

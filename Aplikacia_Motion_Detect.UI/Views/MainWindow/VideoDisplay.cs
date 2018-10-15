@@ -17,7 +17,7 @@ namespace Aplikacia_Motion_Detect.UI.Views.MainWindow
             InitializeComponent();
 
             this.axVideoDisplayControl1.VideoCaptureSource =
-                ViewModelLocator.VideoViewModel.VideoDispplay.VideoCaptureSource;
+                ViewModelLocator.MainViewModel.VideoControl.VideoDispplay.VideoCaptureSource;
         }
     }
 }

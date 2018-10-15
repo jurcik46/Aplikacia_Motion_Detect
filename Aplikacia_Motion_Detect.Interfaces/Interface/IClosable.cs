@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClassLibrary1
+namespace Aplikacia_Motion_Detect.Interfaces.Interface
 {
-    public class Class1
+    public interface IClosable
     {
+        void Close();
     }
 }

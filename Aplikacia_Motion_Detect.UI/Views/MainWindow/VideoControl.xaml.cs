@@ -26,7 +26,7 @@ namespace Aplikacia_Motion_Detect.UI.Views.MainWindow
         public VideoControl()
         {
             InitializeComponent();
-            this.DataContext = ViewModelLocator.VideoViewModel;
+            this.DataContext = ViewModelLocator.MainViewModel.VideoControl;
 
 
         }

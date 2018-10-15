@@ -3,7 +3,8 @@ using GalaSoft.MvvmLight.Ioc;
 using Aplikacia_Motion_Detect.UI.ViewModels.MainWindow;
 using Aplikacia_Motion_Detect.UI.ViewModels.AddVideoDevice;
 using GalaSoft.MvvmLight;
-using Aplikacia_Motion_Detect.Interfaces.Interface;
+using Aplikacia_Motion_Detect.Interfaces.Service;
+using Aplikacia_Motion_Detect.Interfaces.Interface.Services;
 using Serilog.Core;
 
 namespace Aplikacia_Motion_Detect.UI
@@ -29,6 +30,7 @@ namespace Aplikacia_Motion_Detect.UI
             {
                 // Create run time view services and models
                 //SimpleIoc.Default.Register<ITestService, TestService>();
+                SimpleIoc.Default.Register<IVideoService, VideoService>();
 
             }
 
@@ -43,43 +45,35 @@ namespace Aplikacia_Motion_Detect.UI
                 SimpleIoc.Default.Register<MainViewModel>();
             }
 
-            if (!SimpleIoc.Default.IsRegistered<VideoViewModel>())
+            if (!SimpleIoc.Default.IsRegistered<VideoCaptureViewModel>())
             {
-                SimpleIoc.Default.Register<VideoViewModel>();
+                SimpleIoc.Default.Register<VideoCaptureViewModel>();
             }
 
-            if (!SimpleIoc.Default.IsRegistered<VideoSettingViewModel>())
-            {
-                SimpleIoc.Default.Register<VideoSettingViewModel>();
-            }
-
-
-            //if (!SimpleIoc.Default.IsRegistered<OptionsViewModel>())
-            //{
-            //    SimpleIoc.Default.Register(() => new OptionsViewModel(ServiceLocator.Current.GetInstance<IOptionsService>()));
-            //}
-
-
-            //if (!SimpleIoc.Default.IsRegistered<VideoSettingViewModel>())
-            //{
-            //    SimpleIoc.Default.Register<VideoSettingViewModel>();
-            //}
         }
 
 
 
 
-        public static void Cleanup()
+        public static void CleanupVideoCaptureVieModel()
         {
+            if (SimpleIoc.Default.IsRegistered<VideoCaptureViewModel>())
+            {
+                SimpleIoc.Default.Unregister<VideoCaptureViewModel>();
+            }
+
+            if (!SimpleIoc.Default.IsRegistered<VideoCaptureViewModel>())
+            {
+                SimpleIoc.Default.Register<VideoCaptureViewModel>();
+            }
             // TODO Clear the ViewModels
         }
 
         public static LoggingLevelSwitch LoggingLevelSwitch => _loggingLevelSwitch ?? (_loggingLevelSwitch = new LoggingLevelSwitch());
 
         public static MainViewModel MainViewModel => ServiceLocator.Current.GetInstance<MainViewModel>();
-        public static VideoViewModel VideoViewModel => ServiceLocator.Current.GetInstance<VideoViewModel>();
-        public static VideoSettingViewModel VideoSettingViewModel => ServiceLocator.Current.GetInstance<VideoSettingViewModel>();
-        //  public static VideoSettingViewModel VideoSettingViewModel => ServiceLocator.Current.GetInstance<VideoSettingViewModel>();
+        public static VideoCaptureViewModel VideoCaptureViewModel => ServiceLocator.Current.GetInstance<VideoCaptureViewModel>();
+        public static IVideoService VideoService => ServiceLocator.Current.GetInstance<IVideoService>();
 
 
     }

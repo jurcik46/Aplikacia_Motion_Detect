@@ -25,15 +25,30 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock Margin="10 10 50 10" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Text="Video Sources:" />
 
-                <Button Margin="10" Content="Add" HorizontalAlignment="Left" MinWidth="100" Command="{Binding AddVideo}" />
-                <Button Margin="10"  Content="Modify" HorizontalAlignment="Left" MinWidth="100"/>
-                <Button Margin="10" Content="Delete" HorizontalAlignment="Left" MinWidth="100"/>
+                <Button Margin="10" Content="Add" HorizontalAlignment="Left" MinWidth="100" 
+                        Command="{Binding AddVideo}"  />
+                <Button Margin="10"  Content="Modify" HorizontalAlignment="Left" MinWidth="100" 
+                        Command="{Binding ModifyVideo}" />
+                <Button Margin="10" Content="Delete" HorizontalAlignment="Left" MinWidth="100" 
+                        Command="{Binding DeleteVideo}" />
             </StackPanel>
-
-
         </Grid>
+
         <!-- Table with cameras-->
-        <DataGrid  ItemsSource="{Binding B}" RowHeight="30" CanUserAddRows="false"  Width="800" Height="450"  Grid.Row="1" />
+        <DataGrid SelectedItem="{Binding SelectedDataGridItem, Mode=TwoWay}" AutoGenerateColumns="False" ItemsSource="{Binding VideoInfoDataGrid}" 
+                   ColumnWidth="*" RowHeight="25" CanUserAddRows="false" IsReadOnly="True" Width="800" Height="450"  Grid.Row="1" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
+                <DataGridTextColumn Header="State" Binding="{Binding State}"/>
+                <DataGridTextColumn Header="Last Error" Binding="{Binding LastError}"/>
+                <DataGridTextColumn Header="Type" Binding="{Binding Type}"/>
+                <DataGridTextColumn Header="Resolution" Binding="{Binding Resolution}"/>
+                <DataGridTextColumn Header="Pixel Format" Binding="{Binding Pixel}"/>
+                <DataGridTextColumn Header="Frames" Binding="{Binding Frames}"/>
+                <DataGridTextColumn Header="FPS" Binding="{Binding FPS}"/>
+            </DataGrid.Columns>
+        </DataGrid>
 
 
         <!-- Button under table -->
@@ -44,10 +59,10 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" Orientation="Horizontal" >
-                <Button Padding="5" Margin="10 10 10 10" Content="Start Capture" HorizontalAlignment="Left" />
-                <Button Padding="5" Margin="10 10 10 10" Content="Stop Capture" HorizontalAlignment="Left" />
-                <Button Padding="5" Margin="10 10 10 10" Content="Start capute ALL" HorizontalAlignment="Left" />
-                <Button Padding="5" Margin="10 10 10 10" Content="Stop capute ALL" HorizontalAlignment="Left" />
+                <Button Padding="5" Margin="10 10 10 10" Content="Start Capture" HorizontalAlignment="Left" Command="{Binding StartCapture}" />
+                <Button Padding="5" Margin="10 10 10 10" Content="Stop Capture" HorizontalAlignment="Left" Command="{Binding StopCapture}"/>
+                <Button Padding="5" Margin="10 10 10 10" Content="Start capture ALL" HorizontalAlignment="Left"  Command="{Binding StartCaptureAll}"/>
+                <Button Padding="5" Margin="10 10 10 10" Content="Stop capture ALL" HorizontalAlignment="Left" Command="{Binding StopCaptureAll}"/>
             </StackPanel>
             <StackPanel Grid.Column="1">
                 <Button Padding="5" Margin="10 10 10 10" Content="Define Motion Zones" HorizontalAlignment="Right" />

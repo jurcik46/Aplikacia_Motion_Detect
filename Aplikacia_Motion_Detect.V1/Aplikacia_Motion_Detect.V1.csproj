@@ -160,10 +160,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Aplikacia_Motion_Detect.Backend\Aplikacia_Motion_Detect.Backend.csproj">
-      <Project>{38b5bffd-a459-4c1c-bd11-cecb8510b9d8}</Project>
-      <Name>Aplikacia_Motion_Detect.Backend</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Aplikacia_Motion_Detect.Interfaces\Aplikacia_Motion_Detect.Interfaces.csproj">
       <Project>{9ee0b07a-52a8-47c2-91b6-789c515e6b7c}</Project>
       <Name>Aplikacia_Motion_Detect.Interfaces</Name>

@@ -1,11 +1,7 @@
-﻿using Aplikacia_Motion_Detect.Interfaces.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using Aplikacia_Motion_Detect.Interfaces.Interface;
 
-namespace Aplikacia_Motion_Detect.Backend.Models
+namespace Aplikacia_Motion_Detect.Interfaces.Models
 {
     public class Diagnostics : IDiagnostics
     {
