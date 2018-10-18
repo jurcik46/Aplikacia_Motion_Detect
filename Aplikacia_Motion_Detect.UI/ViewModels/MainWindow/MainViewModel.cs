@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using Aplikacia_Motion_Detect.Interfaces.Interface.Services;
 using Aplikacia_Motion_Detect.Interfaces.Messages;
@@ -38,8 +39,13 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
             {
                 VideoSettingControl.SaveVideoCapture(message.CreateNew);
 
-
             });
+
+
+            Messenger.Default.Register<NotifiMessage>(this, (message) => { MessageBox.Show(message.Msg); });
+
+
+
         }
         #endregion
     }

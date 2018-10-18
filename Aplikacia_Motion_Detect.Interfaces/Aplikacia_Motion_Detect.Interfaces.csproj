@@ -106,8 +106,10 @@
     <Compile Include="Messages\AddVideoCapture.cs" />
     <Compile Include="Messages\ClosedWindowMessage.cs" />
     <Compile Include="Messages\ModifyVideoCapture.cs" />
+    <Compile Include="Messages\NotifiMessage.cs" />
     <Compile Include="Models\Diagnostics.cs" />
     <Compile Include="Models\VideoInfoDataGridModel.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\RestService.cs" />
     <Compile Include="Service\VideoService.cs" />

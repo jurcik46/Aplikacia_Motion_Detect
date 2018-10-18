@@ -182,6 +182,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
             this.StopCaptureCommand = new RelayCommand(this.StopCaptureVideo, this.CanStopCapture);
             this.StartCaptureAllCommand = new RelayCommand(this.StartCaptureAllVideos, this.CanStartCaptureAll);
             this.StopCaptureAllCommand = new RelayCommand(this.StopCaptureAllVideos, this.CanStopCaptureAll);
+            this.DefineMotionZonesCommand = new RelayCommand(this.ShowMotionZones, this.CanShowMotionZones);
         }
 
 
@@ -241,7 +242,6 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
 
         private void StartCaptureVideo()
         {
-
         }
 
         private bool CanStopCapture()
@@ -270,6 +270,16 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
         }
 
         private void StopCaptureAllVideos()
+        {
+
+        }
+
+        private bool CanShowMotionZones()
+        {
+            return true;
+        }
+
+        private void ShowMotionZones()
         {
 
         }

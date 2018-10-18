@@ -26,16 +26,16 @@
                 <TextBlock Margin="10 10 50 10" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Text="Video Sources:" />
 
                 <Button Margin="10" Content="Add" HorizontalAlignment="Left" MinWidth="100" 
-                        Command="{Binding AddVideo}"  />
+                        Command="{Binding AddVideoCommand}"  />
                 <Button Margin="10"  Content="Modify" HorizontalAlignment="Left" MinWidth="100" 
-                        Command="{Binding ModifyVideo}" />
+                        Command="{Binding ModifyVideoCommand}" />
                 <Button Margin="10" Content="Delete" HorizontalAlignment="Left" MinWidth="100" 
-                        Command="{Binding DeleteVideo}" />
+                        Command="{Binding DeleteVideoCommand}" />
             </StackPanel>
         </Grid>
 
         <!-- Table with cameras-->
-        <DataGrid SelectedItem="{Binding SelectedDataGridItem, Mode=TwoWay}" AutoGenerateColumns="False" ItemsSource="{Binding VideoInfoDataGrid}" 
+        <DataGrid SelectedItem="{Binding SelectedDataGridItem, Mode=TwoWay}" AutoGenerateColumns="False" ItemsSource="{Binding VideoInfoDataGrid, Mode=TwoWay}" 
                    ColumnWidth="*" RowHeight="25" CanUserAddRows="false" IsReadOnly="True" Width="800" Height="450"  Grid.Row="1" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
@@ -59,10 +59,10 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" Orientation="Horizontal" >
-                <Button Padding="5" Margin="10 10 10 10" Content="Start Capture" HorizontalAlignment="Left" Command="{Binding StartCapture}" />
-                <Button Padding="5" Margin="10 10 10 10" Content="Stop Capture" HorizontalAlignment="Left" Command="{Binding StopCapture}"/>
-                <Button Padding="5" Margin="10 10 10 10" Content="Start capture ALL" HorizontalAlignment="Left"  Command="{Binding StartCaptureAll}"/>
-                <Button Padding="5" Margin="10 10 10 10" Content="Stop capture ALL" HorizontalAlignment="Left" Command="{Binding StopCaptureAll}"/>
+                <Button Padding="5" Margin="10 10 10 10" Content="Start Capture" HorizontalAlignment="Left" Command="{Binding StartCaptureCommand}" />
+                <Button Padding="5" Margin="10 10 10 10" Content="Stop Capture" HorizontalAlignment="Left" Command="{Binding StopCaptureCommand}"/>
+                <Button Padding="5" Margin="10 10 10 10" Content="Start capture ALL" HorizontalAlignment="Left"  Command="{Binding StartCaptureAllCommand}"/>
+                <Button Padding="5" Margin="10 10 10 10" Content="Stop capture ALL" HorizontalAlignment="Left" Command="{Binding StopCaptureAllCommand}"/>
             </StackPanel>
             <StackPanel Grid.Column="1">
                 <Button Padding="5" Margin="10 10 10 10" Content="Define Motion Zones" HorizontalAlignment="Right" />

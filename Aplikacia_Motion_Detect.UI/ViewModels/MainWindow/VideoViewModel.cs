@@ -24,7 +24,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
             VideoCapture videoCapture = new VideoCapture();
 
 
-            ////videoCapture.FrameReceived += FormMain_FrameReceived;
+            //videoCapture.FrameReceived += FormMain_FrameReceived;
 
 
             VideoCaptureUtils utils = new VideoCaptureUtils();
@@ -38,13 +38,17 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
 
 
             // start capture process
-            videoCapture.StartCapture();
+            //videoCapture.StartCapture();
 
 
             VideoDispplay = new VideoDisplayControl();
             VideoDispplay.VideoCaptureSource = videoCapture;
 
         }
+
+
+
+
 
     }
 }

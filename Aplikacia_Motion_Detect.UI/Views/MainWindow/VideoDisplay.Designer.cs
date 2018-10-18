@@ -39,7 +39,7 @@
             this.axVideoDisplayControl1.Location = new System.Drawing.Point(0, 0);
             this.axVideoDisplayControl1.Name = "axVideoDisplayControl1";
             this.axVideoDisplayControl1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axVideoDisplayControl1.OcxState")));
-            this.axVideoDisplayControl1.Size = new System.Drawing.Size(746, 443);
+            this.axVideoDisplayControl1.Size = new System.Drawing.Size(1065, 404);
             this.axVideoDisplayControl1.TabIndex = 0;
             // 
             // VideoDisplay
@@ -48,7 +48,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.axVideoDisplayControl1);
             this.Name = "VideoDisplay";
-            this.Size = new System.Drawing.Size(744, 440);
+            this.Size = new System.Drawing.Size(1065, 404);
             ((System.ComponentModel.ISupportInitialize)(this.axVideoDisplayControl1)).EndInit();
             this.ResumeLayout(false);
 

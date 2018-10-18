@@ -13,6 +13,10 @@ namespace Aplikacia_Motion_Detect.Interfaces.Interface.Services
         VideoInfoDataGridModel VideoDevice { get; set; }
         void ModifyVideoCapture();
         void DeleteVideoCapture();
+        void StartCaptureOne(VideoInfoDataGridModel videoSource);
+        void StartCaptureAll();
+        void StopCaptureOne(VideoInfoDataGridModel videoSource);
+        void StopCaptureAll();
     }
 
 

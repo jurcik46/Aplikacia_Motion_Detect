@@ -59,5 +59,14 @@ namespace Aplikacia_Motion_Detect.Resources.Languages {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string startCaptureError {
+            get {
+                return ResourceManager.GetString("startCaptureError", resourceCulture);
+            }
+        }
     }
 }

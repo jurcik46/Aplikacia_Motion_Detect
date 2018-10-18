@@ -1,4 +1,6 @@
-﻿using CommonServiceLocator;
+﻿using System.Reflection;
+using System.Resources;
+using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
 using Aplikacia_Motion_Detect.UI.ViewModels.MainWindow;
 using Aplikacia_Motion_Detect.UI.ViewModels.AddVideoDevice;
@@ -74,6 +76,7 @@ namespace Aplikacia_Motion_Detect.UI
         public static MainViewModel MainViewModel => ServiceLocator.Current.GetInstance<MainViewModel>();
         public static VideoCaptureViewModel VideoCaptureViewModel => ServiceLocator.Current.GetInstance<VideoCaptureViewModel>();
         public static IVideoService VideoService => ServiceLocator.Current.GetInstance<IVideoService>();
+        public static ResourceManager rm = new ResourceManager("Aplikacia_Motion_Detect.Resources.Languages.sk-Sk", Assembly.GetExecutingAssembly());
 
 
     }
