@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Aplikacia_Motion_Detect.Interfaces.Annotations;
@@ -19,6 +21,7 @@ namespace Aplikacia_Motion_Detect.Interfaces.Models
         private string _pixel;
         private int _frames;
         private int _fps;
+        [CanBeNull] private Queue<int> _frameTick;
 
         public VideoCapture VideoCapture { get; set; }
 
@@ -108,6 +111,16 @@ namespace Aplikacia_Motion_Detect.Interfaces.Models
             set
             {
                 _name = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Queue<int> FrameTick
+        {
+            get { return _frameTick; }
+            set
+            {
+                _frameTick = value;
                 OnPropertyChanged();
             }
         }

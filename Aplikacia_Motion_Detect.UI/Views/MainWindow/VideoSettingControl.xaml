@@ -22,7 +22,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <!-- Video source control buttons -->
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
                 <TextBlock Margin="10 10 50 10" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Text="Video Sources:" />
 
                 <Button Margin="10" Content="Add" HorizontalAlignment="Left" MinWidth="100" 
@@ -31,7 +31,14 @@
                         Command="{Binding ModifyVideoCommand}" />
                 <Button Margin="10" Content="Delete" HorizontalAlignment="Left" MinWidth="100" 
                         Command="{Binding DeleteVideoCommand}" />
+
+
             </StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <Button Margin="10" Content="Set Developer Key" HorizontalAlignment="Right" MinWidth="140" 
+                        Command="{Binding DeleteVideoCommand}" />
+            </StackPanel>
+
         </Grid>
 
         <!-- Table with cameras-->

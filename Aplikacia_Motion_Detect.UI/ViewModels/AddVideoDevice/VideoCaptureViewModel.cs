@@ -112,7 +112,6 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.AddVideoDevice
 
 
 
-
             if (win != null)
             {
                 win.Close();

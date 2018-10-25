@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using System.Windows;
 using System.Windows.Data;
 using Aplikacia_Motion_Detect.Interfaces.Interface.Services;
 using Aplikacia_Motion_Detect.Interfaces.Messages;
+using Aplikacia_Motion_Detect.Interfaces.Models;
 using DTKVideoCapLib;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
@@ -15,6 +17,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
 {
     public class MainViewModel : ViewModelBase
     {
+
         public IVideoService VideoService { get; private set; }
 
         #region Sub ViewModels
@@ -38,9 +41,13 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
             Messenger.Default.Register<AddVideoCapture>(this, (message) =>
             {
                 VideoSettingControl.SaveVideoCapture(message.CreateNew);
-
+                VideoControl.LoadVideoDivaceFromService();
             });
 
+            Messenger.Default.Register<DeleteVidoeCapture>(this, (message) =>
+            {
+                VideoControl.LoadVideoDivaceFromService();
+            });
 
             Messenger.Default.Register<NotifiMessage>(this, (message) => { MessageBox.Show(message.Msg); });
 

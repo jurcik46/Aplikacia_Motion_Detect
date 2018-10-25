@@ -14,8 +14,10 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using Aplikacia_Motion_Detect.Interfaces.Messages;
 using Aplikacia_Motion_Detect.Interfaces.Models;
+using Aplikacia_Motion_Detect.Interfaces.Service;
 using DTKVideoCapLib;
 using GalaSoft.MvvmLight.Messaging;
+using GalaSoft.MvvmLight.Threading;
 
 namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
 {
@@ -24,6 +26,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
         private IVideoService VideoService { get; }
         private VideoCaptureWindow VideoCaptureWindow;
         private ObservableCollection<VideoInfoDataGridModel> _videoInfoDataGrid;
+        #region Commmand Declaration
         private RelayCommand _addVideoCommand;
         private RelayCommand _modifyVideoCommand;
         private RelayCommand _deleteVideoCommand;
@@ -50,19 +53,6 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
         {
             get => _addVideoCommand;
             set => _addVideoCommand = value;
-        }
-
-        public VideoInfoDataGridModel SelectedDataGridItem { get; set; }
-
-
-        public ObservableCollection<VideoInfoDataGridModel> VideoInfoDataGrid
-        {
-            get { return _videoInfoDataGrid; }
-            set
-            {
-                _videoInfoDataGrid = value;
-                //RaisePropertyChanged();
-            }
         }
 
         public RelayCommand StartCaptureCommand
@@ -94,6 +84,21 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
             get { return _defineMotionZonesCommand; }
             set { _defineMotionZonesCommand = value; }
         }
+        #endregion
+
+        public VideoInfoDataGridModel SelectedDataGridItem { get; set; }
+
+
+        public ObservableCollection<VideoInfoDataGridModel> VideoInfoDataGrid
+        {
+            get { return _videoInfoDataGrid; }
+            set
+            {
+                _videoInfoDataGrid = value;
+                //RaisePropertyChanged();
+            }
+        }
+
 
 
         /**
@@ -148,7 +153,8 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
             pom.Resolution = "";
             if (createNew)
             {
-                VideoService.VideoCaptureList.Add(pom);
+                VideoService.VideoDevice = pom;
+                VideoService.AddVideoCapture();
             }
             else
             {
@@ -233,24 +239,32 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
             VideoService.DeleteVideoCapture();
             VideoInfoDataGrid.Remove(SelectedDataGridItem);
 
+            Messenger.Default.Send<DeleteVidoeCapture>(new DeleteVidoeCapture() { });
+
+
         }
 
         private bool CanStartCapture()
         {
-            return true;
+            return SelectedDataGridItem != null && SelectedDataGridItem.VideoCapture.State == VideoCaptureStateEnum.VCS_Stopped;
         }
 
         private void StartCaptureVideo()
         {
+            VideoService.StartCaptureOne(SelectedDataGridItem);
         }
 
         private bool CanStopCapture()
         {
-            return true;
+            return SelectedDataGridItem != null && SelectedDataGridItem.VideoCapture.State != VideoCaptureStateEnum.VCS_Stopped;
         }
 
         private void StopCaptureVideo()
         {
+            Task.Run(() =>
+            {
+                VideoService.StopCaptureOne(SelectedDataGridItem);
+            });
 
         }
 
@@ -261,7 +275,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
 
         private void StartCaptureAllVideos()
         {
-
+            VideoService.StartCaptureAll();
         }
 
         private bool CanStopCaptureAll()
@@ -271,7 +285,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
 
         private void StopCaptureAllVideos()
         {
-
+            VideoService.StopCaptureAll();
         }
 
         private bool CanShowMotionZones()
