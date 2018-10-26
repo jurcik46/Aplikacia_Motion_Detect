@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Xml;
 using Aplikacia_Motion_Detect.Interfaces.Interface.Services;
@@ -23,13 +24,32 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
             public PixelFormatEnum pixelFormat;
         }
 
+        public VideoCaptureUtils utils = new VideoCaptureUtils();
         public List<VideoInfoDataGridModel> _videoCaptureList;
         public VideoInfoDataGridModel _videoDevice;
 
         private string configFilePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
                                         "\\CCSIPRO\\" + LoggerInit.ApplicationName + "\\DTKVideoCapture.xml";
 
-        private string developerKey = "";
+        private string _developerKey = "";
+
+        public List<VideoInfoDataGridModel> VideoCaptureList
+        {
+            get { return _videoCaptureList; }
+            set { _videoCaptureList = value; }
+        }
+
+        public VideoInfoDataGridModel VideoDevice
+        {
+            get { return _videoDevice; }
+            set { _videoDevice = value; }
+        }
+
+        public string DeveloperKey
+        {
+            get { return _developerKey; }
+            set { _developerKey = value; }
+        }
 
         public VideoService()
         {
@@ -218,7 +238,7 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
             int i = 0;
 
             XmlNode node = xmlDoc.CreateNode(XmlNodeType.Element, "DeveloperKey", "");
-            node.InnerText = this.developerKey;
+            node.InnerText = this.DeveloperKey;
             rootNode.AppendChild(node);
 
             foreach (var row in VideoCaptureList)
@@ -238,6 +258,8 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
             xmlDoc.AppendChild(rootNode);
 
             xmlDoc.Save(configFilePath);
+
+            this.LoadConfig();
         }
 
         private void LoadConfig()
@@ -264,9 +286,9 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                     }
                     if (node.Name == "DeveloperKey")
                     {
-                        //this.developerKey = node.InnerText;
-                        //if (this.developerKey.Length > 0)
-                        //    utils.SetDeveloperLicenseKey(this.developerKey);
+                        this.DeveloperKey = node.InnerText;
+                        if (this.DeveloperKey.Length > 0)
+                            utils.SetDeveloperLicenseKey(this._developerKey);
                     }
                 }
             }
@@ -393,16 +415,6 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
             vidCap.State = strState;
         }
 
-        public List<VideoInfoDataGridModel> VideoCaptureList
-        {
-            get { return _videoCaptureList; }
-            set { _videoCaptureList = value; }
-        }
 
-        public VideoInfoDataGridModel VideoDevice
-        {
-            get { return _videoDevice; }
-            set { _videoDevice = value; }
-        }
     }
 }

@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:views="clr-namespace:Aplikacia_Motion_Detect.UI.Views.MainWindow;assembly=Aplikacia_Motion_Detect.UI"
+        xmlns:views="clr-namespace:Aplikacia_Motion_Detect.UI.Views.MainWindow;assembly=Aplikacia_Motion_Detect.UI"
 		xmlns:ui="clr-namespace:Aplikacia_Motion_Detect.UI;assembly=Aplikacia_Motion_Detect.UI"
 		x:Class="Aplikacia_Motion_Detect.V1.MainWindow"
 		DataContext="{Binding Source={x:Static ui:ViewModelLocator.MainViewModel}}"

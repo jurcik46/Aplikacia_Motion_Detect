@@ -35,8 +35,8 @@
 
             </StackPanel>
             <StackPanel Grid.Column="1" Orientation="Horizontal">
-                <Button Margin="10" Content="Set Developer Key" HorizontalAlignment="Right" MinWidth="140" 
-                        Command="{Binding DeleteVideoCommand}" />
+                <!--<Button Margin="10" Content="Set Developer Key" HorizontalAlignment="Right" MinWidth="140" 
+                        Command="{Binding DeveloperKeyCommand}" />-->
             </StackPanel>
 
         </Grid>

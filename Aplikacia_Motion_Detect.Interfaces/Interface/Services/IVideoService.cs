@@ -11,6 +11,7 @@ namespace Aplikacia_Motion_Detect.Interfaces.Interface.Services
     {
         List<VideoInfoDataGridModel> VideoCaptureList { get; set; }
         VideoInfoDataGridModel VideoDevice { get; set; }
+        string DeveloperKey { get; set; }
         void AddVideoCapture();
         void ModifyVideoCapture();
         void DeleteVideoCapture();

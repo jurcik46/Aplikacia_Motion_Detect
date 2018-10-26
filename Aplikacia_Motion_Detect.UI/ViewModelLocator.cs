@@ -7,6 +7,7 @@ using Aplikacia_Motion_Detect.UI.ViewModels.AddVideoDevice;
 using GalaSoft.MvvmLight;
 using Aplikacia_Motion_Detect.Interfaces.Service;
 using Aplikacia_Motion_Detect.Interfaces.Interface.Services;
+using Aplikacia_Motion_Detect.UI.ViewModels.DeveloperKey;
 using Serilog.Core;
 
 namespace Aplikacia_Motion_Detect.UI
@@ -27,6 +28,8 @@ namespace Aplikacia_Motion_Detect.UI
             {
                 // Create design time view services and models
                 //SimpleIoc.Default.Register<ITestService, DesignTestService>();
+                SimpleIoc.Default.Register<IVideoService, VideoService>();
+
             }
             else
             {
@@ -52,6 +55,11 @@ namespace Aplikacia_Motion_Detect.UI
                 SimpleIoc.Default.Register<VideoCaptureViewModel>();
             }
 
+            if (!SimpleIoc.Default.IsRegistered<DeveloperKeyViewModel>())
+            {
+                SimpleIoc.Default.Register<DeveloperKeyViewModel>();
+            }
+
         }
 
 
@@ -75,7 +83,8 @@ namespace Aplikacia_Motion_Detect.UI
 
         public static MainViewModel MainViewModel => ServiceLocator.Current.GetInstance<MainViewModel>();
         public static VideoCaptureViewModel VideoCaptureViewModel => ServiceLocator.Current.GetInstance<VideoCaptureViewModel>();
-        public static IVideoService VideoService => ServiceLocator.Current.GetInstance<IVideoService>();
+        public static DeveloperKeyViewModel DeveloperKeyViewModel => ServiceLocator.Current.GetInstance<DeveloperKeyViewModel>();
+        public static IVideoService videoService => ServiceLocator.Current.GetInstance<IVideoService>();
         public static ResourceManager rm = new ResourceManager("Aplikacia_Motion_Detect.Resources.Languages.sk-Sk", Assembly.GetExecutingAssembly());
 
 

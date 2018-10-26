@@ -15,6 +15,7 @@ using GalaSoft.MvvmLight.CommandWpf;
 using Aplikacia_Motion_Detect.Interfaces.Messages;
 using Aplikacia_Motion_Detect.Interfaces.Models;
 using Aplikacia_Motion_Detect.Interfaces.Service;
+using Aplikacia_Motion_Detect.UI.Views.DeveloperKey;
 using DTKVideoCapLib;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
@@ -25,6 +26,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
     {
         private IVideoService VideoService { get; }
         private VideoCaptureWindow VideoCaptureWindow;
+        private DeveloperKeyWindows DeveloperWindow;
         private ObservableCollection<VideoInfoDataGridModel> _videoInfoDataGrid;
         #region Commmand Declaration
         private RelayCommand _addVideoCommand;
@@ -35,6 +37,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
         private RelayCommand _startCaptureAllCommand;
         private RelayCommand _stopCaptureAllCommand;
         private RelayCommand _defineMotionZonesCommand;
+        private RelayCommand _developerKeyCommand;
 
 
         public RelayCommand DeleteVideoCommand
@@ -84,6 +87,13 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
             get { return _defineMotionZonesCommand; }
             set { _defineMotionZonesCommand = value; }
         }
+
+        public RelayCommand DeveloperKeyCommand
+        {
+            get { return _developerKeyCommand; }
+            set { _developerKeyCommand = value; }
+        }
+
         #endregion
 
         public VideoInfoDataGridModel SelectedDataGridItem { get; set; }
@@ -98,6 +108,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
                 //RaisePropertyChanged();
             }
         }
+
 
 
 
@@ -184,6 +195,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
             this.AddVideoCommand = new RelayCommand(this.ShowVideoCaptureWindow, this.CanShowVideoCaptureWindow);
             this.ModifyVideoCommand = new RelayCommand(this.ModifyVideoCapture, this.CanModifyVideoCapture);
             this.DeleteVideoCommand = new RelayCommand(this.DeleteVideoCapture, this.CanDeleteVideoCapture);
+            this.DeveloperKeyCommand = new RelayCommand(this.ShowDeveloperKeyWindow, this.CanShowDeveloperKeyWindow);
             this.StartCaptureCommand = new RelayCommand(this.StartCaptureVideo, this.CanStartCapture);
             this.StopCaptureCommand = new RelayCommand(this.StopCaptureVideo, this.CanStopCapture);
             this.StartCaptureAllCommand = new RelayCommand(this.StartCaptureAllVideos, this.CanStartCaptureAll);
@@ -242,6 +254,22 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
             Messenger.Default.Send<DeleteVidoeCapture>(new DeleteVidoeCapture() { });
 
 
+        }
+
+        private bool CanShowDeveloperKeyWindow()
+        {
+            if (this.DeveloperWindow != null)
+                return (!this.DeveloperWindow.IsLoaded);
+            else
+            {
+                return true;
+            }
+        }
+
+        private void ShowDeveloperKeyWindow()
+        {
+            this.DeveloperWindow = new DeveloperKeyWindows();
+            this.DeveloperWindow.Show();
         }
 
         private bool CanStartCapture()
