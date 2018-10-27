@@ -11,13 +11,14 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Aplikacia_Motion_Detect.Interfaces.Interface;
 
 namespace Aplikacia_Motion_Detect.UI.Views.DeveloperKey
 {
     /// <summary>
     /// Interaction logic for DeveloperKeyWindows.xaml
     /// </summary>
-    public partial class DeveloperKeyWindows : Window
+    public partial class DeveloperKeyWindows : Window, IClosable
     {
         public DeveloperKeyWindows()
         {

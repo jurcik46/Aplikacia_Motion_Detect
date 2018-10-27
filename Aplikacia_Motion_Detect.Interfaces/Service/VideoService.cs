@@ -259,7 +259,7 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
 
             xmlDoc.Save(configFilePath);
 
-            this.LoadConfig();
+            //this.LoadConfig();
         }
 
         private void LoadConfig()

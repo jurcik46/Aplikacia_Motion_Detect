@@ -7,11 +7,13 @@ using Aplikacia_Motion_Detect.Interfaces.Interface;
 using Aplikacia_Motion_Detect.Interfaces.Interface.Services;
 using Aplikacia_Motion_Detect.Interfaces.Service;
 using DTKVideoCapLib;
-using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
+
 
 namespace Aplikacia_Motion_Detect.UI.ViewModels.DeveloperKey
 {
-    public class DeveloperKeyViewModel
+    public class DeveloperKeyViewModel : ViewModelBase
     {
         private IVideoService _vidoeService;
 
@@ -19,11 +21,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.DeveloperKey
         private RelayCommand<IClosable> _saveKeyCommand;
 
         public string DevKey { get; set; }
-        public RelayCommand<IClosable> SaveKeyCommand
-        {
-            get { return _saveKeyCommand; }
-            set { _saveKeyCommand = value; }
-        }
+        public RelayCommand<IClosable> SaveKeyCommand { get => _saveKeyCommand; set => _saveKeyCommand = value; }
 
         public IVideoService VidoeService
         {
@@ -40,23 +38,17 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.DeveloperKey
 
         private void CommandInit()
         {
-
-            this.SaveKeyCommand = new RelayCommand<IClosable>(this.Save, this.CanSave);
-        }
-
-        private bool CanSave(IClosable win)
-        {
-            return true;
+            this.SaveKeyCommand = new RelayCommand<IClosable>(this.Save);
         }
 
         private void Save(IClosable win)
         {
             VidoeService.DeveloperKey = DevKey;
             VidoeService.SaveConfig();
-            //if (win != null)
-            //{
-            //    win.Close();
-            //}
+            if (win != null)
+            {
+                win.Close();
+            }
         }
 
 

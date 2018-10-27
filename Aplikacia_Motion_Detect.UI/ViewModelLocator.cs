@@ -84,7 +84,7 @@ namespace Aplikacia_Motion_Detect.UI
         public static MainViewModel MainViewModel => ServiceLocator.Current.GetInstance<MainViewModel>();
         public static VideoCaptureViewModel VideoCaptureViewModel => ServiceLocator.Current.GetInstance<VideoCaptureViewModel>();
         public static DeveloperKeyViewModel DeveloperKeyViewModel => ServiceLocator.Current.GetInstance<DeveloperKeyViewModel>();
-        public static IVideoService videoService => ServiceLocator.Current.GetInstance<IVideoService>();
+        public static IVideoService VideoService => ServiceLocator.Current.GetInstance<IVideoService>();
         public static ResourceManager rm = new ResourceManager("Aplikacia_Motion_Detect.Resources.Languages.sk-Sk", Assembly.GetExecutingAssembly());
 
 

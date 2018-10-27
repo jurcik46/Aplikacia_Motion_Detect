@@ -27,7 +27,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
         #endregion
         public MainViewModel(IVideoService videoService)
         {
-            VideoService = videoService;
+            this.VideoService = videoService;
             VideoControl = new VideoViewModel(videoService);
             VideoSettingControl = new VideoSettingViewModel(videoService);
             this.MessageRegister();
