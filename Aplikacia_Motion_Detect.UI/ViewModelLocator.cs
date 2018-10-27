@@ -8,6 +8,7 @@ using GalaSoft.MvvmLight;
 using Aplikacia_Motion_Detect.Interfaces.Service;
 using Aplikacia_Motion_Detect.Interfaces.Interface.Services;
 using Aplikacia_Motion_Detect.UI.ViewModels.DeveloperKey;
+using Aplikacia_Motion_Detect.UI.ViewModels.MotionZones;
 using Serilog.Core;
 
 namespace Aplikacia_Motion_Detect.UI
@@ -60,6 +61,11 @@ namespace Aplikacia_Motion_Detect.UI
                 SimpleIoc.Default.Register<DeveloperKeyViewModel>();
             }
 
+            if (!SimpleIoc.Default.IsRegistered<MotionZonesViewModel>())
+            {
+                SimpleIoc.Default.Register<MotionZonesViewModel>();
+            }
+
         }
 
 
@@ -84,6 +90,7 @@ namespace Aplikacia_Motion_Detect.UI
         public static MainViewModel MainViewModel => ServiceLocator.Current.GetInstance<MainViewModel>();
         public static VideoCaptureViewModel VideoCaptureViewModel => ServiceLocator.Current.GetInstance<VideoCaptureViewModel>();
         public static DeveloperKeyViewModel DeveloperKeyViewModel => ServiceLocator.Current.GetInstance<DeveloperKeyViewModel>();
+        public static MotionZonesViewModel MotionZonesViewModel => ServiceLocator.Current.GetInstance<MotionZonesViewModel>();
         public static IVideoService VideoService => ServiceLocator.Current.GetInstance<IVideoService>();
         public static ResourceManager rm = new ResourceManager("Aplikacia_Motion_Detect.Resources.Languages.sk-Sk", Assembly.GetExecutingAssembly());
 

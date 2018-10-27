@@ -111,6 +111,7 @@
     <Compile Include="ViewModels\MainWindow\VideoViewModel.cs" />
     <Compile Include="ViewModels\AddVideoDevice\SaveOutputViewModel.cs" />
     <Compile Include="ViewModels\AddVideoDevice\VideoCaptureViewModel.cs" />
+    <Compile Include="ViewModels\MotionZones\MotionZonesViewModel.cs" />
     <Compile Include="Views\AddVideoDevice\VideoSourceControl.xaml.cs">
       <DependentUpon>VideoSourceControl.xaml</DependentUpon>
     </Compile>

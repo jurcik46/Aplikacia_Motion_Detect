@@ -22,6 +22,7 @@ namespace Aplikacia_Motion_Detect.UI.Views.MotionZones
         public MotionZonesWindow()
         {
             InitializeComponent();
+            this.DataContext = ViewModelLocator.MotionZonesViewModel;
         }
     }
 }
