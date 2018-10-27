@@ -135,6 +135,15 @@
     <Compile Include="Views\AddVideoDevice\VideoCaptureWindow.xaml.cs">
       <DependentUpon>VideoCaptureWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MotionZones\MotionZonesWindow.xaml.cs">
+      <DependentUpon>MotionZonesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MotionZones\VideoDisplayMotionZones.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\MotionZones\VideoDisplayMotionZones.Designer.cs">
+      <DependentUpon>VideoDisplayMotionZones.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -156,6 +165,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\MainWindow\VideoDisplay.resx">
       <DependentUpon>VideoDisplay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MotionZones\VideoDisplayMotionZones.resx">
+      <DependentUpon>VideoDisplayMotionZones.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="packages.config" />
@@ -199,6 +211,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AddVideoDevice\VideoCaptureWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MotionZones\MotionZonesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
