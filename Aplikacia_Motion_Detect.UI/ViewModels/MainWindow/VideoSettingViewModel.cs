@@ -16,6 +16,7 @@ using Aplikacia_Motion_Detect.Interfaces.Messages;
 using Aplikacia_Motion_Detect.Interfaces.Models;
 using Aplikacia_Motion_Detect.Interfaces.Service;
 using Aplikacia_Motion_Detect.UI.Views.DeveloperKey;
+using Aplikacia_Motion_Detect.UI.Views.MotionZones;
 using DTKVideoCapLib;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
@@ -27,6 +28,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
         private IVideoService VideoService { get; }
         private VideoCaptureWindow VideoCaptureWindow;
         private DeveloperKeyWindows DeveloperWindow;
+        private MotionZonesWindow MotionZonesWidow;
         private ObservableCollection<VideoInfoDataGridModel> _videoInfoDataGrid;
         #region Commmand Declaration
         private RelayCommand _addVideoCommand;
@@ -318,12 +320,25 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
 
         private bool CanShowMotionZones()
         {
-            return true;
+            if (MotionZonesWidow != null)
+            {
+                return (!MotionZonesWidow.IsLoaded);
+            }
+            if (SelectedDataGridItem != null &&
+                SelectedDataGridItem.VideoCapture.State == VideoCaptureStateEnum.VCS_Started)
+            {
+                return true;
+            }
+
+            return false;
+
         }
 
         private void ShowMotionZones()
         {
-
+            VideoService.VideoDevice = SelectedDataGridItem;
+            MotionZonesWidow = new MotionZonesWindow();
+            MotionZonesWidow.Show();
         }
 
 

@@ -72,7 +72,7 @@
                 <Button Padding="5" Margin="10 10 10 10" Content="Stop capture ALL" HorizontalAlignment="Left" Command="{Binding StopCaptureAllCommand}"/>
             </StackPanel>
             <StackPanel Grid.Column="1">
-                <Button Padding="5" Margin="10 10 10 10" Content="Define Motion Zones" HorizontalAlignment="Right" />
+                <Button Padding="5" Margin="10 10 10 10" Content="Define Motion Zones" HorizontalAlignment="Right"  Command="{Binding DefineMotionZonesCommand}"/>
             </StackPanel>
 
         </Grid>

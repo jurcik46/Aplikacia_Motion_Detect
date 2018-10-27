@@ -11,13 +11,14 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Aplikacia_Motion_Detect.Interfaces.Interface;
 
 namespace Aplikacia_Motion_Detect.UI.Views.MotionZones
 {
     /// <summary>
     /// Interaction logic for MotionZonesWindow.xaml
     /// </summary>
-    public partial class MotionZonesWindow : Window
+    public partial class MotionZonesWindow : Window, IClosable
     {
         public MotionZonesWindow()
         {
