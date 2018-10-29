@@ -82,7 +82,15 @@ namespace Aplikacia_Motion_Detect.UI
             {
                 SimpleIoc.Default.Register<VideoCaptureViewModel>();
             }
-            // TODO Clear the ViewModels
+        }
+
+        public static void CleanupMotionZonesViewModel()
+        {
+
+            if (!SimpleIoc.Default.IsRegistered<MotionZonesViewModel>())
+            {
+                SimpleIoc.Default.Register<MotionZonesViewModel>();
+            }
         }
 
         public static LoggingLevelSwitch LoggingLevelSwitch => _loggingLevelSwitch ?? (_loggingLevelSwitch = new LoggingLevelSwitch());

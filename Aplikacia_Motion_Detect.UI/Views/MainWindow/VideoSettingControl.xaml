@@ -42,8 +42,10 @@
         </Grid>
 
         <!-- Table with cameras-->
-        <DataGrid SelectedItem="{Binding SelectedDataGridItem, Mode=TwoWay}" AutoGenerateColumns="False" ItemsSource="{Binding VideoInfoDataGrid, Mode=TwoWay}" 
-                   ColumnWidth="*" RowHeight="25" CanUserAddRows="false" IsReadOnly="True" Width="800" Height="450"  Grid.Row="1" >
+        <DataGrid SelectedItem="{Binding SelectedDataGridItem, Mode=TwoWay}" 
+                  AutoGenerateColumns="False" ItemsSource="{Binding VideoInfoDataGrid, Mode=TwoWay}" 
+                  SelectionMode="Single"
+                  ColumnWidth="*" RowHeight="25" CanUserAddRows="false" IsReadOnly="True" Width="800" Height="450"  Grid.Row="1" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
@@ -55,8 +57,18 @@
                 <DataGridTextColumn Header="Frames" Binding="{Binding Frames}"/>
                 <DataGridTextColumn Header="FPS" Binding="{Binding FPS}"/>
             </DataGrid.Columns>
-        </DataGrid>
 
+            <DataGrid.Resources>
+                <Style TargetType="DataGridRow">
+                    <Style.Resources>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Red"/>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="White"/>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="Red" />
+                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}" Color="White"/>
+                    </Style.Resources>
+                </Style>
+            </DataGrid.Resources>
+        </DataGrid>
 
         <!-- Button under table -->
 

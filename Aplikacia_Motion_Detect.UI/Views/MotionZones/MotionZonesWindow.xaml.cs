@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,13 @@ namespace Aplikacia_Motion_Detect.UI.Views.MotionZones
         {
             InitializeComponent();
             this.DataContext = ViewModelLocator.MotionZonesViewModel;
+        }
+
+        private void MotionZonesWindow_OnClosing(object sender, CancelEventArgs e)
+        {
+            ViewModelLocator.VideoService.VideoDevice = null;
+            ViewModelLocator.VideoService.SaveConfig();
+            ViewModelLocator.CleanupMotionZonesViewModel();
         }
     }
 }

@@ -8,7 +8,7 @@ using DTKVideoCapLib;
 
 namespace Aplikacia_Motion_Detect.Interfaces.Messages
 {
-    public class ModifyVideoCapture
+    public class ModifyVideoCaptureMessage
     {
         private VideoInfoDataGridModel _videoSource;
 

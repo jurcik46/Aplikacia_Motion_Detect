@@ -7,7 +7,7 @@ using DTKVideoCapLib;
 
 namespace Aplikacia_Motion_Detect.Interfaces.Messages
 {
-    public class AddVideoCapture
+    public class AddVideoCaptureMessage
     {
         private bool _createNew;
 

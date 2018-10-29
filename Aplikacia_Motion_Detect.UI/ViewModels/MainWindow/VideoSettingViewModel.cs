@@ -238,7 +238,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
             this.VideoCaptureWindow = new VideoCaptureWindow();
             this.VideoCaptureWindow.Show();
 
-            Messenger.Default.Send<ModifyVideoCapture>(new ModifyVideoCapture() { VideoSource = SelectedDataGridItem });
+            Messenger.Default.Send<ModifyVideoCaptureMessage>(new ModifyVideoCaptureMessage() { VideoSource = SelectedDataGridItem });
 
         }
 
@@ -253,7 +253,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
             VideoService.DeleteVideoCapture();
             VideoInfoDataGrid.Remove(SelectedDataGridItem);
 
-            Messenger.Default.Send<DeleteVidoeCapture>(new DeleteVidoeCapture() { });
+            Messenger.Default.Send<DeleteVidoeCaptureMessage>(new DeleteVidoeCaptureMessage() { });
 
 
         }
@@ -291,10 +291,9 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
 
         private void StopCaptureVideo()
         {
-            Task.Run(() =>
-            {
-                VideoService.StopCaptureOne(SelectedDataGridItem);
-            });
+
+            VideoService.StopCaptureOne(SelectedDataGridItem);
+
 
         }
 

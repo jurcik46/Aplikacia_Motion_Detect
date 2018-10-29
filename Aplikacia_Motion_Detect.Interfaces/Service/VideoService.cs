@@ -168,8 +168,10 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                 {
                     try
                     {
+
                         item.VideoCapture.StartCapture();
                         UpdateState(item);
+
                     }
                     catch (COMException)
                     {
@@ -211,6 +213,7 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                     try
                     {
                         item.VideoCapture.StopCapture();
+
                     }
                     catch (Exception e)
                     {

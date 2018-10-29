@@ -38,13 +38,13 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
 
         private void MessageRegister()
         {
-            Messenger.Default.Register<AddVideoCapture>(this, (message) =>
+            Messenger.Default.Register<AddVideoCaptureMessage>(this, (message) =>
             {
                 VideoSettingControl.SaveVideoCapture(message.CreateNew);
                 VideoControl.LoadVideoDivaceFromService();
             });
 
-            Messenger.Default.Register<DeleteVidoeCapture>(this, (message) =>
+            Messenger.Default.Register<DeleteVidoeCaptureMessage>(this, (message) =>
             {
                 VideoControl.LoadVideoDivaceFromService();
             });

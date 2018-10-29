@@ -66,7 +66,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.AddVideoDevice
 
         public void MessagessRegistration()
         {
-            Messenger.Default.Register<ModifyVideoCapture>(this, (message) =>
+            Messenger.Default.Register<ModifyVideoCaptureMessage>(this, (message) =>
             {
                 VideoService.VideoDevice = message.VideoSource;
                 VideoCaptureName = VideoService.VideoDevice.Name;
@@ -95,7 +95,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.AddVideoDevice
             {
                 VideoService.VideoDevice = new VideoInfoDataGridModel();
                 VideoSourceControl.SaveVideoCaptureSetting(true, VideoCaptureName);
-                Messenger.Default.Send<AddVideoCapture>(new AddVideoCapture()
+                Messenger.Default.Send<AddVideoCaptureMessage>(new AddVideoCaptureMessage()
                 {
                     CreateNew = true
                 });
@@ -103,7 +103,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.AddVideoDevice
             else
             {
                 VideoSourceControl.SaveVideoCaptureSetting(false, VideoCaptureName);
-                Messenger.Default.Send<AddVideoCapture>(new AddVideoCapture()
+                Messenger.Default.Send<AddVideoCaptureMessage>(new AddVideoCaptureMessage()
                 {
                     CreateNew = false
                 });

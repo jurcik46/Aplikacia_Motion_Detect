@@ -8,8 +8,10 @@
         mc:Ignorable="d"
         Title="MotionZonesWindow" Height="450" Width="800"
         ResizeMode="NoResize" 
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Closing="MotionZonesWindow_OnClosing">
     <Grid>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
@@ -22,17 +24,31 @@
 
         <!--Add and Delete Buttons-->
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0">
-            <Button Width="80" Margin="6 10" Content="Add"/>
-            <Button Width="80" Margin="6 10 " Content="Delete"/>
+            <Button Width="80" Margin="6 10" Content="Add" Command="{Binding AddCommand}"/>
+            <Button Width="80" Margin="6 10 " Content="Delete" Command="{Binding DeleteCommand}"/>
         </StackPanel>
 
         <!-- Table with Motion Zones-->
-        <DataGrid SelectedItem="{Binding SelectedDataGridItem, Mode=TwoWay}" AutoGenerateColumns="False" ItemsSource="{Binding VideoInfoDataGrid, Mode=TwoWay}" 
-                  ColumnWidth="*" RowHeight="25" CanUserAddRows="false" IsReadOnly="True"  Grid.Row="1" Grid.Column="0">
+        <DataGrid AutoGenerateColumns="False" 
+                  SelectedItem="{Binding SelectedMotionZone, Mode=TwoWay}"
+                  ItemsSource="{Binding MotionZoneList, Mode=TwoWay}" 
+                  SelectionMode="Single"
+                  ColumnWidth="*" RowHeight="25" CanUserAddRows="false"  Grid.Row="1" Grid.Column="0">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Sensitivity" Binding="{Binding Sensitivity}"/>
+                <DataGridTextColumn IsReadOnly="True" Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn IsReadOnly="False" Header="Sensitivity" Binding="{Binding Sensitivity, Mode=TwoWay}"/>
             </DataGrid.Columns>
+
+            <DataGrid.Resources>
+                <Style TargetType="DataGridRow">
+                    <Style.Resources>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Red"/>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="White"/>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="Red" />
+                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}" Color="White"/>
+                    </Style.Resources>
+                </Style>
+            </DataGrid.Resources>
         </DataGrid>
 
         <!--VideoDisplay Controler-->
