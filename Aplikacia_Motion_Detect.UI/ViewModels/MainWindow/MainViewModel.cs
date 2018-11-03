@@ -10,6 +10,7 @@ using Aplikacia_Motion_Detect.Interfaces.Interface.Services;
 using Aplikacia_Motion_Detect.Interfaces.Messages;
 using Aplikacia_Motion_Detect.Interfaces.Models;
 using Aplikacia_Motion_Detect.UI.ViewModels.AddVideoDevice;
+using Aplikacia_Motion_Detect.UI.ViewModels.DeveloperKey;
 using Aplikacia_Motion_Detect.UI.Views.AddVideoDevice;
 using Aplikacia_Motion_Detect.UI.Views.DeveloperKey;
 using Aplikacia_Motion_Detect.UI.Views.MainWindow;
@@ -27,7 +28,11 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
         private VideoCaptureViewModel VideoCaptureViewModel;
         private VideoCaptureWindow VideoCaptureWindow;
         #endregion
+
+        #region Developer Key Window
+        private DeveloperKeyViewModel DevelopeViewModel;
         private DeveloperKeyWindows DeveloperWindow;
+        #endregion
         private MotionZonesWindow MotionZonesWidow;
         private ObservableCollection<VideoInfoDataGridModel> _videoInfoDataGrid;
         #region Commmand Declaration
@@ -236,7 +241,9 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
 
         private void ShowDeveloperKeyWindow()
         {
+            this.DevelopeViewModel = new DeveloperKeyViewModel(VideoService);
             this.DeveloperWindow = new DeveloperKeyWindows();
+            this.DeveloperWindow.DataContext = this.DevelopeViewModel;
             this.DeveloperWindow.Show();
         }
 
@@ -301,7 +308,6 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
 
         private void ShowMotionZones()
         {
-            //VideoService.VideoDevice = SelectedDataGridItem;
             MotionZonesWidow = new MotionZonesWindow();
             MotionZonesWidow.Show();
         }

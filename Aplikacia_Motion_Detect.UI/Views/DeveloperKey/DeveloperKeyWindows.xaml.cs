@@ -23,7 +23,7 @@ namespace Aplikacia_Motion_Detect.UI.Views.DeveloperKey
         public DeveloperKeyWindows()
         {
             InitializeComponent();
-            this.DataContext = ViewModelLocator.DeveloperKeyViewModel;
+
         }
     }
 }
