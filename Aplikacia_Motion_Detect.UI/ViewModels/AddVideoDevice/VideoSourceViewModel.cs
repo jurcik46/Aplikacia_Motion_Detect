@@ -206,130 +206,130 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.AddVideoDevice
 
         }
 
-        public void SaveVideoCaptureSetting(bool createNew, string name)
-        {
-            if (createNew)
-            {
-                VideoService.VideoDevice.VideoCapture = new VideoCapture();
-                VideoService.VideoDevice.VideoCapture.Name = name;
-                if (IsIpCameraCheck)
-                {
-                    IPCamera ipCamera = new IPCamera();
-                    ipCamera.IPCameraURL = IpCameraUrl;
-                    ipCamera.IPCameraUser = IpCameraUser;
-                    ipCamera.IPCameraPassword = IpCameraPassword;
-                    VideoService.VideoDevice.VideoCapture.VideoSource = ipCamera;
-                }
-                else if (IsVideoDeviceCheck)
-                {
-                    if (SVideoDevice != null)
-                    {
-                        VideoService.VideoDevice.VideoCapture.VideoSource = SVideoDevice;
-                    }
+        //public void SaveVideoCaptureSetting(bool createNew, string name)
+        //{
+        //    if (createNew)
+        //    {
+        //        VideoService.VideoDevice.VideoCapture = new VideoCapture();
+        //        VideoService.VideoDevice.VideoCapture.Name = name;
+        //        if (IsIpCameraCheck)
+        //        {
+        //            IPCamera ipCamera = new IPCamera();
+        //            ipCamera.IPCameraURL = IpCameraUrl;
+        //            ipCamera.IPCameraUser = IpCameraUser;
+        //            ipCamera.IPCameraPassword = IpCameraPassword;
+        //            VideoService.VideoDevice.VideoCapture.VideoSource = ipCamera;
+        //        }
+        //        else if (IsVideoDeviceCheck)
+        //        {
+        //            if (SVideoDevice != null)
+        //            {
+        //                VideoService.VideoDevice.VideoCapture.VideoSource = SVideoDevice;
+        //            }
 
-                    if (SVideoDeviceOutputSize != null)
-                    {
-                        SVideoDevice.OutputSize = SVideoDeviceOutputSize;
-                    }
+        //            if (SVideoDeviceOutputSize != null)
+        //            {
+        //                SVideoDevice.OutputSize = SVideoDeviceOutputSize;
+        //            }
 
-                    if (SVideoDeviceOutputFormat != null)
-                    {
-                        SVideoDevice.OutputPixelFormat = SVideoDeviceOutputFormat;
-                    }
-                }
-                else if (IsVideoFileCheck)
-                {
-                    VideoFile videoFile = new VideoFile();
-                    videoFile.FileName = VideoFilePath;
-                    videoFile.Repeat = VideoFileRepeat;
-                    VideoService.VideoDevice.VideoCapture.VideoSource = videoFile;
-                }
-            }
-            else
-            {
-                VideoService.VideoDevice.VideoCapture.Name = name;
+        //            if (SVideoDeviceOutputFormat != null)
+        //            {
+        //                SVideoDevice.OutputPixelFormat = SVideoDeviceOutputFormat;
+        //            }
+        //        }
+        //        else if (IsVideoFileCheck)
+        //        {
+        //            VideoFile videoFile = new VideoFile();
+        //            videoFile.FileName = VideoFilePath;
+        //            videoFile.Repeat = VideoFileRepeat;
+        //            VideoService.VideoDevice.VideoCapture.VideoSource = videoFile;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        VideoService.VideoDevice.VideoCapture.Name = name;
 
-                if (IsIpCameraCheck)
-                {
-                    IPCamera ipCamera = VideoService.VideoDevice.VideoCapture.VideoSource is IPCamera
-                        ? (IPCamera)VideoService.VideoDevice.VideoCapture.VideoSource
-                        : new IPCamera();
-                    ipCamera.IPCameraURL = IpCameraUrl;
-                    ipCamera.IPCameraUser = IpCameraUser;
-                    ipCamera.IPCameraPassword = IpCameraPassword;
-                    VideoService.VideoDevice.VideoCapture.VideoSource = ipCamera;
-                }
-                else if (IsVideoDeviceCheck)
-                {
-                    if (SVideoDevice != null)
-                    {
-                        VideoService.VideoDevice.VideoCapture.VideoSource = SVideoDevice;
-                    }
+        //        if (IsIpCameraCheck)
+        //        {
+        //            IPCamera ipCamera = VideoService.VideoDevice.VideoCapture.VideoSource is IPCamera
+        //                ? (IPCamera)VideoService.VideoDevice.VideoCapture.VideoSource
+        //                : new IPCamera();
+        //            ipCamera.IPCameraURL = IpCameraUrl;
+        //            ipCamera.IPCameraUser = IpCameraUser;
+        //            ipCamera.IPCameraPassword = IpCameraPassword;
+        //            VideoService.VideoDevice.VideoCapture.VideoSource = ipCamera;
+        //        }
+        //        else if (IsVideoDeviceCheck)
+        //        {
+        //            if (SVideoDevice != null)
+        //            {
+        //                VideoService.VideoDevice.VideoCapture.VideoSource = SVideoDevice;
+        //            }
 
-                    if (SVideoDeviceOutputSize != null)
-                    {
-                        SVideoDevice.OutputSize = SVideoDeviceOutputSize;
-                    }
+        //            if (SVideoDeviceOutputSize != null)
+        //            {
+        //                SVideoDevice.OutputSize = SVideoDeviceOutputSize;
+        //            }
 
-                    if (SVideoDeviceOutputFormat != null)
-                    {
-                        SVideoDevice.OutputPixelFormat = SVideoDeviceOutputFormat;
-                    }
-                }
-                else if (IsVideoFileCheck)
-                {
-                    VideoFile videoFile = VideoService.VideoDevice.VideoCapture.VideoSource is VideoFile
-                        ? (VideoFile)VideoService.VideoDevice.VideoCapture.VideoSource
-                        : new VideoFile();
-                    videoFile.FileName = VideoFilePath;
-                    videoFile.Repeat = VideoFileRepeat;
-                    VideoService.VideoDevice.VideoCapture.VideoSource = videoFile;
-                }
-            }
+        //            if (SVideoDeviceOutputFormat != null)
+        //            {
+        //                SVideoDevice.OutputPixelFormat = SVideoDeviceOutputFormat;
+        //            }
+        //        }
+        //        else if (IsVideoFileCheck)
+        //        {
+        //            VideoFile videoFile = VideoService.VideoDevice.VideoCapture.VideoSource is VideoFile
+        //                ? (VideoFile)VideoService.VideoDevice.VideoCapture.VideoSource
+        //                : new VideoFile();
+        //            videoFile.FileName = VideoFilePath;
+        //            videoFile.Repeat = VideoFileRepeat;
+        //            VideoService.VideoDevice.VideoCapture.VideoSource = videoFile;
+        //        }
+        //    }
 
-        }
+        //}
 
-        public void ModifyVideoCapture()
-        {
-            if (VideoService.VideoDevice != null)
-            {
+        //public void ModifyVideoCapture()
+        //{
+        //    if (VideoService.VideoDevice != null)
+        //    {
 
-                if (VideoService.VideoDevice.VideoCapture.VideoSource is IPCamera)
-                {
-                    IsIpCameraCheck = true;
-                    IPCamera ipCamera = (IPCamera)VideoService.VideoDevice.VideoCapture.VideoSource;
-                    IpCameraUrl = ipCamera.IPCameraURL;
-                    IpCameraUser = ipCamera.IPCameraUser;
-                    IpCameraPassword = ipCamera.IPCameraPassword;
-                }
-                else if (VideoService.VideoDevice.VideoCapture.VideoSource is VideoDevice)
-                {
-                    IsVideoDeviceCheck = true;
-                    VideoDevice videoDevice = (VideoDevice)VideoService.VideoDevice.VideoCapture.VideoSource;
-                    SVideoDevice = videoDevice;
-                    SVideoDeviceOutputFormat = videoDevice.OutputPixelFormat;
-                    foreach (VideoDevice device in VideoDevicesList)
-                    {
-                        if (device.Path == videoDevice.Path)
-                        {
-                            SVideoDevice = videoDevice;
-                            SVideoDeviceOutputFormat = videoDevice.OutputPixelFormat;
-                            SVideoDeviceOutputSize = videoDevice.OutputSize;
-                            break;
-                        }
-                    }
-                }
-                else if (VideoService.VideoDevice.VideoCapture.VideoSource is VideoFile)
-                {
-                    IsVideoFileCheck = true;
+        //        if (VideoService.VideoDevice.VideoCapture.VideoSource is IPCamera)
+        //        {
+        //            IsIpCameraCheck = true;
+        //            IPCamera ipCamera = (IPCamera)VideoService.VideoDevice.VideoCapture.VideoSource;
+        //            IpCameraUrl = ipCamera.IPCameraURL;
+        //            IpCameraUser = ipCamera.IPCameraUser;
+        //            IpCameraPassword = ipCamera.IPCameraPassword;
+        //        }
+        //        else if (VideoService.VideoDevice.VideoCapture.VideoSource is VideoDevice)
+        //        {
+        //            IsVideoDeviceCheck = true;
+        //            VideoDevice videoDevice = (VideoDevice)VideoService.VideoDevice.VideoCapture.VideoSource;
+        //            SVideoDevice = videoDevice;
+        //            SVideoDeviceOutputFormat = videoDevice.OutputPixelFormat;
+        //            foreach (VideoDevice device in VideoDevicesList)
+        //            {
+        //                if (device.Path == videoDevice.Path)
+        //                {
+        //                    SVideoDevice = videoDevice;
+        //                    SVideoDeviceOutputFormat = videoDevice.OutputPixelFormat;
+        //                    SVideoDeviceOutputSize = videoDevice.OutputSize;
+        //                    break;
+        //                }
+        //            }
+        //        }
+        //        else if (VideoService.VideoDevice.VideoCapture.VideoSource is VideoFile)
+        //        {
+        //            IsVideoFileCheck = true;
 
-                    VideoFile video = (VideoFile)VideoService.VideoDevice.VideoCapture.VideoSource;
-                    VideoFilePath = video.FileName;
-                    VideoFileRepeat = video.Repeat;
-                }
+        //            VideoFile video = (VideoFile)VideoService.VideoDevice.VideoCapture.VideoSource;
+        //            VideoFilePath = video.FileName;
+        //            VideoFileRepeat = video.Repeat;
+        //        }
 
-            }
-        }
+        //    }
+        //}
 
 
         #region Commands

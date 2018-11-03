@@ -21,9 +21,18 @@ namespace Aplikacia_Motion_Detect.Interfaces.Models
         private string _pixel;
         private int _frames;
         private int _fps;
+        private VideoCapture _videoCapture;
         [CanBeNull] private Queue<int> _frameTick;
 
-        public VideoCapture VideoCapture { get; set; }
+        public VideoCapture VideoCapture
+        {
+            get { return _videoCapture; }
+            set
+            {
+                _videoCapture = value;
+                OnPropertyChanged();
+            }
+        }
 
         public int FPS
         {

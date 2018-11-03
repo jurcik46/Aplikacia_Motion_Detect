@@ -12,12 +12,10 @@ namespace Aplikacia_Motion_Detect.UI.Views.AddVideoDevice
         public VideoCaptureWindow()
         {
             InitializeComponent();
-            this.DataContext = ViewModelLocator.VideoCaptureViewModel;
         }
 
         private void VideoCaptureWindow_OnClosing(object sender, CancelEventArgs e)
         {
-            ViewModelLocator.CleanupVideoCaptureVieModel();
         }
     }
 }

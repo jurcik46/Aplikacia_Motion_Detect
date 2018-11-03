@@ -111,9 +111,6 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
             }
         }
 
-
-
-
         /**
          * Constructor
          */
@@ -126,57 +123,57 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
 
         }
 
-        public void SaveVideoCapture(bool createNew)
-        {
-            var pom = VideoService.VideoDevice;
+        //public void SaveVideoCapture(bool createNew)
+        //{
+        //    var pom = VideoService.VideoDevice;
 
-            if (createNew)
-            {
-                pom = new VideoInfoDataGridModel();
-            }
+        //    if (createNew)
+        //    {
+        //        pom = new VideoInfoDataGridModel();
+        //    }
 
-            pom.Name = VideoService.VideoDevice.VideoCapture.Name;
-            pom.VideoCapture = VideoService.VideoDevice.VideoCapture;
+        //    pom.Name = VideoService.VideoDevice.VideoCapture.Name;
+        //    pom.VideoCapture = VideoService.VideoDevice.VideoCapture;
 
-            string strState = VideoService.VideoDevice.VideoCapture.State.ToString();
-            //remove prefix from the state contatnt name 
-            strState = strState.Substring(4, strState.Length - 4);
-            pom.State = strState;
-            if (VideoService.VideoDevice.VideoCapture.VideoSource is IPCamera)
-            {
-                IPCamera ipPCamera = (IPCamera)VideoService.VideoDevice.VideoCapture.VideoSource;
-                pom.Description = ipPCamera.IPCameraURL;
-                pom.Type = "IP Camera";
-            }
-            else if (VideoService.VideoDevice.VideoCapture.VideoSource is VideoDevice)
-            {
-                VideoDevice videoDevice = (VideoDevice)VideoService.VideoDevice.VideoCapture.VideoSource;
-                pom.Description = videoDevice.DisplayName;
-                pom.Type = "Video Device";
-            }
-            else if (VideoService.VideoDevice.VideoCapture.VideoSource is VideoFile)
-            {
-                VideoFile videoFile = (VideoFile)VideoService.VideoDevice.VideoCapture.VideoSource;
-                pom.Description = videoFile.FileName;
-                pom.Type = "Video File";
-            }
+        //    string strState = VideoService.VideoDevice.VideoCapture.State.ToString();
+        //    //remove prefix from the state contatnt name 
+        //    strState = strState.Substring(4, strState.Length - 4);
+        //    pom.State = strState;
+        //    if (VideoService.VideoDevice.VideoCapture.VideoSource is IPCamera)
+        //    {
+        //        IPCamera ipPCamera = (IPCamera)VideoService.VideoDevice.VideoCapture.VideoSource;
+        //        pom.Description = ipPCamera.IPCameraURL;
+        //        pom.Type = "IP Camera";
+        //    }
+        //    else if (VideoService.VideoDevice.VideoCapture.VideoSource is VideoDevice)
+        //    {
+        //        VideoDevice videoDevice = (VideoDevice)VideoService.VideoDevice.VideoCapture.VideoSource;
+        //        pom.Description = videoDevice.DisplayName;
+        //        pom.Type = "Video Device";
+        //    }
+        //    else if (VideoService.VideoDevice.VideoCapture.VideoSource is VideoFile)
+        //    {
+        //        VideoFile videoFile = (VideoFile)VideoService.VideoDevice.VideoCapture.VideoSource;
+        //        pom.Description = videoFile.FileName;
+        //        pom.Type = "Video File";
+        //    }
 
-            pom.Frames = 0;
-            pom.FPS = 0;
-            pom.Resolution = "";
-            if (createNew)
-            {
-                VideoService.VideoDevice = pom;
-                VideoService.AddVideoCapture();
-            }
-            else
-            {
-                VideoService.ModifyVideoCapture();
-            }
+        //    pom.Frames = 0;
+        //    pom.FPS = 0;
+        //    pom.Resolution = "";
+        //    if (createNew)
+        //    {
+        //        VideoService.VideoDevice = pom;
+        //        //VideoService.AddVideoCapture();
+        //    }
+        //    else
+        //    {
+        //        VideoService.ModifyVideoCapture();
+        //    }
 
-            LoadVideoDivaceFromService();
-            VideoService.VideoDevice = null;
-        }
+        //    LoadVideoDivaceFromService();
+        //    VideoService.VideoDevice = null;
+        //}
 
 
         private void LoadVideoDivaceFromService()
@@ -196,13 +193,13 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
         {
             this.AddVideoCommand = new RelayCommand(this.ShowVideoCaptureWindow, this.CanShowVideoCaptureWindow);
             this.ModifyVideoCommand = new RelayCommand(this.ModifyVideoCapture, this.CanModifyVideoCapture);
-            this.DeleteVideoCommand = new RelayCommand(this.DeleteVideoCapture, this.CanDeleteVideoCapture);
+            //this.DeleteVideoCommand = new RelayCommand(this.DeleteVideoCapture, this.CanDeleteVideoCapture);
             this.DeveloperKeyCommand = new RelayCommand(this.ShowDeveloperKeyWindow, this.CanShowDeveloperKeyWindow);
             this.StartCaptureCommand = new RelayCommand(this.StartCaptureVideo, this.CanStartCapture);
             this.StopCaptureCommand = new RelayCommand(this.StopCaptureVideo, this.CanStopCapture);
             this.StartCaptureAllCommand = new RelayCommand(this.StartCaptureAllVideos, this.CanStartCaptureAll);
             this.StopCaptureAllCommand = new RelayCommand(this.StopCaptureAllVideos, this.CanStopCaptureAll);
-            this.DefineMotionZonesCommand = new RelayCommand(this.ShowMotionZones, this.CanShowMotionZones);
+            //this.DefineMotionZonesCommand = new RelayCommand(this.ShowMotionZones, this.CanShowMotionZones);
         }
 
 
@@ -230,7 +227,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
                     return false;
             }
 
-            return SelectedDataGridItem != null;
+            return SelectedDataGridItem != null && this.SelectedDataGridItem.VideoCapture.State == VideoCaptureStateEnum.VCS_Stopped;
         }
 
         private void ModifyVideoCapture()
@@ -247,16 +244,15 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
             return SelectedDataGridItem != null;
         }
 
-        private void DeleteVideoCapture()
-        {
-            VideoService.VideoDevice = SelectedDataGridItem;
-            VideoService.DeleteVideoCapture();
-            VideoInfoDataGrid.Remove(SelectedDataGridItem);
-
-            Messenger.Default.Send<DeleteVidoeCaptureMessage>(new DeleteVidoeCaptureMessage() { });
+        //private void DeleteVideoCapture()
+        //{
+        //    VideoService.VideoDevice = SelectedDataGridItem;
+        //    VideoService.DeleteVideoCapture();
+        //    VideoInfoDataGrid.Remove(SelectedDataGridItem);
 
 
-        }
+
+        //}
 
         private bool CanShowDeveloperKeyWindow()
         {
@@ -333,12 +329,12 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
 
         }
 
-        private void ShowMotionZones()
-        {
-            VideoService.VideoDevice = SelectedDataGridItem;
-            MotionZonesWidow = new MotionZonesWindow();
-            MotionZonesWidow.Show();
-        }
+        //private void ShowMotionZones()
+        //{
+        //    VideoService.VideoDevice = SelectedDataGridItem;
+        //    MotionZonesWidow = new MotionZonesWindow();
+        //    MotionZonesWidow.Show();
+        //}
 
 
         #endregion

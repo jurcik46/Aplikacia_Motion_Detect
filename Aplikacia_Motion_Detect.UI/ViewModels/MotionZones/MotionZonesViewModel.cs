@@ -68,31 +68,31 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MotionZones
 
         public MotionZonesViewModel(IVideoService videoService)
         {
-            MotionZoneList = new ObservableCollection<MotionZoneInfoDataGridModel>();
-            VideoService = videoService;
-            VideoCapture = videoService.VideoDevice.VideoCapture;
-            this.CommandInit();
-            this.MessageRegistration();
-            Messenger.Default.Send<MotionZoneMessage>(new MotionZoneMessage()
-            {
-                VideoSource = videoService.VideoDevice.VideoCapture
-            });
+            //MotionZoneList = new ObservableCollection<MotionZoneInfoDataGridModel>();
+            //VideoService = videoService;
+            ////VideoCapture = videoService.VideoDevice.VideoCapture;
+            //this.CommandInit();
+            //this.MessageRegistration();
+            //Messenger.Default.Send<MotionZoneMessage>(new MotionZoneMessage()
+            //{
+            //    //VideoSource = videoService.VideoDevice.VideoCapture
+            //});
 
 
-            for (int i = 0; i < videoService.VideoDevice.VideoCapture.MotionZones.Count; i++)
-            {
-                MotionZone zone = videoService.VideoDevice.VideoCapture.MotionZones.Item[i];
-                string name = "Zone " + MotionZoneList.Count;
-                MotionZoneList.Add(new MotionZoneInfoDataGridModel()
-                {
-                    Name = name,
-                    Zone = zone,
-                    Sensitivity = zone.Sensitivity
+            //for (int i = 0; i < videoService.VideoDevice.VideoCapture.MotionZones.Count; i++)
+            //{
+            //    MotionZone zone = videoService.VideoDevice.VideoCapture.MotionZones.Item[i];
+            //    string name = "Zone " + MotionZoneList.Count;
+            //    MotionZoneList.Add(new MotionZoneInfoDataGridModel()
+            //    {
+            //        Name = name,
+            //        Zone = zone,
+            //        Sensitivity = zone.Sensitivity
 
-                });
-            }
+            //    });
+            //}
 
-            SelectedMotionZone = MotionZoneList.Last();
+            //SelectedMotionZone = MotionZoneList.Last();
         }
 
         private int GetIndex()
@@ -144,7 +144,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MotionZones
         {
             if (win != null)
             {
-                VideoService.VideoDevice = null;
+                //VideoService.VideoDevice = null;
                 win.Close();
             }
         }

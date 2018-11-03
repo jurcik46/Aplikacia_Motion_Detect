@@ -29,7 +29,6 @@ namespace Aplikacia_Motion_Detect.UI.Views.MotionZones
 
         private void MotionZonesWindow_OnClosing(object sender, CancelEventArgs e)
         {
-            ViewModelLocator.VideoService.VideoDevice = null;
             ViewModelLocator.VideoService.SaveConfig();
             ViewModelLocator.CleanupMotionZonesViewModel();
         }

@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows;
-using GalaSoft.MvvmLight.Messaging;
-using Aplikacia_Motion_Detect.Interfaces.Messages;
+using System.Windows.Data;
 using Aplikacia_Motion_Detect.UI;
 
 namespace Aplikacia_Motion_Detect.V1

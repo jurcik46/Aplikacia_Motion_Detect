@@ -105,14 +105,15 @@
     <Compile Include="LoggerInit.cs" />
     <Compile Include="Messages\AddVideoCaptureMessage.cs" />
     <Compile Include="Messages\ClosedWindowMessage.cs" />
-    <Compile Include="Messages\DeleteVidoeCaptureMessage.cs" />
     <Compile Include="Messages\ModifyVideoCaptureMessage.cs" />
     <Compile Include="Messages\MotionZoneMessage.cs" />
     <Compile Include="Messages\NotifiMessage.cs" />
+    <Compile Include="Messages\ReloadDeviceMessage.cs" />
     <Compile Include="Messages\ShowMotionZonesVideoCaptureMessage.cs" />
     <Compile Include="Messages\ShowVideoCaptureMessage.cs" />
     <Compile Include="Models\Diagnostics.cs" />
     <Compile Include="Models\MotionZoneInfoDataGridModel.cs" />
+    <Compile Include="Models\VideoDisplayModel.cs" />
     <Compile Include="Models\VideoInfoDataGridModel.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

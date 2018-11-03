@@ -10,11 +10,10 @@ namespace Aplikacia_Motion_Detect.Interfaces.Interface.Services
     public interface IVideoService
     {
         List<VideoInfoDataGridModel> VideoCaptureList { get; set; }
-        VideoInfoDataGridModel VideoDevice { get; set; }
         string DeveloperKey { get; set; }
-        void AddVideoCapture();
-        void ModifyVideoCapture();
-        void DeleteVideoCapture();
+        void AddVideoCapture(VideoInfoDataGridModel videoDevice);
+        void ModifyVideoCapture(VideoInfoDataGridModel videoDevice);
+        void DeleteVideoCapture(VideoInfoDataGridModel videoDevice);
         void StartCaptureOne(VideoInfoDataGridModel videoSource);
         void StartCaptureAll();
         void StopCaptureOne(VideoInfoDataGridModel videoSource);

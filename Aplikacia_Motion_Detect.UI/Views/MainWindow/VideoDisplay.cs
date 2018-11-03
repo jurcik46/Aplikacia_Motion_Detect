@@ -20,15 +20,14 @@ namespace Aplikacia_Motion_Detect.UI.Views.MainWindow
         public VideoDisplay()
         {
             InitializeComponent();
-            this.MessagesRegistration();
-            this.axVideoDisplayControl1.VideoCaptureSource = null;
             // Create Text overlay to display current date/time
 
             dateTimeOverlay = new TextOverlay();
             dateTimeOverlay.Text = "";
             dateTimeOverlay.X = 10;
             dateTimeOverlay.Y = 5;
-            dateTimeOverlay.FontFile = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Fonts) + "\\arial.ttf";
+            dateTimeOverlay.FontFile =
+                System.Environment.GetFolderPath(System.Environment.SpecialFolder.Fonts) + "\\arial.ttf";
             dateTimeOverlay.FontSize = 14;
             dateTimeOverlay.FontColor = (uint)System.Drawing.ColorTranslator.ToOle(Color.Black);
             dateTimeOverlay.DrawBox = true;
@@ -41,25 +40,17 @@ namespace Aplikacia_Motion_Detect.UI.Views.MainWindow
             axVideoDisplayControl1.UpdateOverlays();
         }
 
-        #region Messages Registration
-        private void MessagesRegistration()
+        public void SetMotionZone(bool sh = false)
         {
-            Messenger.Default.Register<ShowVideoCaptureMessage>(this, (message) =>
-            {
-                if (message.ShowVideoCapture)
-                {
-                    this.axVideoDisplayControl1.VideoCaptureSource = message.Capture;
-                    return;
-                }
-                this.axVideoDisplayControl1.VideoCaptureSource = null;
+            axVideoDisplayControl1.ShowMotionZones = sh;
 
-            });
-
-            Messenger.Default.Register<ShowMotionZonesVideoCaptureMessage>(this, (message) =>
-            {
-                this.axVideoDisplayControl1.ShowMotionZones = message.Show;
-            });
         }
-        #endregion
+
+        public void SetVideoCapt(VideoCapture vidCap = null)
+        {
+            axVideoDisplayControl1.VideoCaptureSource = vidCap;
+        }
+
+
     }
 }

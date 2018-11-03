@@ -24,7 +24,6 @@ namespace Aplikacia_Motion_Detect.UI.Views.AddVideoDevice
         public SaveOutputControl()
         {
             InitializeComponent();
-            this.DataContext = ViewModelLocator.VideoCaptureViewModel.SaveOutputControl;
 
         }
     }

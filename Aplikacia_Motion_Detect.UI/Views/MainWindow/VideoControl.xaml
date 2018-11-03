@@ -4,22 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:wf="clr-namespace:Aplikacia_Motion_Detect.UI.Views.MainWindow"
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
+             x:Name="VideoDisplayControl"
              d:DesignHeight="360" d:DesignWidth="800">
-    <UserControl.Resources>
-        <DataTemplate x:Key="EmpKey">
-            <Grid Height="20" Width="400" ShowGridLines="True" >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0,7*"></ColumnDefinition>
-                    <ColumnDefinition Width="0,3*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Grid.Column="0"  Text="{Binding Name}"></TextBlock>
-                <TextBlock Grid.Column="1"  Text="{Binding State}" HorizontalAlignment="Center"></TextBlock>
-            </Grid>
-        </DataTemplate>
-    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0,2*" />
@@ -27,52 +14,18 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        <Label Margin="10" Grid.Row="0" Grid.Column="0" Content="Video Source: " HorizontalAlignment="Right"/>
-
-
-        <ComboBox Width="400" Margin="10 15" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left"
-                  ItemsSource="{Binding VideoSourceList,  Mode=TwoWay}" 
-                  ItemTemplate="{StaticResource EmpKey}"
-                  SelectedItem="{Binding SelectedVideoSourceItem, Mode=TwoWay}">
-
-        </ComboBox>
-        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
-            <CheckBox Margin="10 10" Content="Show Motion Zones">
-
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="Checked">
-                        <i:InvokeCommandAction Command="{Binding ShowMotionZonesCheckedCommand}"/>
-                    </i:EventTrigger>
-                    <i:EventTrigger EventName="Unchecked">
-                        <i:InvokeCommandAction Command="{Binding ShowMotionZonesUnCheckedCommand}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-
-            </CheckBox>
-
-            <CheckBox Margin="10 10" Content="Show Video">
-
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="Checked">
-                        <i:InvokeCommandAction Command="{Binding ShowVideoCheckedCommand}"/>
-                    </i:EventTrigger>
-                    <i:EventTrigger EventName="Unchecked">
-                        <i:InvokeCommandAction Command="{Binding ShowVideoUnCheckedCommand}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-
-            </CheckBox>
+        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+            <CheckBox Margin="10 10" Content="Show Motion Zones" x:Name="ShowMotionZoneCheckBox" IsChecked="{Binding MotionZone, ElementName=VideoDisplayControl, Mode=TwoWay}" Checked="MotionZoneCheckBoxChanged" Unchecked="MotionZoneCheckBoxChanged"/>
+            <CheckBox Margin="10 10" Content="Show Video" x:Name="ShowVideoCheckBox" Checked="VideoCheckboxChanged" Unchecked="VideoCheckboxChanged"/>
         </StackPanel>
 
-        <StackPanel x:Name="stack" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
-            <WindowsFormsHost>
-                <wf:VideoDisplay/>
+        <DockPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+            <WindowsFormsHost Name="VideoDisplayHost">
+                <wf:VideoDisplay />
             </WindowsFormsHost>
-        </StackPanel>
+        </DockPanel>
 
     </Grid>
 </UserControl>

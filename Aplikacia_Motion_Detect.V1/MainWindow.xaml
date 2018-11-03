@@ -8,7 +8,8 @@
 		x:Class="Aplikacia_Motion_Detect.V1.MainWindow"
 		DataContext="{Binding Source={x:Static ui:ViewModelLocator.MainViewModel}}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="810" Width="850" MinWidth="850"
+        x:Name="MainWin"
+    Title="MainWindow" Height="810" Width="850" MinWidth="850"
         Closing="MainWindow_OnClosing">
     <Grid Margin="15">
         <Grid.ColumnDefinitions>
@@ -19,8 +20,89 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <views:VideoSettingControl Grid.Row="0" />
-        <views:VideoControl Grid.Row="1" />
+        <Grid Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" x:Name="Column1"/>
 
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*" x:Name="Row2"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <!-- Video source control buttons -->
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <TextBlock Margin="10 10 50 10" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Text="Video Sources:" />
+
+                    <Button Margin="10" Content="Add" HorizontalAlignment="Left" MinWidth="100" 
+                        Command="{Binding AddVideoCommand}"  />
+                    <Button Margin="10"  Content="Modify" HorizontalAlignment="Left" MinWidth="100" 
+                        Command="{Binding ModifyVideoCommand}" />
+                    <Button Margin="10" Content="Delete" HorizontalAlignment="Left" MinWidth="100" 
+                        Command="{Binding DeleteVideoCommand}" />
+
+
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <Button Margin="10" Content="Set Developer Key" HorizontalAlignment="Right" MinWidth="140" 
+                        Command="{Binding DeveloperKeyCommand}" />
+                </StackPanel>
+
+            </Grid>
+
+            <!-- Table with cameras-->
+            <DataGrid x:Name="datagrid" SelectedItem="{Binding SelectedDataGridItem, Mode=TwoWay}" 
+                  AutoGenerateColumns="False" ItemsSource="{Binding VideoInfoDataGrid, Mode=TwoWay}" 
+                  SelectionMode="Single"
+                  ColumnWidth="*" RowHeight="25" CanUserAddRows="false" IsReadOnly="True" Width="800" Height="450"  Grid.Row="1" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
+                    <DataGridTextColumn Header="State" Binding="{Binding State}"/>
+                    <DataGridTextColumn Header="Last Error" Binding="{Binding LastError}"/>
+                    <DataGridTextColumn Header="Type" Binding="{Binding Type}"/>
+                    <DataGridTextColumn Header="Resolution" Binding="{Binding Resolution}"/>
+                    <DataGridTextColumn Header="Pixel Format" Binding="{Binding Pixel}"/>
+                    <DataGridTextColumn Header="Frames" Binding="{Binding Frames}"/>
+                    <DataGridTextColumn Header="FPS" Binding="{Binding FPS}"/>
+                </DataGrid.Columns>
+
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridRow">
+                        <Style.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Red"/>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="White"/>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="Red" />
+                            <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}" Color="White"/>
+                        </Style.Resources>
+                    </Style>
+                </DataGrid.Resources>
+            </DataGrid>
+
+            <!-- Button under table -->
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.3*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Orientation="Horizontal" >
+                    <Button Padding="5" Margin="10 10 10 10" Content="Start Capture" HorizontalAlignment="Left" Command="{Binding StartCaptureCommand}" />
+                    <Button Padding="5" Margin="10 10 10 10" Content="Stop Capture" HorizontalAlignment="Left" Command="{Binding StopCaptureCommand}"/>
+                    <Button Padding="5" Margin="10 10 10 10" Content="Start capture ALL" HorizontalAlignment="Left"  Command="{Binding StartCaptureAllCommand}"/>
+                    <Button Padding="5" Margin="10 10 10 10" Content="Stop capture ALL" HorizontalAlignment="Left" Command="{Binding StopCaptureAllCommand}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <Button Padding="5" Margin="10 10 10 10" Content="Define Motion Zones" HorizontalAlignment="Right"  Command="{Binding DefineMotionZonesCommand}"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <views:VideoControl Grid.Row="1" VideoCap="{Binding DataContext.SelectedDataGridItem.VideoCapture, ElementName=MainWin}"/>
     </Grid>
 </Window>

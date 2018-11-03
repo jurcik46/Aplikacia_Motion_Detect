@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Aplikacia_Motion_Detect.Interfaces.Messages
 {
-    public class DeleteVidoeCaptureMessage
+    public class ReloadDeviceMessage
     {
     }
 }

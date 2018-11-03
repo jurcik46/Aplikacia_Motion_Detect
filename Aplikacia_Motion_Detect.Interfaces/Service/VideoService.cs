@@ -26,7 +26,6 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
 
         public VideoCaptureUtils utils = new VideoCaptureUtils();
         public List<VideoInfoDataGridModel> _videoCaptureList;
-        public VideoInfoDataGridModel _videoDevice;
 
         private string configFilePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
                                         "\\CCSIPRO\\" + LoggerInit.ApplicationName + "\\DTKVideoCapture.xml";
@@ -37,12 +36,6 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
         {
             get { return _videoCaptureList; }
             set { _videoCaptureList = value; }
-        }
-
-        public VideoInfoDataGridModel VideoDevice
-        {
-            get { return _videoDevice; }
-            set { _videoDevice = value; }
         }
 
         public string DeveloperKey
@@ -58,13 +51,14 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
             //this.VideoDevice = null;
         }
 
-        public void AddVideoCapture()
+        public void AddVideoCapture(VideoInfoDataGridModel videoDevice)
         {
-            VideoDevice.VideoCapture.FrameReceived += FrameReceived;
-            VideoDevice.VideoCapture.StateChanged += VideoCaptureStateChanged;
-            VideoDevice.VideoCapture.Error += VideoCaptureError;
+            videoDevice.VideoCapture.FrameReceived += FrameReceived;
+            videoDevice.VideoCapture.StateChanged += VideoCaptureStateChanged;
+            videoDevice.VideoCapture.Error += VideoCaptureError;
 
-            VideoCaptureList.Add(VideoDevice);
+            VideoCaptureList.Add(videoDevice);
+            SetInfoData();
             SaveConfig();
         }
 
@@ -122,23 +116,24 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
 
         }
 
-        public void ModifyVideoCapture()
+        public void ModifyVideoCapture(VideoInfoDataGridModel videoDevice)
         {
             foreach (var item in VideoCaptureList)
             {
-                if (object.ReferenceEquals(item, VideoDevice))
+                if (object.ReferenceEquals(item, videoDevice))
                 {
-                    ChangeVideoSource(item);
+                    ChangeVideoSource(item, videoDevice);
+                    SetInfoData();
                     return;
                 }
             }
         }
 
-        public void DeleteVideoCapture()
+        public void DeleteVideoCapture(VideoInfoDataGridModel videoDevice)
         {
             foreach (var item in VideoCaptureList)
             {
-                if (object.ReferenceEquals(item, VideoDevice))
+                if (object.ReferenceEquals(item, videoDevice))
                 {
                     DeleteVideoSource(item);
                     return;
@@ -146,17 +141,15 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
             }
         }
 
-        private void ChangeVideoSource(VideoInfoDataGridModel videSource)
+        private void ChangeVideoSource(VideoInfoDataGridModel videoDeviceOld, VideoInfoDataGridModel videoDeviceNew)
         {
-            videSource = VideoDevice;
-            VideoDevice = null;
+            videoDeviceOld = videoDeviceNew;
             SaveConfig();
         }
 
-        private void DeleteVideoSource(VideoInfoDataGridModel videSource)
+        private void DeleteVideoSource(VideoInfoDataGridModel videoDevice)
         {
-            VideoCaptureList.Remove(videSource);
-            VideoDevice = null;
+            VideoCaptureList.Remove(videoDevice);
             SaveConfig();
         }
 
@@ -261,8 +254,6 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
             xmlDoc.AppendChild(rootNode);
 
             xmlDoc.Save(configFilePath);
-
-            //this.LoadConfig();
         }
 
         private void LoadConfig()
@@ -280,12 +271,10 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                         VideoCapture videoCapture = new VideoCapture();
                         videoCapture.SetConfigXml(node.InnerText);
 
-                        VideoDevice = new VideoInfoDataGridModel()
+                        AddVideoCapture(new VideoInfoDataGridModel()
                         {
                             VideoCapture = videoCapture
-                        };
-
-                        AddVideoCapture();
+                        });
                     }
                     if (node.Name == "DeveloperKey")
                     {
@@ -295,10 +284,7 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                     }
                 }
             }
-
-            VideoDevice = null;
             SetInfoData();
-
         }
 
         private void SetInfoData()
