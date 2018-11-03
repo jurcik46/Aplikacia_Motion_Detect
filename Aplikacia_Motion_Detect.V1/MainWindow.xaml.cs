@@ -15,10 +15,5 @@ namespace Aplikacia_Motion_Detect.V1
             InitializeComponent();
         }
 
-
-        private void MainWindow_OnClosing(object sender, CancelEventArgs e)
-        {
-            ViewModelLocator.VideoService.SaveConfig();
-        }
     }
 }

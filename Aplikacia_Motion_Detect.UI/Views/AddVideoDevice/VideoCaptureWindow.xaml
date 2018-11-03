@@ -10,9 +10,7 @@
         xmlns:controls="clr-namespace:Controls;assembly=Aplikacia_Motion_Detect.Interfaces"
         mc:Ignorable="d"
         Title="VideoDeviceWindow" ResizeMode="NoResize" Height="600" Width="800"
-        WindowStartupLocation="CenterScreen"
-        Closing="VideoCaptureWindow_OnClosing"
-        >
+        WindowStartupLocation="CenterScreen">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="Colum0" Width="*"/>

@@ -24,13 +24,13 @@ namespace Aplikacia_Motion_Detect.UI.Views.MotionZones
         public MotionZonesWindow()
         {
             InitializeComponent();
-            this.DataContext = ViewModelLocator.MotionZonesViewModel;
+
         }
 
         private void MotionZonesWindow_OnClosing(object sender, CancelEventArgs e)
         {
             ViewModelLocator.VideoService.SaveConfig();
-            ViewModelLocator.CleanupMotionZonesViewModel();
+
         }
     }
 }

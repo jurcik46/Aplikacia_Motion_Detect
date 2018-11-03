@@ -14,8 +14,6 @@ namespace Aplikacia_Motion_Detect.UI.Views.AddVideoDevice
             InitializeComponent();
         }
 
-        private void VideoCaptureWindow_OnClosing(object sender, CancelEventArgs e)
-        {
-        }
+
     }
 }

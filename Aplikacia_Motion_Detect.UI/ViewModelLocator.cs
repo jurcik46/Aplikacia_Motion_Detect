@@ -68,37 +68,9 @@ namespace Aplikacia_Motion_Detect.UI
 
         }
 
-
-
-
-        public static void CleanupVideoCaptureVieModel()
-        {
-            if (SimpleIoc.Default.IsRegistered<VideoCaptureViewModel>())
-            {
-                SimpleIoc.Default.Unregister<VideoCaptureViewModel>();
-            }
-
-            if (!SimpleIoc.Default.IsRegistered<VideoCaptureViewModel>())
-            {
-                SimpleIoc.Default.Register<VideoCaptureViewModel>();
-            }
-        }
-
-        public static void CleanupMotionZonesViewModel()
-        {
-
-            if (!SimpleIoc.Default.IsRegistered<MotionZonesViewModel>())
-            {
-                SimpleIoc.Default.Register<MotionZonesViewModel>();
-            }
-        }
-
         public static LoggingLevelSwitch LoggingLevelSwitch => _loggingLevelSwitch ?? (_loggingLevelSwitch = new LoggingLevelSwitch());
 
         public static MainViewModel MainViewModel => ServiceLocator.Current.GetInstance<MainViewModel>();
-        public static VideoCaptureViewModel VideoCaptureViewModel => ServiceLocator.Current.GetInstance<VideoCaptureViewModel>();
-        public static DeveloperKeyViewModel DeveloperKeyViewModel => ServiceLocator.Current.GetInstance<DeveloperKeyViewModel>();
-        public static MotionZonesViewModel MotionZonesViewModel => ServiceLocator.Current.GetInstance<MotionZonesViewModel>();
         public static IVideoService VideoService => ServiceLocator.Current.GetInstance<IVideoService>();
         public static ResourceManager rm = new ResourceManager("Aplikacia_Motion_Detect.Resources.Languages.sk-Sk", Assembly.GetExecutingAssembly());
 

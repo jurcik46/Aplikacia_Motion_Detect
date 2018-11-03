@@ -104,17 +104,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ViewModelLocator.cs" />
-    <Compile Include="ViewModels\AddVideoDevice\VideoSourceViewModel.cs" />
     <Compile Include="ViewModels\DeveloperKey\DeveloperKeyViewModel.cs" />
     <Compile Include="ViewModels\MainWindow\MainViewModel.cs" />
-    <Compile Include="ViewModels\MainWindow\VideoSettingViewModel.cs" />
-    <Compile Include="ViewModels\MainWindow\VideoViewModel.cs" />
     <Compile Include="ViewModels\AddVideoDevice\SaveOutputViewModel.cs" />
     <Compile Include="ViewModels\AddVideoDevice\VideoCaptureViewModel.cs" />
     <Compile Include="ViewModels\MotionZones\MotionZonesViewModel.cs" />
-    <Compile Include="Views\AddVideoDevice\VideoSourceControl.xaml.cs">
-      <DependentUpon>VideoSourceControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\DeveloperKey\DeveloperKeyWindows.xaml.cs">
       <DependentUpon>DeveloperKeyWindows.xaml</DependentUpon>
     </Compile>
@@ -191,10 +185,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\AddVideoDevice\VideoSourceControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\DeveloperKey\DeveloperKeyWindows.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
