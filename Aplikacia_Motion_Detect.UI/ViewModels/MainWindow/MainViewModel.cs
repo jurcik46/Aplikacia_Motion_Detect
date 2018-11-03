@@ -11,6 +11,7 @@ using Aplikacia_Motion_Detect.Interfaces.Messages;
 using Aplikacia_Motion_Detect.Interfaces.Models;
 using Aplikacia_Motion_Detect.UI.ViewModels.AddVideoDevice;
 using Aplikacia_Motion_Detect.UI.ViewModels.DeveloperKey;
+using Aplikacia_Motion_Detect.UI.ViewModels.MotionZones;
 using Aplikacia_Motion_Detect.UI.Views.AddVideoDevice;
 using Aplikacia_Motion_Detect.UI.Views.DeveloperKey;
 using Aplikacia_Motion_Detect.UI.Views.MainWindow;
@@ -33,8 +34,12 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
         private DeveloperKeyViewModel DevelopeViewModel;
         private DeveloperKeyWindows DeveloperWindow;
         #endregion
+
+        #region Motion  Zone Window
+        private MotionZonesViewModel MotionZoneViewModel;
         private MotionZonesWindow MotionZonesWidow;
-        private ObservableCollection<VideoInfoDataGridModel> _videoInfoDataGrid;
+        #endregion
+
         #region Commmand Declaration
         private RelayCommand _addVideoCommand;
         private RelayCommand _modifyVideoCommand;
@@ -102,7 +107,9 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
         }
 
         #endregion
+
         public IVideoService VideoService { get; private set; }
+        private ObservableCollection<VideoInfoDataGridModel> _videoInfoDataGrid;
 
         private VideoInfoDataGridModel _selectedDataGridItem;
 
@@ -122,7 +129,6 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
             set
             {
                 _videoInfoDataGrid = value;
-                //RaisePropertyChanged();
             }
         }
 
@@ -308,11 +314,11 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
 
         private void ShowMotionZones()
         {
-            MotionZonesWidow = new MotionZonesWindow();
+            this.MotionZoneViewModel = new MotionZonesViewModel(VideoService, SelectedDataGridItem);
+            this.MotionZonesWidow = new MotionZonesWindow();
+            this.MotionZonesWidow.DataContext = MotionZoneViewModel;
             MotionZonesWidow.Show();
         }
-
-
         #endregion
     }
 }

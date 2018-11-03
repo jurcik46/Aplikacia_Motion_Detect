@@ -8,8 +8,7 @@
         mc:Ignorable="d"
         Title="MotionZonesWindow" Height="450" Width="800"
         ResizeMode="NoResize" 
-        WindowStartupLocation="CenterScreen"
-        Closing="MotionZonesWindow_OnClosing">
+        WindowStartupLocation="CenterScreen">
     <Grid>
 
         <Grid.RowDefinitions>
@@ -52,11 +51,9 @@
         </DataGrid>
 
         <!--VideoDisplay Controler-->
-        <StackPanel x:Name="stack" Grid.Row="0" Grid.Column="1" Grid.RowSpan="2">
-            <WindowsFormsHost>
-                <local:VideoDisplayMotionZones/>
-            </WindowsFormsHost>
-        </StackPanel>
+
+        <local:VideoDisplayMotionZoneControl Grid.Row="0" Grid.Column="1" Grid.RowSpan="2"
+                                             VideoCapture="{Binding DataContext.VideoDevice.VideoCapture, ElementName=MotionZoneWindow}"/>
 
         <!--Finish Button-->
         <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Width="200" Margin="8" Content="OK" Command="{Binding OkCommand}" CommandParameter="{Binding ElementName=MotionZoneWindow}"/>

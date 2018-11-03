@@ -67,6 +67,11 @@ namespace Aplikacia_Motion_Detect.UI.Views.MotionZones
             }
         }
 
+        public void SetVideoCapture(VideoCapture videoCapture)
+        {
+            this.axVideoDisplayControl1.VideoCaptureSource = videoCapture;
+        }
+
         private void ShowSelectedZone(MotionZone zone)
         {
             axVideoDisplayControl1.Overlays.Clear();

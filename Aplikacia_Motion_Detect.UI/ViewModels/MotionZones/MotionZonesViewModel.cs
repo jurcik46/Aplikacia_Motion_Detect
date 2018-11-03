@@ -47,6 +47,16 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MotionZones
         private MotionZoneInfoDataGridModel _selectedMotionZone;
         private IVideoService VideoService { get; set; }
         private IVideoCapture VideoCapture { get; set; }
+        private VideoInfoDataGridModel _videoDevice;
+        public VideoInfoDataGridModel VideoDevice
+        {
+            get { return _videoDevice; }
+            set
+            {
+                _videoDevice = value;
+                RaisePropertyChanged();
+            }
+        }
 
         public ObservableCollection<MotionZoneInfoDataGridModel> MotionZoneList { get; set; }
 
@@ -66,32 +76,32 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MotionZones
         }
 
 
-        public MotionZonesViewModel(IVideoService videoService)
+        public MotionZonesViewModel(IVideoService videoService, VideoInfoDataGridModel selectedDevice)
         {
-            //MotionZoneList = new ObservableCollection<MotionZoneInfoDataGridModel>();
-            //VideoService = videoService;
-            ////VideoCapture = videoService.VideoDevice.VideoCapture;
-            //this.CommandInit();
-            //this.MessageRegistration();
-            //Messenger.Default.Send<MotionZoneMessage>(new MotionZoneMessage()
-            //{
-            //    //VideoSource = videoService.VideoDevice.VideoCapture
-            //});
+            this.VideoDevice = selectedDevice;
+            MotionZoneList = new ObservableCollection<MotionZoneInfoDataGridModel>();
+            VideoService = videoService;
+            //VideoCapture = videoService.VideoDevice.VideoCapture;
+            this.CommandInit();
+            this.MessageRegistration();
+            Messenger.Default.Send<MotionZoneMessage>(new MotionZoneMessage()
+            {
+                //VideoSource = videoService.VideoDevice.VideoCapture
+            });
 
 
-            //for (int i = 0; i < videoService.VideoDevice.VideoCapture.MotionZones.Count; i++)
-            //{
-            //    MotionZone zone = videoService.VideoDevice.VideoCapture.MotionZones.Item[i];
-            //    string name = "Zone " + MotionZoneList.Count;
-            //    MotionZoneList.Add(new MotionZoneInfoDataGridModel()
-            //    {
-            //        Name = name,
-            //        Zone = zone,
-            //        Sensitivity = zone.Sensitivity
+            for (int i = 0; i < VideoDevice.VideoCapture.MotionZones.Count; i++)
+            {
+                MotionZone zone = VideoDevice.VideoCapture.MotionZones.Item[i];
+                string name = "Zone " + MotionZoneList.Count;
+                MotionZoneList.Add(new MotionZoneInfoDataGridModel()
+                {
+                    Name = name,
+                    Zone = zone,
+                    Sensitivity = zone.Sensitivity
 
-            //    });
-            //}
-
+                });
+            }
             //SelectedMotionZone = MotionZoneList.Last();
         }
 
@@ -142,9 +152,9 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MotionZones
 
         private void ExecuteOk(IClosable win)
         {
+            VideoService.SaveConfig();
             if (win != null)
             {
-                //VideoService.VideoDevice = null;
                 win.Close();
             }
         }

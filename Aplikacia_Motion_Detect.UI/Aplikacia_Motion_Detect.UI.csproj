@@ -133,6 +133,9 @@
     <Compile Include="Views\MotionZones\MotionZonesWindow.xaml.cs">
       <DependentUpon>MotionZonesWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MotionZones\VideoDisplayMotionZoneControl.xaml.cs">
+      <DependentUpon>VideoDisplayMotionZoneControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MotionZones\VideoDisplayMotionZones.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -206,6 +209,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MotionZones\MotionZonesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MotionZones\VideoDisplayMotionZoneControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
