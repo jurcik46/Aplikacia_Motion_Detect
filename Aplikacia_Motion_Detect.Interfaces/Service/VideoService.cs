@@ -417,7 +417,6 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                     return row;
                 }
             }
-
             return null;
         }
 

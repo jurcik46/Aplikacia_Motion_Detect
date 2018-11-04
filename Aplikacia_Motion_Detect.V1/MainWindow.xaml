@@ -9,8 +9,8 @@
 		DataContext="{Binding Source={x:Static ui:ViewModelLocator.MainViewModel}}"
         mc:Ignorable="d"
         x:Name="MainWin"
-       Title="MainWindow" Height="810" Width="850" MinWidth="850"
-       Closing="MainWindow_OnClosing">
+        Title="MainWindow" Height="810" Width="850" MinWidth="850"
+        Closing="MainWindow_OnClosing">
     <Grid Margin="15">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />

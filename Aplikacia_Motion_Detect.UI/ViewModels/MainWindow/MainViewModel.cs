@@ -51,7 +51,6 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
         private RelayCommand _defineMotionZonesCommand;
         private RelayCommand _developerKeyCommand;
 
-
         public RelayCommand DeleteVideoCommand
         {
             get => _deleteVideoCommand;
@@ -161,11 +160,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
             {
                 LoadVideoDeviceFromService();
             });
-
             Messenger.Default.Register<NotifiMessage>(this, (message) => { MessageBox.Show(message.Msg); });
-
-
-
         }
         #endregion
 
@@ -184,7 +179,6 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
             this.StopCaptureAllCommand = new RelayCommand(this.StopCaptureAllVideos, this.CanStopCaptureAll);
             this.DefineMotionZonesCommand = new RelayCommand(this.ShowMotionZones, this.CanShowMotionZones);
         }
-
 
         private bool CanShowVideoCaptureWindow()
         {
@@ -270,10 +264,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
 
         private void StopCaptureVideo()
         {
-
             VideoService.StopCaptureOne(SelectedDataGridItem);
-
-
         }
 
         private bool CanStartCaptureAll()
