@@ -1,26 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using Aplikacia_Motion_Detect.Interfaces.Enums;
+using Aplikacia_Motion_Detect.Interfaces.Extensions;
 using Aplikacia_Motion_Detect.Interfaces.Interface;
 using Aplikacia_Motion_Detect.Interfaces.Interface.Services;
 using Aplikacia_Motion_Detect.Interfaces.Messages;
 using Aplikacia_Motion_Detect.Interfaces.Models;
-using Aplikacia_Motion_Detect.Interfaces.Service;
 using DTKVideoCapLib;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using GalaSoft.MvvmLight.Threading;
 using Microsoft.Win32;
+using Serilog;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Aplikacia_Motion_Detect.UI.ViewModels.AddVideoDevice
 {
     public class VideoCaptureViewModel : ViewModelBase
     {
+        public ILogger Logger => Log.Logger.ForContext<VideoCaptureViewModel>();
+
         public IVideoService VideoService { get; private set; }
 
         #region Properties for Video File
@@ -103,7 +101,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.AddVideoDevice
 
         #region Properties for Video Device
 
-        public RelayCommand DeviceProperties { get; private set; }
+        public RelayCommand DevicePropertiesCommand { get; private set; }
         public RelayCommand DeviceSelectionChangedCommand { get; private set; }
 
         public ObservableCollection<VideoDevice> VideoDevicesList
@@ -118,7 +116,6 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.AddVideoDevice
             set
             {
                 _videoDeviceOutputFormat = value;
-                //RaisePropertyChanged();
             }
         }
 
@@ -128,7 +125,6 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.AddVideoDevice
             set
             {
                 _videoDeviceOutputSize = value;
-                //RaisePropertyChanged(); for Observable Collection this is done automatic
             }
         }
 
@@ -138,7 +134,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.AddVideoDevice
             set
             {
                 _sVideoDevice = value;
-                DeviceProperties.RaiseCanExecuteChanged();
+                DevicePropertiesCommand.RaiseCanExecuteChanged();
                 RaisePropertyChanged();
             }
         }
@@ -200,7 +196,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.AddVideoDevice
         }
 
 
-        public RelayCommand<IClosable> SavieVideoCaptureCommand { get; private set; }
+        public RelayCommand<IClosable> SaveVideoCaptureCommand { get; private set; }
         public RelayCommand<IClosable> CloseVideoCaptureCommand { get; private set; }
 
         public VideoInfoDataGridModel SelectedDevice
@@ -213,6 +209,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.AddVideoDevice
          */
         public VideoCaptureViewModel(IVideoService videoService, VideoInfoDataGridModel selectedDevice = null)
         {
+            Logger.Debug(VideoCaptureViewModelEvents.Create, "Creating new instance of VideoCaptureViewModel");
             this.VideoDeviceOutputFormat = new ObservableCollection<string>();
             this.VideoDeviceOutputSize = new ObservableCollection<string>();
             this.FoundVideoDevice();
@@ -226,6 +223,8 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.AddVideoDevice
 
         private void FoundVideoDevice()
         {
+            Logger.Debug(VideoCaptureViewModelEvents.FoundVideoDevice);
+
             VideoDevicesList = new ObservableCollection<VideoDevice>();
             VideoCaptureUtils utils = new VideoCaptureUtilsClass();
             for (int i = 0; i < utils.VideoDevices.Count; i++)
@@ -237,6 +236,8 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.AddVideoDevice
 
         public void SaveVideoCaptureSetting()
         {
+            Logger.Debug(VideoCaptureViewModelEvents.SaveVideoCaptureSetting);
+
             bool Modifie = true;
             if (SelectedDevice == null)
             {
@@ -331,6 +332,8 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.AddVideoDevice
 
         private void LoadVideoCapture()
         {
+            Logger.Debug(VideoCaptureViewModelEvents.LoadVideoCapture);
+
             if (SelectedDevice != null)
             {
                 VideoCaptureName = SelectedDevice.VideoCapture.Name;
@@ -381,9 +384,9 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.AddVideoDevice
         #region Commands 
         private void CommandInit()
         {
-            this.SavieVideoCaptureCommand = new RelayCommand<IClosable>(this.SaveVideoCapture, this.CanSaveVideoCapture);
+            this.SaveVideoCaptureCommand = new RelayCommand<IClosable>(this.SaveVideoCapture, this.CanSaveVideoCapture);
             this.CloseVideoCaptureCommand = new RelayCommand<IClosable>(this.CloseVideoCapture, this.CanCloseVideoCapture);
-            this.DeviceProperties = new RelayCommand(this.ShowDeviceProperties, this.CanShowDeviceProperties);
+            this.DevicePropertiesCommand = new RelayCommand(this.ShowDeviceProperties, this.CanShowDeviceProperties);
             this.DeviceSelectionChangedCommand = new RelayCommand(this.ShowDeviceOutputProperties, this.CanDeviceSelectionChangeCommand);
             this.DialogFileCommand = new RelayCommand(this.ShowDialogFile, true);
         }
@@ -395,6 +398,8 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.AddVideoDevice
 
         private void SaveVideoCapture(IClosable win)
         {
+            Logger.Debug(VideoCaptureViewModelEvents.SaveVideoCaptureCommand);
+
             SaveVideoCaptureSetting();
 
             Messenger.Default.Send<ReloadDeviceMessage>(new ReloadDeviceMessage());
@@ -412,6 +417,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.AddVideoDevice
         private void CloseVideoCapture(IClosable win)
         {
 
+            Logger.Debug(VideoCaptureViewModelEvents.CloseVideoCaptureCommand);
             if (win != null)
             {
                 win.Close();
@@ -430,6 +436,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.AddVideoDevice
 
         private void ShowDeviceProperties()
         {
+            Logger.Debug(VideoCaptureViewModelEvents.DevicePropertiesCommand);
             SVideoDevice.ShowProperties();
         }
 
@@ -442,6 +449,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.AddVideoDevice
 
         private void ShowDeviceOutputProperties()
         {
+            Logger.Debug(VideoCaptureViewModelEvents.DeviceSelectionChangedCommand);
 
             foreach (var item in SVideoDevice.OutputPixelFormats.Split(';').ToList())
             {
@@ -458,6 +466,8 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.AddVideoDevice
 
         private void ShowDialogFile()
         {
+            Logger.Debug(VideoCaptureViewModelEvents.DialogFileCommand);
+
             OpenFileDialog openFileDialg = new OpenFileDialog();
             openFileDialg.Filter = "All Files|*.*|MP4 Files|*.mp4";
             if (openFileDialg.ShowDialog() == true)
