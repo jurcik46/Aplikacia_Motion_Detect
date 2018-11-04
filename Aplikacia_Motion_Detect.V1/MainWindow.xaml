@@ -9,7 +9,8 @@
 		DataContext="{Binding Source={x:Static ui:ViewModelLocator.MainViewModel}}"
         mc:Ignorable="d"
         x:Name="MainWin"
-    Title="MainWindow" Height="810" Width="850" MinWidth="850">
+       Title="MainWindow" Height="810" Width="850" MinWidth="850"
+       Closing="MainWindow_OnClosing">
     <Grid Margin="15">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -58,18 +59,19 @@
             <!-- Table with cameras-->
             <DataGrid x:Name="datagrid" SelectedItem="{Binding SelectedDataGridItem, Mode=TwoWay}" 
                   AutoGenerateColumns="False" ItemsSource="{Binding VideoInfoDataGrid, Mode=TwoWay}" 
-                  SelectionMode="Single"
-                  ColumnWidth="*" RowHeight="25" CanUserAddRows="false" IsReadOnly="True" Width="800" Height="450"  Grid.Row="1" >
+                  SelectionMode="Single" CanUserAddRows="false"
+                  ColumnWidth="*"  RowHeight="25"  Width="800" Height="450"  Grid.Row="1" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
-                    <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
-                    <DataGridTextColumn Header="State" Binding="{Binding State}"/>
-                    <DataGridTextColumn Header="Last Error" Binding="{Binding LastError}"/>
-                    <DataGridTextColumn Header="Type" Binding="{Binding Type}"/>
-                    <DataGridTextColumn Header="Resolution" Binding="{Binding Resolution}"/>
-                    <DataGridTextColumn Header="Pixel Format" Binding="{Binding Pixel}"/>
-                    <DataGridTextColumn Header="Frames" Binding="{Binding Frames}"/>
-                    <DataGridTextColumn Header="FPS" Binding="{Binding FPS}"/>
+                    <DataGridTextColumn      IsReadOnly="True" Header="Name" Binding="{Binding Name}"/>
+                    <DataGridTextColumn      IsReadOnly="True" Header="Description" Binding="{Binding Description}"/>
+                    <DataGridTextColumn      IsReadOnly="True" Header="State" Binding="{Binding State}"/>
+                    <DataGridTextColumn      IsReadOnly="True" Header="Last Error" Binding="{Binding LastError}"/>
+                    <DataGridTextColumn      IsReadOnly="True" Header="Type" Binding="{Binding Type}"/>
+                    <DataGridTextColumn      IsReadOnly="True" Header="Resolution" Binding="{Binding Resolution}"/>
+                    <DataGridTextColumn      IsReadOnly="True" Header="Pixel Format" Binding="{Binding Pixel}"/>
+                    <DataGridTextColumn      IsReadOnly="True" Header="Frames" Binding="{Binding Frames}"/>
+                    <DataGridTextColumn      IsReadOnly="True" Header="FPS" Binding="{Binding FPS}"/>
+                    <DataGridCheckBoxColumn  IsReadOnly="False"  Header="Enabled" Binding="{Binding Enable, Mode=TwoWay}"/>
                 </DataGrid.Columns>
 
                 <DataGrid.Resources>

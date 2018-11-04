@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Xml;
+using Aplikacia_Motion_Detect.Interfaces.Convertors;
 using Aplikacia_Motion_Detect.Interfaces.Interface.Services;
 using Aplikacia_Motion_Detect.Interfaces.Messages;
 using Aplikacia_Motion_Detect.Interfaces.Models;
@@ -230,6 +231,7 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
         public void SaveConfig()
         {
             XmlDocument xmlDoc = new XmlDocument();
+            BoolToTextConverter boolConvert = new BoolToTextConverter();
             XmlNode rootNode = xmlDoc.CreateNode(XmlNodeType.Element, "VideoSources", "");
             int i = 0;
 
@@ -247,8 +249,10 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
 
                 node = xmlDoc.CreateNode(XmlNodeType.Element, "VideoCapture", "");
                 node.InnerText = xmlConfig;
+                var enableNode = xmlDoc.CreateNode(XmlNodeType.Element, "Enable", "");
+                enableNode.InnerText = (string)boolConvert.Convert(row.Enable);
+                node.AppendChild(enableNode);
                 rootNode.AppendChild(node);
-
                 i++;
             }
             xmlDoc.AppendChild(rootNode);
@@ -263,18 +267,35 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                 XmlDocument xmlDoc = new XmlDocument();
                 xmlDoc.Load(configFilePath);
 
+                BoolToTextConverter boolConvert = new BoolToTextConverter();
                 XmlNode root = xmlDoc.DocumentElement;
+
                 foreach (XmlNode node in root.ChildNodes)
                 {
                     if (node.Name == "VideoCapture")
                     {
                         VideoCapture videoCapture = new VideoCapture();
                         videoCapture.SetConfigXml(node.InnerText);
-
-                        AddVideoCapture(new VideoInfoDataGridModel()
+                        var pom = new VideoInfoDataGridModel()
                         {
                             VideoCapture = videoCapture
-                        });
+                        };
+                        foreach (XmlNode enable in node.ChildNodes)
+                        {
+                            if (enable.Name == "Enable")
+                            {
+                                var a = boolConvert.ConvertBack(enable.InnerText);
+                                if (a == null)
+                                {
+                                    pom.Enable = false;
+                                }
+                                else
+                                {
+                                    pom.Enable = (bool)a;
+                                }
+                            }
+                        }
+                        AddVideoCapture(pom);
                     }
                     if (node.Name == "DeveloperKey")
                     {
@@ -282,6 +303,8 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                         if (this.DeveloperKey.Length > 0)
                             utils.SetDeveloperLicenseKey(this._developerKey);
                     }
+
+
                 }
             }
             SetInfoData();

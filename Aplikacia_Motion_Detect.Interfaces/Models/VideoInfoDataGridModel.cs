@@ -21,6 +21,7 @@ namespace Aplikacia_Motion_Detect.Interfaces.Models
         private string _pixel;
         private int _frames;
         private int _fps;
+        private bool _enable = true;
         private VideoCapture _videoCapture;
         [CanBeNull] private Queue<int> _frameTick;
 
@@ -134,6 +135,15 @@ namespace Aplikacia_Motion_Detect.Interfaces.Models
             }
         }
 
+        public bool Enable
+        {
+            get { return _enable; }
+            set
+            {
+                _enable = value;
+                OnPropertyChanged();
+            }
+        }
 
         #region INotifyPropertyChanged Impl
         public event PropertyChangedEventHandler PropertyChanged;
