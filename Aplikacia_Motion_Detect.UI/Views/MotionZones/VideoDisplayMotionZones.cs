@@ -15,26 +15,12 @@ namespace Aplikacia_Motion_Detect.UI.Views.MotionZones
 {
     public partial class VideoDisplayMotionZones : UserControl
     {
+
+        private MotionZone _zone;
         public VideoDisplayMotionZones()
         {
             InitializeComponent();
             this.axVideoDisplayControl1.ShowMotionZones = true;
-
-            Messenger.Default.Register<MotionZoneMessage>(this, (message) =>
-            {
-                if (message.VideoSource != null)
-                {
-                    this.axVideoDisplayControl1.VideoCaptureSource = message.VideoSource;
-                }
-            });
-
-            Messenger.Default.Register<MotionZoneMessage>(this, (message) =>
-            {
-                if (message.ShowSelectedZone != null && message.Zone != null && message.ShowSelectedZone == true)
-                {
-                    ShowSelectedZone(message.Zone);
-                }
-            });
         }
 
         Point dragStartPoint = Point.Empty;
@@ -49,7 +35,7 @@ namespace Aplikacia_Motion_Detect.UI.Views.MotionZones
             if (dragStartPoint == Point.Empty)
                 return;
 
-            MotionZone zone = new MotionZone();
+            MotionZone zone = this._zone;
 
             // allow minimum zone 5x5
             if (e.x - dragStartPoint.X > 5 && e.y - dragStartPoint.Y > 5)
@@ -59,10 +45,6 @@ namespace Aplikacia_Motion_Detect.UI.Views.MotionZones
                 zone.Width = e.x - dragStartPoint.X + 1;
                 zone.Height = e.y - dragStartPoint.Y + 1;
                 dragStartPoint = Point.Empty;
-                Messenger.Default.Send<MotionZoneMessage>(new MotionZoneMessage()
-                {
-                    Zone = zone
-                });
                 ShowSelectedZone(zone);
             }
         }
@@ -70,7 +52,16 @@ namespace Aplikacia_Motion_Detect.UI.Views.MotionZones
         public void SetVideoCapture(VideoCapture videoCapture)
         {
             this.axVideoDisplayControl1.VideoCaptureSource = videoCapture;
+
         }
+
+        public void SetZone(MotionZone zone)
+        {
+            this._zone = zone;
+            ShowSelectedZone(this._zone);
+        }
+
+
 
         private void ShowSelectedZone(MotionZone zone)
         {

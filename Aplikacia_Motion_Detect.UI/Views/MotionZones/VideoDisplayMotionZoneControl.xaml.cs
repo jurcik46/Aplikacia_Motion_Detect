@@ -27,6 +27,26 @@ namespace Aplikacia_Motion_Detect.UI.Views.MotionZones
             InitializeComponent();
         }
 
+        public static readonly DependencyProperty SelectedMotionZoneProperty = DependencyProperty.Register(
+            "SelectedMotionZone", typeof(MotionZone), typeof(VideoDisplayMotionZoneControl), new FrameworkPropertyMetadata(
+                default(MotionZone),
+                FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
+                SelectedMotionZoneOnPropertyChanged));
+
+        private static void SelectedMotionZoneOnPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            VideoDisplayMotionZoneControl thisVidContorl = (VideoDisplayMotionZoneControl)d;
+            WindowsFormsHost axVideoDisplayHost = thisVidContorl.VideoDisplayHostMotionZone;
+            VideoDisplayMotionZones axVideoDisplay = (VideoDisplayMotionZones)axVideoDisplayHost.Child;
+            axVideoDisplay.SetZone((MotionZone)e.NewValue);
+        }
+
+        public MotionZone SelectedMotionZone
+        {
+            get { return (MotionZone)GetValue(SelectedMotionZoneProperty); }
+            set { SetValue(SelectedMotionZoneProperty, value); }
+        }
+
         public static readonly DependencyProperty VideoCaptureProperty = DependencyProperty.Register(
             "VideoCapture", typeof(VideoCapture), typeof(VideoDisplayMotionZoneControl), new FrameworkPropertyMetadata(
                 default(VideoCapture),

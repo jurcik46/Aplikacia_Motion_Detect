@@ -46,7 +46,6 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MotionZones
 
         private MotionZoneInfoDataGridModel _selectedMotionZone;
         private IVideoService VideoService { get; set; }
-        private IVideoCapture VideoCapture { get; set; }
         private VideoInfoDataGridModel _videoDevice;
         public VideoInfoDataGridModel VideoDevice
         {
@@ -66,12 +65,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MotionZones
             set
             {
                 _selectedMotionZone = value;
-                Messenger.Default.Send<MotionZoneMessage>(new MotionZoneMessage()
-                {
-                    Zone = value.Zone,
-                    ShowSelectedZone = true
-                });
-                RaisePropertyChanged(); // need test 
+                RaisePropertyChanged();
             }
         }
 
@@ -81,14 +75,8 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MotionZones
             this.VideoDevice = selectedDevice;
             MotionZoneList = new ObservableCollection<MotionZoneInfoDataGridModel>();
             VideoService = videoService;
-            //VideoCapture = videoService.VideoDevice.VideoCapture;
             this.CommandInit();
             this.MessageRegistration();
-            Messenger.Default.Send<MotionZoneMessage>(new MotionZoneMessage()
-            {
-                //VideoSource = videoService.VideoDevice.VideoCapture
-            });
-
 
             for (int i = 0; i < VideoDevice.VideoCapture.MotionZones.Count; i++)
             {
@@ -102,43 +90,22 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MotionZones
 
                 });
             }
-            //SelectedMotionZone = MotionZoneList.Last();
+            SetSelectToLast();
         }
 
-        private int GetIndex()
+        private void SetSelectToLast()
         {
-            for (int i = 0; i < VideoCapture.MotionZones.Count; i++)
+            if (MotionZoneList.Count != 0)
             {
-                MotionZone zone = VideoCapture.MotionZones.Item[i];
-                if (SelectedMotionZone.Zone.Equals(zone))
-                {
-                    return i;
-                }
+                SelectedMotionZone = MotionZoneList.Last();
             }
-            return -1;
         }
 
 
         #region Messages Registration
-
         private void MessageRegistration()
         {
-            Messenger.Default.Register<MotionZoneMessage>(this, (message) =>
-            {
-                if (message.Zone != null && (message.ShowSelectedZone == null || message.ShowSelectedZone != true))
-                {
-                    var pom = GetIndex();
-                    if (pom != -1)
-                    {
-                        var a = VideoCapture.MotionZones.get_Item(pom);
-                        a = message.Zone;
-                    }
-                    SelectedMotionZone.Zone = message.Zone;
-
-                }
-            });
         }
-
         #endregion
 
         #region Commands
@@ -174,8 +141,8 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MotionZones
                 Sensitivity = zone.Sensitivity
             });
 
-            VideoCapture.MotionZones.Add(zone);
-            SelectedMotionZone = MotionZoneList.Last();
+            VideoDevice.VideoCapture.MotionZones.Add(zone);
+            SetSelectToLast();
         }
 
         private bool CanDeleteMotionZone()
@@ -185,13 +152,10 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MotionZones
 
         private void DeleteMotionZone()
         {
-            var pom = SelectedMotionZone;
-            VideoCapture.MotionZones.Remove(pom.Zone);
-            MotionZoneList.Remove(pom);
-            if (MotionZoneList.Count != 0)
-            {
-                SelectedMotionZone = MotionZoneList.Last();
-            }
+            VideoDevice.VideoCapture.MotionZones.Remove(SelectedMotionZone.Zone);
+            MotionZoneList.Remove(SelectedMotionZone);
+            SetSelectToLast();
+
         }
         #endregion
     }
