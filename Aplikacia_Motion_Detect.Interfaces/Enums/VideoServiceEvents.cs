@@ -9,6 +9,22 @@ namespace Aplikacia_Motion_Detect.Interfaces.Enums
     public enum VideoServiceEvents
     {
         Create,
-        SetDeveloperKey
+        SetDeveloperKey,
+        AddVideoCaptureDevice,
+        FrameReceived,
+        VideoCaptureStateChanged,
+        VideoCaptureError,
+        VideoDeviceDisconnected,
+        TryingRestartCapturing,
+        ModifyVideoCapture,
+        DeleteVideoCapture,
+        StartCapture,
+        StopCapture,
+        SavingConfig,
+        LoadingConfig,
+        SettingGUIDeviceDataOne,
+        SettingGUIDeviceDataAll,
+        UpdateStateVideoDevice
+
     }
 }

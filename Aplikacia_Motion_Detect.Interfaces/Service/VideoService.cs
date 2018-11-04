@@ -52,7 +52,7 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
             set
             {
                 _developerKey = value;
-                Logger.Information(VideoServiceEvents.SetDeveloperKey, "Setting developer key to {value}", value);
+                Logger.Information(VideoServiceEvents.SetDeveloperKey, $"Setting developer key to {value}");
             }
         }
 
@@ -65,17 +65,20 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
 
         public void AddVideoCapture(VideoInfoDataGridModel videoDevice)
         {
+            Logger.Information(VideoServiceEvents.AddVideoCaptureDevice, $"Adding new video device whit name {videoDevice.Name} and type {videoDevice.Type}");
             videoDevice.VideoCapture.FrameReceived += FrameReceived;
             videoDevice.VideoCapture.StateChanged += VideoCaptureStateChanged;
             videoDevice.VideoCapture.Error += VideoCaptureError;
 
             VideoCaptureList.Add(videoDevice);
+
             SetInfoData();
             SaveConfig();
         }
 
         private void FrameReceived(VideoCapture vidCap, FrameImage frame)
         {
+            //Logger.Debug(VideoServiceEvents.FrameReceived, $"Width {frame.Width} Height {frame.Height} PixelFormat {frame.PixelFormat} from device  {vidCap.Name} ");
             FrameImageInfo frameInfo = new FrameImageInfo();
             frameInfo.width = frame.Width;
             frameInfo.height = frame.Height;
@@ -95,6 +98,7 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                     var pom = FoundEqualsVideoCapture(vidCap);
                     if (pom != null)
                     {
+                        Logger.Debug(VideoServiceEvents.VideoCaptureStateChanged, $"Video device {vidCap.Name} changed state from {pom.State} to {State}");
                         UpdateState(pom);
                         if (State == VideoCaptureStateEnum.VCS_Stopped)
                         {
@@ -123,10 +127,11 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                     if (pom != null)
                     {
                         string error = errorCode.ToString("X8");
+                        Logger.Error(VideoServiceEvents.VideoCaptureError, $"Video device {vidCap.Name} raised error {error} ");
                         if (error.Equals("FFFFFFFB") || error.Equals("80008004"))
                         {
+                            Logger.Warning(VideoServiceEvents.VideoDeviceDisconnected, $"Video device {vidCap.Name}");
                             Task.Run(() => { ReconnectDevice(vidCap); });
-
                         }
 
                         pom.LastError = "Error " + "0x" + error;
@@ -140,6 +145,7 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
             while (vidCap.State != VideoCaptureStateEnum.VCS_Started)
             {
                 System.Threading.Thread.Sleep(1000);
+                Logger.Warning(VideoServiceEvents.TryingRestartCapturing, $"Video device {vidCap.Name}");
                 vidCap.StartCapture();
                 System.Threading.Thread.Sleep(4000);
             }
@@ -147,64 +153,33 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
 
         public void ModifyVideoCapture(VideoInfoDataGridModel videoDevice)
         {
-            foreach (var item in VideoCaptureList)
-            {
-                if (object.ReferenceEquals(item, videoDevice))
-                {
-                    ChangeVideoSource(item, videoDevice);
-                    SetInfoData();
-                    return;
-                }
-            }
+            SetInfoData();
+            SaveConfig();
+            Logger.Information(VideoServiceEvents.ModifyVideoCapture, "Video device {Name} modified \n{@videoDevice}", videoDevice.Name, videoDevice);
         }
 
         public void DeleteVideoCapture(VideoInfoDataGridModel videoDevice)
         {
-            foreach (var item in VideoCaptureList)
-            {
-                if (object.ReferenceEquals(item, videoDevice))
-                {
-                    DeleteVideoSource(item);
-                    return;
-                }
-            }
-        }
-
-        private void ChangeVideoSource(VideoInfoDataGridModel videoDeviceOld, VideoInfoDataGridModel videoDeviceNew)
-        {
-            videoDeviceOld = videoDeviceNew;
-            SaveConfig();
-        }
-
-        private void DeleteVideoSource(VideoInfoDataGridModel videoDevice)
-        {
+            Logger.Information(VideoServiceEvents.DeleteVideoCapture, "Video device {Name}  \n{@videoDevice}", videoDevice.Name, videoDevice);
             VideoCaptureList.Remove(videoDevice);
             SaveConfig();
         }
 
         public void StartCaptureOne(VideoInfoDataGridModel videoSource)
         {
-            foreach (var item in VideoCaptureList)
+            try
             {
-                if (object.ReferenceEquals(item, videoSource) && item.Enable)
-                {
-                    try
-                    {
-
-                        item.VideoCapture.StartCapture();
-                        UpdateState(item);
-
-                    }
-                    catch (COMException)
-                    {
-                        Messenger.Default.Send<NotifiMessage>(new NotifiMessage()
-                        {
-                            Msg = "Error: " + item.VideoCapture.LastErrorCode
-                        });
-                    }
-
+                if (!videoSource.Enable)
                     return;
-                }
+                Logger.Information(VideoServiceEvents.StartCapture, "Video device {Name} ", videoSource.Name);
+                videoSource.VideoCapture.StartCapture();
+            }
+            catch (COMException)
+            {
+                Messenger.Default.Send<NotifiMessage>(new NotifiMessage()
+                {
+                    Msg = "Error: " + videoSource.VideoCapture.LastErrorCode
+                });
             }
         }
 
@@ -216,6 +191,7 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                     continue;
                 try
                 {
+                    Logger.Information(VideoServiceEvents.StartCapture, "Video device {Name} ", item.Name);
                     item.VideoCapture.StartCapture();
                 }
                 catch (COMException)
@@ -230,29 +206,19 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
 
         public void StopCaptureOne(VideoInfoDataGridModel videoSource)
         {
-            foreach (var item in VideoCaptureList)
-            {
-                if (object.ReferenceEquals(item, videoSource))
-                {
-                    try
-                    {
-                        item.VideoCapture.StopCapture();
-
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e.Message);
-                    }
-
-                    return;
-                }
-            }
+            if (!videoSource.Enable)
+                return;
+            Logger.Information(VideoServiceEvents.StopCapture, "Video device {Name} ", videoSource.Name);
+            videoSource.VideoCapture.StopCapture();
         }
 
         public void StopCaptureAll()
         {
             foreach (var item in VideoCaptureList)
             {
+                if (!item.Enable)
+                    continue;
+                Logger.Information(VideoServiceEvents.StopCapture, "Video device {Name} ", item.Name);
                 item.VideoCapture.StopCapture();
 
             }
@@ -260,6 +226,7 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
 
         public void SaveConfig()
         {
+            Logger.Information(VideoServiceEvents.SavingConfig);
             XmlDocument xmlDoc = new XmlDocument();
             BoolToTextConverter boolConvert = new BoolToTextConverter();
             XmlNode rootNode = xmlDoc.CreateNode(XmlNodeType.Element, "VideoSources", "");
@@ -294,6 +261,7 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
         {
             if (File.Exists(configFilePath))
             {
+                Logger.Information(VideoServiceEvents.LoadingConfig);
                 XmlDocument xmlDoc = new XmlDocument();
                 xmlDoc.Load(configFilePath);
 
@@ -342,6 +310,8 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
 
         private void SetInfoData()
         {
+            Logger.Debug(VideoServiceEvents.SettingGUIDeviceDataAll);
+
             foreach (var row in VideoCaptureList)
             {
                 row.Name = row.VideoCapture.Name;
@@ -384,6 +354,8 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                     var pom = FoundEqualsVideoCapture(vidCap);
                     if (pom != null)
                     {
+                        Logger.Debug(VideoServiceEvents.SettingGUIDeviceDataOne);
+
                         // set resulution 
                         pom.Resolution = frameInfo.width.ToString() + "x" + frameInfo.height.ToString();
 
@@ -450,6 +422,7 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
 
         private void UpdateState(VideoInfoDataGridModel vidCap)
         {
+            Logger.Debug(VideoServiceEvents.UpdateStateVideoDevice);
             string strState = vidCap.VideoCapture.State.ToString();
             //remove prefix from the state contatnt name 
             strState = strState.Substring(4, strState.Length - 4);
