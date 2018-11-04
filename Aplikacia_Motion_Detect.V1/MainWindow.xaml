@@ -46,9 +46,8 @@
                         Command="{Binding ModifyVideoCommand}" />
                     <Button Margin="10" Content="Delete" HorizontalAlignment="Left" MinWidth="100" 
                         Command="{Binding DeleteVideoCommand}" />
-
-
                 </StackPanel>
+
                 <StackPanel Grid.Column="1" Orientation="Horizontal">
                     <Button Margin="10" Content="Set Developer Key" HorizontalAlignment="Right" MinWidth="140" 
                         Command="{Binding DeveloperKeyCommand}" />
@@ -104,6 +103,8 @@
                 </StackPanel>
             </Grid>
         </Grid>
+
         <views:VideoControl Grid.Row="1" VideoCap="{Binding DataContext.SelectedDataGridItem.VideoCapture, ElementName=MainWin}"/>
+
     </Grid>
 </Window>

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using System.Xml;
 using Aplikacia_Motion_Detect.Interfaces.Convertors;
 using Aplikacia_Motion_Detect.Interfaces.Interface.Services;
@@ -49,7 +50,6 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
         {
             this.VideoCaptureList = new List<VideoInfoDataGridModel>();
             this.LoadConfig();
-            //this.VideoDevice = null;
         }
 
         public void AddVideoCapture(VideoInfoDataGridModel videoDevice)
@@ -111,10 +111,27 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                     var pom = FoundEqualsVideoCapture(vidCap);
                     if (pom != null)
                     {
-                        pom.LastError = "Error " + "0x" + errorCode.ToString("X8");
+                        string error = errorCode.ToString("X8");
+                        if (error.Equals("FFFFFFFB") || error.Equals("80008004"))
+                        {
+                            Task.Run(() => { ReconnectDevice(vidCap); });
+
+                        }
+
+                        pom.LastError = "Error " + "0x" + error;
                     }
                 });
 
+        }
+
+        private void ReconnectDevice(VideoCapture vidCap)
+        {
+            while (vidCap.State != VideoCaptureStateEnum.VCS_Started)
+            {
+                System.Threading.Thread.Sleep(1000);
+                vidCap.StartCapture();
+                System.Threading.Thread.Sleep(4000);
+            }
         }
 
         public void ModifyVideoCapture(VideoInfoDataGridModel videoDevice)
