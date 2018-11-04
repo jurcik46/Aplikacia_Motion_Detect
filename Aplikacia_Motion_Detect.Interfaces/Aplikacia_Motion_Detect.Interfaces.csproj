@@ -104,10 +104,8 @@
     <Compile Include="Interface\Services\IRestService.cs" />
     <Compile Include="Interface\Services\IVideoService.cs" />
     <Compile Include="LoggerInit.cs" />
-    <Compile Include="Messages\MotionZoneMessage.cs" />
     <Compile Include="Messages\NotifiMessage.cs" />
     <Compile Include="Messages\ReloadDeviceMessage.cs" />
-    <Compile Include="Messages\ShowVideoCaptureMessage.cs" />
     <Compile Include="Models\Diagnostics.cs" />
     <Compile Include="Models\MotionZoneInfoDataGridModel.cs" />
     <Compile Include="Models\VideoInfoDataGridModel.cs" />
