@@ -86,8 +86,6 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MotionZones
                 {
                     Name = name,
                     Zone = zone,
-                    Sensitivity = zone.Sensitivity
-
                 });
             }
             SetSelectToLast();
@@ -138,7 +136,6 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MotionZones
             {
                 Name = name,
                 Zone = zone,
-                Sensitivity = zone.Sensitivity
             });
 
             VideoDevice.VideoCapture.MotionZones.Add(zone);

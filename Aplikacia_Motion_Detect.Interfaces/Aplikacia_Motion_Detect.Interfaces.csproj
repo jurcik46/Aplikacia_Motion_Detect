@@ -106,7 +106,6 @@
     <Compile Include="Messages\MotionZoneMessage.cs" />
     <Compile Include="Messages\NotifiMessage.cs" />
     <Compile Include="Messages\ReloadDeviceMessage.cs" />
-    <Compile Include="Messages\ShowMotionZonesVideoCaptureMessage.cs" />
     <Compile Include="Messages\ShowVideoCaptureMessage.cs" />
     <Compile Include="Models\Diagnostics.cs" />
     <Compile Include="Models\MotionZoneInfoDataGridModel.cs" />

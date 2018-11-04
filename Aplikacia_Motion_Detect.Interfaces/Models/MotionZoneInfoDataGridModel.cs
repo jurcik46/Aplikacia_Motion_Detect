@@ -38,18 +38,6 @@ namespace Aplikacia_Motion_Detect.Interfaces.Models
             }
         }
 
-        public int Sensitivity
-        {
-            get { return _sensitivity; }
-            set
-            {
-                _sensitivity = value;
-                OnPropertyChanged();
-
-            }
-        }
-
-
         #region INotifyPropertyChanged Impl
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName]string propertyName = null)

@@ -35,7 +35,7 @@
                   ColumnWidth="*" RowHeight="25" CanUserAddRows="false"  Grid.Row="1" Grid.Column="0">
             <DataGrid.Columns>
                 <DataGridTextColumn IsReadOnly="True" Header="Name" Binding="{Binding Name}"/>
-                <DataGridTextColumn IsReadOnly="False" Header="Sensitivity" Binding="{Binding Sensitivity, Mode=TwoWay}"/>
+                <DataGridTextColumn IsReadOnly="False" Header="Sensitivity" Binding="{Binding Zone.Sensitivity, Mode=TwoWay}" />
             </DataGrid.Columns>
 
             <DataGrid.Resources>
