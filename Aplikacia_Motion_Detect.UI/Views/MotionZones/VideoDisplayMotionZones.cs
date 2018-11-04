@@ -75,10 +75,13 @@ namespace Aplikacia_Motion_Detect.UI.Views.MotionZones
                 box.Y = zone.Y;
                 box.Width = zone.Width;
                 box.Height = zone.Height;
-                box.Color = (uint)ColorTranslator.ToOle(Color.Green);
-                box.LineThickness = 8;
-                box.Opacity = 80;
+                box.Color = (uint)ColorTranslator.ToOle(Color.GreenYellow);
+                box.LineThickness = 5;
+                box.Opacity = 100;
                 axVideoDisplayControl1.Overlays.Add(box);
+                axVideoDisplayControl1.ShowMotionZones = false;
+                axVideoDisplayControl1.ShowMotionZones = true;
+
             }
         }
 
