@@ -4,20 +4,26 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Aplikacia_Motion_Detect.Interfaces.Enums;
+using Aplikacia_Motion_Detect.Interfaces.Extensions;
 using Aplikacia_Motion_Detect.Interfaces.Interface;
 using Aplikacia_Motion_Detect.Interfaces.Interface.Services;
 using Aplikacia_Motion_Detect.Interfaces.Messages;
 using Aplikacia_Motion_Detect.Interfaces.Models;
 using Aplikacia_Motion_Detect.Interfaces.Service;
+using Aplikacia_Motion_Detect.UI.ViewModels.DeveloperKey;
 using DTKVideoCapLib;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
+using Serilog;
 
 namespace Aplikacia_Motion_Detect.UI.ViewModels.MotionZones
 {
     public class MotionZonesViewModel : ViewModelBase
     {
+        public ILogger Logger => Log.Logger.ForContext<MotionZonesViewModel>();
+
         #region Command Declaration
 
         private RelayCommand<IClosable> _okCommand;
@@ -69,9 +75,10 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MotionZones
             }
         }
 
-
         public MotionZonesViewModel(IVideoService videoService, VideoInfoDataGridModel selectedDevice)
         {
+            Logger.Debug(MotionZonesViewModelEvents.Create, "Creating new instance of MotionZonesViewModel");
+
             this.VideoDevice = selectedDevice;
             MotionZoneList = new ObservableCollection<MotionZoneInfoDataGridModel>();
             VideoService = videoService;
@@ -95,6 +102,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MotionZones
         {
             if (MotionZoneList.Count != 0)
             {
+                Logger.Debug(MotionZonesViewModelEvents.SetSelectToLast);
                 SelectedMotionZone = MotionZoneList.Last();
             }
         }
@@ -117,6 +125,8 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MotionZones
 
         private void ExecuteOk(IClosable win)
         {
+            Logger.Debug(MotionZonesViewModelEvents.OkCommand);
+
             VideoService.SaveConfig();
             if (win != null)
             {
@@ -137,6 +147,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MotionZones
                 Name = name,
                 Zone = zone,
             });
+            Logger.Information(MotionZonesViewModelEvents.AddCommand, "Name of zone {name} \n{@zone}", name, zone);
 
             VideoDevice.VideoCapture.MotionZones.Add(zone);
             SetSelectToLast();
@@ -149,6 +160,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MotionZones
 
         private void DeleteMotionZone()
         {
+            Logger.Information(MotionZonesViewModelEvents.DeleteCommand, "Name of zone {name} \n{@zone}", SelectedMotionZone.Name, SelectedMotionZone.Zone);
             VideoDevice.VideoCapture.MotionZones.Remove(SelectedMotionZone.Zone);
             MotionZoneList.Remove(SelectedMotionZone);
             SetSelectToLast();

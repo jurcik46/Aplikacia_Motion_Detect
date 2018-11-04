@@ -22,7 +22,6 @@ namespace Aplikacia_Motion_Detect.Interfaces.Enums
         StopCapture,
         SavingConfig,
         LoadingConfig,
-        SettingGUIDeviceDataOne,
         SettingGUIDeviceDataAll,
         UpdateStateVideoDevice
 

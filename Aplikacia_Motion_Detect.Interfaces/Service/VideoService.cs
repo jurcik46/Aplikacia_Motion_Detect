@@ -354,7 +354,6 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                     var pom = FoundEqualsVideoCapture(vidCap);
                     if (pom != null)
                     {
-                        Logger.Debug(VideoServiceEvents.SettingGUIDeviceDataOne);
 
                         // set resulution 
                         pom.Resolution = frameInfo.width.ToString() + "x" + frameInfo.height.ToString();

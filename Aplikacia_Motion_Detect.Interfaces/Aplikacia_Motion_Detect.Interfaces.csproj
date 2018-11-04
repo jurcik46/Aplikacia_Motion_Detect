@@ -96,6 +96,8 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Convertors\BoolToTextConverter.cs" />
     <Compile Include="Enums\ApplicationEvents.cs" />
+    <Compile Include="Enums\DeveloperKeyViewModelEvents.cs" />
+    <Compile Include="Enums\MotionZonesViewModelEvents.cs" />
     <Compile Include="Enums\VideoCaptureViewModelEvents.cs" />
     <Compile Include="Enums\VideoServiceEvents.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
