@@ -138,7 +138,7 @@
 
         <Grid Margin="10" Grid.Row="3">
             <Button HorizontalAlignment="Left" Content="Cancel" Width="150" Command="{Binding CloseVideoCaptureCommand}" CommandParameter="{Binding ElementName=VideoCaptureWin}"/>
-            <Button HorizontalAlignment="Right" Content="OK" Width="150" Command="{Binding SavieVideoCaptureCommand}" CommandParameter="{Binding ElementName=VideoCaptureWin}" />
+            <Button HorizontalAlignment="Right" IsDefault="True" Content="OK" Width="150" Command="{Binding SavieVideoCaptureCommand}" CommandParameter="{Binding ElementName=VideoCaptureWin}" />
         </Grid>
 
     </Grid>

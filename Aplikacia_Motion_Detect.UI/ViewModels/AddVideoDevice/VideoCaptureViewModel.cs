@@ -396,6 +396,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.AddVideoDevice
         private void SaveVideoCapture(IClosable win)
         {
             SaveVideoCaptureSetting();
+
             Messenger.Default.Send<ReloadDeviceMessage>(new ReloadDeviceMessage());
             if (win != null)
             {

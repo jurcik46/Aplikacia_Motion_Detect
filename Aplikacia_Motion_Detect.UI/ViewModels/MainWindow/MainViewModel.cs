@@ -4,8 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Data;
+using System.Windows.Forms;
 using Aplikacia_Motion_Detect.Interfaces.Interface.Services;
 using Aplikacia_Motion_Detect.Interfaces.Messages;
 using Aplikacia_Motion_Detect.Interfaces.Models;
@@ -20,6 +20,7 @@ using DTKVideoCapLib;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
+using MessageBox = System.Windows.MessageBox;
 
 namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
 {
@@ -193,9 +194,8 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
         private void AddVideoCaptureWindow()
         {
             this.VideoCaptureViewModel = new VideoCaptureViewModel(VideoService);
-            this.VideoCaptureWindow = new VideoCaptureWindow();
-            this.VideoCaptureWindow.DataContext = this.VideoCaptureViewModel;
-            this.VideoCaptureWindow.Show();
+            this.VideoCaptureWindow = new VideoCaptureWindow() { DataContext = VideoCaptureViewModel };
+            VideoCaptureWindow.ShowDialog();
         }
 
         private bool CanModifyVideoCapture()
@@ -212,9 +212,8 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
         private void ModifyVideoCapture()
         {
             this.VideoCaptureViewModel = new VideoCaptureViewModel(VideoService, SelectedDataGridItem);
-            this.VideoCaptureWindow = new VideoCaptureWindow();
-            this.VideoCaptureWindow.DataContext = this.VideoCaptureViewModel;
-            this.VideoCaptureWindow.Show();
+            this.VideoCaptureWindow = new VideoCaptureWindow() { DataContext = VideoCaptureViewModel };
+            this.VideoCaptureWindow.ShowDialog();
 
         }
 
@@ -242,9 +241,8 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
         private void ShowDeveloperKeyWindow()
         {
             this.DevelopeViewModel = new DeveloperKeyViewModel(VideoService);
-            this.DeveloperWindow = new DeveloperKeyWindows();
-            this.DeveloperWindow.DataContext = this.DevelopeViewModel;
-            this.DeveloperWindow.Show();
+            this.DeveloperWindow = new DeveloperKeyWindows() { DataContext = DevelopeViewModel };
+            this.DeveloperWindow.ShowDialog();
         }
 
         private bool CanStartCapture()
@@ -306,9 +304,8 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
         private void ShowMotionZones()
         {
             this.MotionZoneViewModel = new MotionZonesViewModel(VideoService, SelectedDataGridItem);
-            this.MotionZonesWidow = new MotionZonesWindow();
-            this.MotionZonesWidow.DataContext = MotionZoneViewModel;
-            MotionZonesWidow.Show();
+            this.MotionZonesWidow = new MotionZonesWindow() { DataContext = MotionZoneViewModel };
+            MotionZonesWidow.ShowDialog();
         }
         #endregion
     }

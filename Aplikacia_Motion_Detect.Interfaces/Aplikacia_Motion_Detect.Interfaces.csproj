@@ -96,6 +96,7 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Convertors\BoolToTextConverter.cs" />
     <Compile Include="Enums\ApplicationEvents.cs" />
+    <Compile Include="Enums\VideoServiceEvents.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\LoggerExtensions.cs" />
     <Compile Include="Extensions\RadioButtonExtended.cs" />
