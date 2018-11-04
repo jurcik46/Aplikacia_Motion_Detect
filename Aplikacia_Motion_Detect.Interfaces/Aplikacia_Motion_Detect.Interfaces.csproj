@@ -109,7 +109,6 @@
     <Compile Include="Messages\ShowVideoCaptureMessage.cs" />
     <Compile Include="Models\Diagnostics.cs" />
     <Compile Include="Models\MotionZoneInfoDataGridModel.cs" />
-    <Compile Include="Models\VideoDisplayModel.cs" />
     <Compile Include="Models\VideoInfoDataGridModel.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
