@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Forms;
+using Aplikacia_Motion_Detect.Interfaces.Enums;
+using Aplikacia_Motion_Detect.Interfaces.Extensions;
 using Aplikacia_Motion_Detect.Interfaces.Interface.Services;
 using Aplikacia_Motion_Detect.Interfaces.Messages;
 using Aplikacia_Motion_Detect.Interfaces.Models;
@@ -20,12 +22,16 @@ using DTKVideoCapLib;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
+using Serilog;
 using MessageBox = System.Windows.MessageBox;
 
 namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
 {
     public class MainViewModel : ViewModelBase
     {
+
+        public ILogger Logger => Log.Logger.ForContext<MainViewModel>();
+
         #region Add Video Capture Window 
         private VideoCaptureViewModel VideoCaptureViewModel;
         private VideoCaptureWindow VideoCaptureWindow;
@@ -134,6 +140,8 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
 
         public MainViewModel(IVideoService videoService)
         {
+            Logger.Debug(MainViewModelEvents.Create, "Creating new instance of MainViewModel");
+
             this.VideoService = videoService;
             VideoInfoDataGrid = new ObservableCollection<VideoInfoDataGridModel>();
             this.MessageRegister();
@@ -143,6 +151,8 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
 
         private void LoadVideoDeviceFromService()
         {
+            Logger.Debug(MainViewModelEvents.LoadVideoDeviceFromService);
+
             VideoInfoDataGrid.Clear();
 
             foreach (var video in VideoService.VideoCaptureList)
@@ -156,6 +166,8 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
         {
             if (VideoInfoDataGrid.Count != 0)
             {
+                Logger.Debug(MainViewModelEvents.SetSelectToLast);
+
                 SelectedDataGridItem = VideoInfoDataGrid.Last();
             }
         }
@@ -167,6 +179,8 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
         {
             Messenger.Default.Register<ReloadDeviceMessage>(this, (message) =>
             {
+                Logger.Debug(MainViewModelEvents.ReloadDeviceMessage);
+
                 LoadVideoDeviceFromService();
             });
             Messenger.Default.Register<NotifiMessage>(this, (message) => { MessageBox.Show(message.Msg); });
@@ -201,6 +215,8 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
 
         private void AddVideoCaptureWindow()
         {
+            Logger.Debug(MainViewModelEvents.AddVideoCommand);
+
             this.VideoCaptureViewModel = new VideoCaptureViewModel(VideoService);
             this.VideoCaptureWindow = new VideoCaptureWindow() { DataContext = VideoCaptureViewModel };
             VideoCaptureWindow.ShowDialog();
@@ -219,6 +235,8 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
 
         private void ModifyVideoCapture()
         {
+            Logger.Information(MainViewModelEvents.ModifyVideoCommand, "Device name {name} \n Setting before \n {@SelectedDataGridItem } ", SelectedDataGridItem.Name);
+
             this.VideoCaptureViewModel = new VideoCaptureViewModel(VideoService, SelectedDataGridItem);
             this.VideoCaptureWindow = new VideoCaptureWindow() { DataContext = VideoCaptureViewModel };
             this.VideoCaptureWindow.ShowDialog();
@@ -232,12 +250,14 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
 
         private void DeleteVideoCapture()
         {
+            Logger.Information(MainViewModelEvents.DeleteVideoCommand, "Device name {name} \n Setting before \n {@SelectedDataGridItem } ", SelectedDataGridItem.Name);
             VideoService.DeleteVideoCapture(SelectedDataGridItem);
             LoadVideoDeviceFromService();
         }
 
         private bool CanShowDeveloperKeyWindow()
         {
+
             if (this.DeveloperWindow != null)
                 return (!this.DeveloperWindow.IsLoaded);
             else
@@ -248,6 +268,8 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
 
         private void ShowDeveloperKeyWindow()
         {
+            Logger.Debug(MainViewModelEvents.DeveloperKeyCommand);
+
             this.DevelopeViewModel = new DeveloperKeyViewModel(VideoService);
             this.DeveloperWindow = new DeveloperKeyWindows() { DataContext = DevelopeViewModel };
             this.DeveloperWindow.ShowDialog();
@@ -260,6 +282,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
 
         private void StartCaptureVideo()
         {
+            Logger.Debug(MainViewModelEvents.StartCaptureCommand, "Device name {name} \n Setting before \n {@SelectedDataGridItem } ", SelectedDataGridItem.Name);
             VideoService.StartCaptureOne(SelectedDataGridItem);
         }
 
@@ -270,6 +293,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
 
         private void StopCaptureVideo()
         {
+            Logger.Debug(MainViewModelEvents.StopCaptureCommand, "Device name {name} \n Setting before \n {@SelectedDataGridItem } ", SelectedDataGridItem.Name);
             VideoService.StopCaptureOne(SelectedDataGridItem);
         }
 
@@ -280,6 +304,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
 
         private void StartCaptureAllVideos()
         {
+            Logger.Debug(MainViewModelEvents.StopCaptureAllCommand);
             VideoService.StartCaptureAll();
         }
 
@@ -290,6 +315,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
 
         private void StopCaptureAllVideos()
         {
+            Logger.Debug(MainViewModelEvents.StopCaptureAllCommand);
             VideoService.StopCaptureAll();
         }
 
@@ -311,6 +337,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
 
         private void ShowMotionZones()
         {
+            Logger.Debug(MainViewModelEvents.DefineMotionZonesCommand);
             this.MotionZoneViewModel = new MotionZonesViewModel(VideoService, SelectedDataGridItem);
             this.MotionZonesWidow = new MotionZonesWindow() { DataContext = MotionZoneViewModel };
             MotionZonesWidow.ShowDialog();
