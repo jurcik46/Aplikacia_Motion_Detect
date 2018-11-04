@@ -158,7 +158,7 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
         {
             foreach (var item in VideoCaptureList)
             {
-                if (object.ReferenceEquals(item, videoSource))
+                if (object.ReferenceEquals(item, videoSource) && item.Enable)
                 {
                     try
                     {
@@ -184,6 +184,8 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
         {
             foreach (var item in VideoCaptureList)
             {
+                if (!item.Enable)
+                    continue;
                 try
                 {
                     item.VideoCapture.StartCapture();
