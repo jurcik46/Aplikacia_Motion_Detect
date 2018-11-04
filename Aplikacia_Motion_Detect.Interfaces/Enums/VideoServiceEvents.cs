@@ -8,6 +8,7 @@ namespace Aplikacia_Motion_Detect.Interfaces.Enums
 {
     public enum VideoServiceEvents
     {
-
+        Create,
+        SetDeveloperKey
     }
 }

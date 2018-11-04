@@ -17,10 +17,8 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.DeveloperKey
     {
         private IVideoService _vidoeService;
 
-
         private RelayCommand<IClosable> _saveKeyCommand;
 
-        public string DevKey { get; set; }
         public RelayCommand<IClosable> SaveKeyCommand { get => _saveKeyCommand; set => _saveKeyCommand = value; }
 
         public IVideoService VidoeService
@@ -32,7 +30,6 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.DeveloperKey
         public DeveloperKeyViewModel(IVideoService videoService)
         {
             VidoeService = videoService;
-            DevKey = VidoeService.DeveloperKey;
             this.CommandInit();
         }
 
@@ -43,7 +40,6 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.DeveloperKey
 
         private void Save(IClosable win)
         {
-            VidoeService.DeveloperKey = DevKey;
             VidoeService.SaveConfig();
             if (win != null)
             {

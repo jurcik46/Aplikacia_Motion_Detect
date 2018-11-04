@@ -57,6 +57,6 @@
                                              SelectedMotionZone="{Binding DataContext.SelectedMotionZone.Zone, ElementName=MotionZoneWindow}"/>
 
         <!--Finish Button-->
-        <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Width="200" Margin="8" Content="OK" Command="{Binding OkCommand}" CommandParameter="{Binding ElementName=MotionZoneWindow}"/>
+        <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Width="200" Margin="8" Content="OK"  IsDefault="True" Command="{Binding OkCommand}" CommandParameter="{Binding ElementName=MotionZoneWindow}"/>
     </Grid>
 </Window>

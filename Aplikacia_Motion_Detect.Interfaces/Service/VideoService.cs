@@ -7,6 +7,8 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Xml;
 using Aplikacia_Motion_Detect.Interfaces.Convertors;
+using Aplikacia_Motion_Detect.Interfaces.Enums;
+using Aplikacia_Motion_Detect.Interfaces.Extensions;
 using Aplikacia_Motion_Detect.Interfaces.Interface.Services;
 using Aplikacia_Motion_Detect.Interfaces.Messages;
 using Aplikacia_Motion_Detect.Interfaces.Models;
@@ -14,6 +16,7 @@ using DTKVideoCapLib;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using Microsoft.Win32;
+using Serilog;
 
 namespace Aplikacia_Motion_Detect.Interfaces.Service
 {
@@ -25,6 +28,9 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
             public int height;
             public PixelFormatEnum pixelFormat;
         }
+
+        public ILogger Logger => Log.Logger.ForContext<VideoService>();
+
 
         public VideoCaptureUtils utils = new VideoCaptureUtils();
         public List<VideoInfoDataGridModel> _videoCaptureList;
@@ -43,11 +49,16 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
         public string DeveloperKey
         {
             get { return _developerKey; }
-            set { _developerKey = value; }
+            set
+            {
+                _developerKey = value;
+                Logger.Information(VideoServiceEvents.SetDeveloperKey, "Setting developer key to {value}", value);
+            }
         }
 
         public VideoService()
         {
+            Logger.Debug(VideoServiceEvents.Create, "Creating new instance of VideoService");
             this.VideoCaptureList = new List<VideoInfoDataGridModel>();
             this.LoadConfig();
         }

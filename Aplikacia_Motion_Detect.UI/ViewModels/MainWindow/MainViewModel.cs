@@ -139,7 +139,6 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
             this.MessageRegister();
             this.CommandInit();
             this.LoadVideoDeviceFromService();
-
         }
 
         private void LoadVideoDeviceFromService()
@@ -149,6 +148,15 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
             foreach (var video in VideoService.VideoCaptureList)
             {
                 VideoInfoDataGrid.Add(video);
+            }
+            SetSelectToLast();
+        }
+
+        private void SetSelectToLast()
+        {
+            if (VideoInfoDataGrid.Count != 0)
+            {
+                SelectedDataGridItem = VideoInfoDataGrid.Last();
             }
         }
 
