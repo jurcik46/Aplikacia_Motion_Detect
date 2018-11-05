@@ -6,19 +6,19 @@
              xmlns:wf="clr-namespace:Aplikacia_Motion_Detect.UI.Views.MainWindow"
              mc:Ignorable="d" 
              x:Name="VideoDisplayControl"
-             d:DesignHeight="360" d:DesignWidth="820">
+             Height="360" MinWidth="820" >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0,2*" />
             <ColumnDefinition Width="0,9*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
-            <CheckBox Margin="10 10" Content="Show Motion Zones" x:Name="ShowMotionZoneCheckBox" IsChecked="{Binding MotionZone, ElementName=VideoDisplayControl, Mode=TwoWay}" Checked="MotionZoneCheckBoxChanged" Unchecked="MotionZoneCheckBoxChanged"/>
-            <CheckBox Margin="10 10" Content="Show Video" x:Name="ShowVideoCheckBox" Checked="VideoCheckboxChanged" Unchecked="VideoCheckboxChanged"/>
+            <CheckBox Margin="5 5" Content="Show Motion Zones" x:Name="ShowMotionZoneCheckBox" IsChecked="{Binding MotionZone, ElementName=VideoDisplayControl, Mode=TwoWay}" Checked="MotionZoneCheckBoxChanged" Unchecked="MotionZoneCheckBoxChanged"/>
+            <CheckBox Margin="5 5" Content="Show Video" x:Name="ShowVideoCheckBox" Checked="VideoCheckboxChanged" Unchecked="VideoCheckboxChanged"/>
         </StackPanel>
 
         <DockPanel HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">

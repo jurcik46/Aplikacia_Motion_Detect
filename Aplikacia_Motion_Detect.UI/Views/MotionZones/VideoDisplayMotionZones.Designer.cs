@@ -39,11 +39,10 @@
             this.axVideoDisplayControl1.Location = new System.Drawing.Point(0, 0);
             this.axVideoDisplayControl1.Name = "axVideoDisplayControl1";
             this.axVideoDisplayControl1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axVideoDisplayControl1.OcxState")));
-            this.axVideoDisplayControl1.Size = new System.Drawing.Size(600, 410);
+            this.axVideoDisplayControl1.Size = new System.Drawing.Size(900, 600);
             this.axVideoDisplayControl1.TabIndex = 0;
             this.axVideoDisplayControl1.VideoMouseDown += new AxDTKVideoCapLib._IVideoDisplayControlEvents_VideoMouseDownEventHandler(this.axVideoDisplayControl1_VideoMouseDown);
             this.axVideoDisplayControl1.VideoMouseUp += new AxDTKVideoCapLib._IVideoDisplayControlEvents_VideoMouseUpEventHandler(this.axVideoDisplayControl1_VideoMouseUp);
-
             // 
             // VideoDisplayMotionZones
             // 
@@ -51,7 +50,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.axVideoDisplayControl1);
             this.Name = "VideoDisplayMotionZones";
-            this.Size = new System.Drawing.Size(600, 410);
+            this.Size = new System.Drawing.Size(900, 600);
             ((System.ComponentModel.ISupportInitialize)(this.axVideoDisplayControl1)).EndInit();
             this.ResumeLayout(false);
 
