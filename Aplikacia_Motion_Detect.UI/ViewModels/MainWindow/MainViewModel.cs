@@ -250,7 +250,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
 
         private void DeleteVideoCapture()
         {
-            Logger.Information(MainViewModelEvents.DeleteVideoCommand, "Device name {name} \n Setting before \n {@SelectedDataGridItem } ", SelectedDataGridItem.Name);
+            Logger.Information(MainViewModelEvents.DeleteVideoCommand, "Device name {name} \n Setting \n {@SelectedDataGridItem } ", SelectedDataGridItem.Name);
             VideoService.DeleteVideoCapture(SelectedDataGridItem);
             LoadVideoDeviceFromService();
         }
@@ -282,7 +282,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
 
         private void StartCaptureVideo()
         {
-            Logger.Debug(MainViewModelEvents.StartCaptureCommand, "Device name {name} \n Setting before \n {@SelectedDataGridItem } ", SelectedDataGridItem.Name);
+            Logger.Debug(MainViewModelEvents.StartCaptureCommand, "Device name {name} \n Setting \n {@SelectedDataGridItem } ", SelectedDataGridItem.Name);
             VideoService.StartCaptureOne(SelectedDataGridItem);
         }
 
@@ -293,7 +293,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
 
         private void StopCaptureVideo()
         {
-            Logger.Debug(MainViewModelEvents.StopCaptureCommand, "Device name {name} \n Setting before \n {@SelectedDataGridItem } ", SelectedDataGridItem.Name);
+            Logger.Debug(MainViewModelEvents.StopCaptureCommand, "Device name {name} \n Setting \n {@SelectedDataGridItem } ", SelectedDataGridItem.Name);
             VideoService.StopCaptureOne(SelectedDataGridItem);
         }
 
@@ -321,18 +321,8 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
 
         private bool CanShowMotionZones()
         {
-            if (MotionZonesWidow != null)
-            {
-                return (!MotionZonesWidow.IsLoaded);
-            }
-            if (SelectedDataGridItem != null &&
-                SelectedDataGridItem.VideoCapture.State == VideoCaptureStateEnum.VCS_Started)
-            {
-                return true;
-            }
-
-            return false;
-
+            return (SelectedDataGridItem != null &&
+                    SelectedDataGridItem.VideoCapture.State == VideoCaptureStateEnum.VCS_Started);
         }
 
         private void ShowMotionZones()

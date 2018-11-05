@@ -9,7 +9,8 @@
 		DataContext="{Binding Source={x:Static ui:ViewModelLocator.MainViewModel}}"
         mc:Ignorable="d"
         x:Name="MainWin"
-        Title="MainWindow" Height="810" Width="850" MinWidth="850"
+        WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="700" Width="850" MinWidth="850"
         Closing="MainWindow_OnClosing">
     <Grid Margin="15">
         <Grid.ColumnDefinitions>
@@ -26,9 +27,9 @@
 
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="40"/>
                 <RowDefinition Height="*" x:Name="Row2"/>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0">
@@ -40,16 +41,32 @@
                 <StackPanel Grid.Column="0" Orientation="Horizontal">
                     <TextBlock Margin="10 10 50 10" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Text="Video Sources:" />
 
-                    <Button Margin="10" Content="Add" HorizontalAlignment="Left" MinWidth="100" 
+                    <Button Margin="5" Content="Add" HorizontalAlignment="Left" MinWidth="100" 
                         Command="{Binding AddVideoCommand}"  />
-                    <Button Margin="10"  Content="Modify" HorizontalAlignment="Left" MinWidth="100" 
-                        Command="{Binding ModifyVideoCommand}" />
-                    <Button Margin="10" Content="Delete" HorizontalAlignment="Left" MinWidth="100" 
-                        Command="{Binding DeleteVideoCommand}" />
+                    <Button Margin="5"  Content="Modify" HorizontalAlignment="Left" MinWidth="100" ToolTipService.ShowOnDisabled="True" 
+                        Command="{Binding ModifyVideoCommand}" >
+                        <Button.ToolTip>
+                            <ToolTip>
+                                <TextBlock>
+                                    Stop capture before this operation.
+                                </TextBlock>
+                            </ToolTip>
+                        </Button.ToolTip>
+                    </Button>
+                    <Button Margin="5" Content="Delete" HorizontalAlignment="Left" MinWidth="100" 
+                        Command="{Binding DeleteVideoCommand}" ToolTipService.ShowOnDisabled="True" >
+                        <Button.ToolTip>
+                            <ToolTip>
+                                <TextBlock>
+                                    Stop capture before this operation.
+                                </TextBlock>
+                            </ToolTip>
+                        </Button.ToolTip>
+                    </Button>
                 </StackPanel>
 
                 <StackPanel Grid.Column="1" Orientation="Horizontal">
-                    <Button Margin="10" Content="Set Developer Key" HorizontalAlignment="Right" MinWidth="140" 
+                    <Button Margin="5" Content="Set Developer Key" HorizontalAlignment="Right" MinWidth="140" 
                         Command="{Binding DeveloperKeyCommand}" />
                 </StackPanel>
 
@@ -59,7 +76,7 @@
             <DataGrid x:Name="datagrid" SelectedItem="{Binding SelectedDataGridItem, Mode=TwoWay}" 
                   AutoGenerateColumns="False" ItemsSource="{Binding VideoInfoDataGrid, Mode=TwoWay}" 
                   SelectionMode="Single" CanUserAddRows="false"
-                  ColumnWidth="*"  RowHeight="25"  Width="800" Height="450"  Grid.Row="1" >
+                  ColumnWidth="*"  RowHeight="25"  MinWidth="800"  Height="450"  Grid.Row="1" >
                 <DataGrid.Columns>
                     <DataGridTextColumn      IsReadOnly="True" Header="Name" Binding="{Binding Name}"/>
                     <DataGridTextColumn      IsReadOnly="True" Header="Description" Binding="{Binding Description}"/>
@@ -93,13 +110,22 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Orientation="Horizontal" >
-                    <Button Padding="5" Margin="10 10 10 10" Content="Start Capture" HorizontalAlignment="Left" Command="{Binding StartCaptureCommand}" />
-                    <Button Padding="5" Margin="10 10 10 10" Content="Stop Capture" HorizontalAlignment="Left" Command="{Binding StopCaptureCommand}"/>
-                    <Button Padding="5" Margin="10 10 10 10" Content="Start capture ALL" HorizontalAlignment="Left"  Command="{Binding StartCaptureAllCommand}"/>
-                    <Button Padding="5" Margin="10 10 10 10" Content="Stop capture ALL" HorizontalAlignment="Left" Command="{Binding StopCaptureAllCommand}"/>
+                    <Button Padding="5" Margin="5" Content="Start Capture" HorizontalAlignment="Left" Command="{Binding StartCaptureCommand}" />
+                    <Button Padding="5" Margin="5" Content="Stop Capture" HorizontalAlignment="Left" Command="{Binding StopCaptureCommand}"/>
+                    <Button Padding="5" Margin="5" Content="Start capture ALL" HorizontalAlignment="Left"  Command="{Binding StartCaptureAllCommand}"/>
+                    <Button Padding="5" Margin="5" Content="Stop capture ALL" HorizontalAlignment="Left" Command="{Binding StopCaptureAllCommand}"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1">
-                    <Button Padding="5" Margin="10 10 10 10" Content="Define Motion Zones" HorizontalAlignment="Right"  Command="{Binding DefineMotionZonesCommand}"/>
+                    <Button Padding="5" Margin="5" Content="Define Motion Zones" HorizontalAlignment="Right" 
+                            Command="{Binding DefineMotionZonesCommand}" ToolTipService.ShowOnDisabled="True">
+                        <Button.ToolTip>
+                            <ToolTip>
+                                <TextBlock>
+                                    Start capture before this operation.
+                                </TextBlock>
+                            </ToolTip>
+                        </Button.ToolTip>
+                    </Button>
                 </StackPanel>
             </Grid>
         </Grid>

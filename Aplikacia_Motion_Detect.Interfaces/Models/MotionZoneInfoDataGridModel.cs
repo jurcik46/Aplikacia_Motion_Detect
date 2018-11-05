@@ -14,7 +14,6 @@ namespace Aplikacia_Motion_Detect.Interfaces.Models
 
         private MotionZone _motionZone;
         private string _name;
-        private int _sensitivity;
 
         public MotionZone Zone
         {

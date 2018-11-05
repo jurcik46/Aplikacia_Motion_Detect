@@ -1,21 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Aplikacia_Motion_Detect.Interfaces.Enums;
 using Aplikacia_Motion_Detect.Interfaces.Extensions;
 using Aplikacia_Motion_Detect.Interfaces.Interface;
 using Aplikacia_Motion_Detect.Interfaces.Interface.Services;
-using Aplikacia_Motion_Detect.Interfaces.Messages;
 using Aplikacia_Motion_Detect.Interfaces.Models;
-using Aplikacia_Motion_Detect.Interfaces.Service;
-using Aplikacia_Motion_Detect.UI.ViewModels.DeveloperKey;
 using DTKVideoCapLib;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
-using GalaSoft.MvvmLight.Messaging;
 using Serilog;
 
 namespace Aplikacia_Motion_Detect.UI.ViewModels.MotionZones
