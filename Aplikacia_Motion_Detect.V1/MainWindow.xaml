@@ -46,7 +46,7 @@
                     <Button Margin="5"  Content="Modify" HorizontalAlignment="Left" MinWidth="100" ToolTipService.ShowOnDisabled="True" 
                         Command="{Binding ModifyVideoCommand}" >
                         <Button.ToolTip>
-                            <ToolTip>
+                            <ToolTip BorderBrush="Red" Foreground="Red">
                                 <TextBlock>
                                     Stop capture before this operation.
                                 </TextBlock>
@@ -56,7 +56,7 @@
                     <Button Margin="5" Content="Delete" HorizontalAlignment="Left" MinWidth="100" 
                         Command="{Binding DeleteVideoCommand}" ToolTipService.ShowOnDisabled="True" >
                         <Button.ToolTip>
-                            <ToolTip>
+                            <ToolTip BorderBrush="Red" Foreground="Red">
                                 <TextBlock>
                                     Stop capture before this operation.
                                 </TextBlock>
@@ -119,7 +119,7 @@
                     <Button Padding="5" Margin="5" Content="Define Motion Zones" HorizontalAlignment="Right" 
                             Command="{Binding DefineMotionZonesCommand}" ToolTipService.ShowOnDisabled="True">
                         <Button.ToolTip>
-                            <ToolTip>
+                            <ToolTip BorderBrush="Red" Foreground="Red">
                                 <TextBlock>
                                     Start capture before this operation.
                                 </TextBlock>
