@@ -235,7 +235,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
 
         private void ModifyVideoCapture()
         {
-            Logger.Information(MainViewModelEvents.ModifyVideoCommand, "Device name {name} \n Setting before \n {@SelectedDataGridItem } ", SelectedDataGridItem.Name);
+            Logger.Information(MainViewModelEvents.ModifyVideoCommand, "Device name {name} \n Setting before \n {@SelectedDataGridItem} ", SelectedDataGridItem.Name, SelectedDataGridItem);
 
             this.VideoCaptureViewModel = new VideoCaptureViewModel(VideoService, SelectedDataGridItem);
             this.VideoCaptureWindow = new VideoCaptureWindow() { DataContext = VideoCaptureViewModel };
@@ -250,7 +250,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
 
         private void DeleteVideoCapture()
         {
-            Logger.Information(MainViewModelEvents.DeleteVideoCommand, "Device name {name} \n Setting \n {@SelectedDataGridItem } ", SelectedDataGridItem.Name);
+            Logger.Information(MainViewModelEvents.DeleteVideoCommand, "Device name {name} ", SelectedDataGridItem.Name);
             VideoService.DeleteVideoCapture(SelectedDataGridItem);
             LoadVideoDeviceFromService();
         }
@@ -282,18 +282,18 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MainWindow
 
         private void StartCaptureVideo()
         {
-            Logger.Debug(MainViewModelEvents.StartCaptureCommand, "Device name {name} \n Setting \n {@SelectedDataGridItem } ", SelectedDataGridItem.Name);
+            Logger.Debug(MainViewModelEvents.StartCaptureCommand, "Device name {name} ", SelectedDataGridItem.Name);
             VideoService.StartCaptureOne(SelectedDataGridItem);
         }
 
         private bool CanStopCapture()
         {
-            return SelectedDataGridItem != null && SelectedDataGridItem.VideoCapture.State != VideoCaptureStateEnum.VCS_Stopped;
+            return SelectedDataGridItem != null && SelectedDataGridItem.VideoCapture.State == VideoCaptureStateEnum.VCS_Started;
         }
 
         private void StopCaptureVideo()
         {
-            Logger.Debug(MainViewModelEvents.StopCaptureCommand, "Device name {name} \n Setting \n {@SelectedDataGridItem } ", SelectedDataGridItem.Name);
+            Logger.Debug(MainViewModelEvents.StopCaptureCommand, "Device name {name}", SelectedDataGridItem.Name);
             VideoService.StopCaptureOne(SelectedDataGridItem);
         }
 

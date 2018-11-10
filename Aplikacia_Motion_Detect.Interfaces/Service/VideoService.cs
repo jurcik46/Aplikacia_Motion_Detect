@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Xml;
@@ -15,8 +14,9 @@ using Aplikacia_Motion_Detect.Interfaces.Models;
 using DTKVideoCapLib;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
-using Microsoft.Win32;
 using Serilog;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace Aplikacia_Motion_Detect.Interfaces.Service
 {
@@ -37,6 +37,9 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
 
         private string configFilePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
                                         "\\CCSIPRO\\" + LoggerInit.ApplicationName + "\\DTKVideoCapture.xml";
+
+        //private string pa = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
+        //                    "\\CCSIPRO\\" + LoggerInit.ApplicationName + "\\img";
 
         private string _developerKey = "";
 
@@ -74,6 +77,10 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
 
             SetInfoData();
             SaveConfig();
+            //if (!Directory.Exists(pa))
+            //{
+            //    Directory.CreateDirectory(pa);
+            //}
         }
 
         private void FrameReceived(VideoCapture vidCap, FrameImage frame)
@@ -83,11 +90,32 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
             frameInfo.width = frame.Width;
             frameInfo.height = frame.Height;
             frameInfo.pixelFormat = frame.PixelFormat;
-
             SetInfoDataOne(vidCap, frameInfo);
+
+            //Task.Run(() =>
+            //{
+            //    FrameImage f = frame;
+            //    long k = 0;
+            //    f.GetHBitmap(out k);
+            //    IntPtr test = new IntPtr(k);
+
+            //    using (Bitmap bmp = Image.FromHbitmap(test))
+            //    {
+            //        bmp.Save(pa + "\\ " + f.Timestamp + ".jpg", ImageFormat.Jpeg);
+            //    }
+            //    test = IntPtr.Zero;
+            //    k = 0;
+            //});
 
             Marshal.ReleaseComObject(frame);
 
+        }
+
+        public Image byteArrayToImage(byte[] byteArrayIn)
+        {
+            MemoryStream ms = new MemoryStream(byteArrayIn);
+            Image returnImage = Image.FromStream(ms);
+            return returnImage;
         }
 
         private void VideoCaptureStateChanged(VideoCapture vidCap, VideoCaptureStateEnum State)
@@ -114,8 +142,6 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                         }
                     }
                 });
-
-
         }
 
         private void VideoCaptureError(VideoCapture vidCap, int errorCode)
@@ -137,7 +163,6 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                         pom.LastError = "Error " + "0x" + error;
                     }
                 });
-
         }
 
         private void ReconnectDevice(VideoCapture vidCap)
@@ -155,7 +180,7 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
         {
             SetInfoData();
             SaveConfig();
-            Logger.Information(VideoServiceEvents.ModifyVideoCapture, "Video device {Name} modified \n{@videoDevice}", videoDevice.Name, videoDevice);
+            Logger.Information(VideoServiceEvents.ModifyVideoCapture, "Video device {Name} modified setting \n{@videoDevice}", videoDevice.Name, videoDevice);
         }
 
         public void DeleteVideoCapture(VideoInfoDataGridModel videoDevice)
@@ -209,7 +234,18 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
             if (!videoSource.Enable)
                 return;
             Logger.Information(VideoServiceEvents.StopCapture, "Video device {Name} ", videoSource.Name);
+
+            //videoSource.VideoCapture.FrameReceived -= FrameReceived;
+            //videoSource.VideoCapture.StateChanged -= VideoCaptureStateChanged;
+            //videoSource.VideoCapture.Error -= VideoCaptureError;
+
             videoSource.VideoCapture.StopCapture();
+
+            //videoSource.VideoCapture.FrameReceived += FrameReceived;
+            //videoSource.VideoCapture.StateChanged += VideoCaptureStateChanged;
+            //videoSource.VideoCapture.Error += VideoCaptureError;
+
+            //UpdateState(videoSource);
         }
 
         public void StopCaptureAll()
@@ -219,7 +255,8 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                 if (!item.Enable)
                     continue;
                 Logger.Information(VideoServiceEvents.StopCapture, "Video device {Name} ", item.Name);
-                item.VideoCapture.StopCapture();
+                StopCaptureOne(item);
+                //item.VideoCapture.StopCapture();
 
             }
         }
