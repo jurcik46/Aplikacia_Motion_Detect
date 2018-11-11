@@ -17,6 +17,7 @@ using GalaSoft.MvvmLight.Threading;
 using Serilog;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Threading;
 
 namespace Aplikacia_Motion_Detect.Interfaces.Service
 {
@@ -111,12 +112,6 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
 
         }
 
-        public Image byteArrayToImage(byte[] byteArrayIn)
-        {
-            MemoryStream ms = new MemoryStream(byteArrayIn);
-            Image returnImage = Image.FromStream(ms);
-            return returnImage;
-        }
 
         private void VideoCaptureStateChanged(VideoCapture vidCap, VideoCaptureStateEnum State)
         {
@@ -235,17 +230,18 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                 return;
             Logger.Information(VideoServiceEvents.StopCapture, "Video device {Name} ", videoSource.Name);
 
-            //videoSource.VideoCapture.FrameReceived -= FrameReceived;
-            //videoSource.VideoCapture.StateChanged -= VideoCaptureStateChanged;
-            //videoSource.VideoCapture.Error -= VideoCaptureError;
-
+            videoSource.VideoCapture.FrameReceived -= FrameReceived;
+            videoSource.VideoCapture.StateChanged -= VideoCaptureStateChanged;
+            videoSource.VideoCapture.Error -= VideoCaptureError;
+            Thread.Sleep(100);
             videoSource.VideoCapture.StopCapture();
+            Thread.Sleep(100);
 
-            //videoSource.VideoCapture.FrameReceived += FrameReceived;
-            //videoSource.VideoCapture.StateChanged += VideoCaptureStateChanged;
-            //videoSource.VideoCapture.Error += VideoCaptureError;
+            videoSource.VideoCapture.FrameReceived += FrameReceived;
+            videoSource.VideoCapture.StateChanged += VideoCaptureStateChanged;
+            videoSource.VideoCapture.Error += VideoCaptureError;
 
-            //UpdateState(videoSource);
+            UpdateState(videoSource);
         }
 
         public void StopCaptureAll()
