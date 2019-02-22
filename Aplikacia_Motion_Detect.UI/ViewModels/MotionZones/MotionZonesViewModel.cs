@@ -77,15 +77,16 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MotionZones
             VideoService = videoService;
             this.CommandInit();
             this.MessageRegistration();
-            for (int i = 0; i < VideoDevice.VideoCapture.MotionZones.Count; i++)
+            foreach (var vidDiv in VideoService.FoundEqualsVideoCapture(VideoDevice.VideoCapture).MotionZones)
             {
-                MotionZone zone = VideoDevice.VideoCapture.MotionZones.Item[i];
-                string name = "Zone " + MotionZoneList.Count;
+                //MotionZone zone = VideoDevice.VideoCapture.MotionZones.Item[i];
+                //string name = "Zone " + MotionZoneList.Count;
                 MotionZoneList.Add(new MotionZoneInfoDataGridModel()
                 {
-                    Number = MotionZoneList.Count,
-                    Name = name,
-                    Zone = zone,
+                    Number = vidDiv.Number,
+                    Name = vidDiv.Name,
+                    Zone = vidDiv.Zone,
+                    Timer = vidDiv.Timer
                 });
             }
             SetSelectToLast();

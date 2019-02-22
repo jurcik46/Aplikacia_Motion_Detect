@@ -343,7 +343,34 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                                     pom.Enable = (bool)a;
                                 }
                             }
+                            if(childNode.Name == "MotionZones")
+                            {
+                                foreach(XmlNode motionZ in childNode.ChildNodes)
+                                {
+                                    var pomZone = new MotionZoneInfoDataGridModel();
+                                    foreach (XmlNode zoneData in motionZ.ChildNodes) {
+                                        switch (zoneData.Name) {
+                                            case "Number":
+                                                pomZone.Number = int.Parse(zoneData.InnerText);
+                                                break;
+                                            case "Name":
+                                                pomZone.Name = zoneData.InnerText;
+                                                break;
+                                            case "Timer":
+                                                pomZone.Timer = int.Parse(zoneData.InnerText);
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                    }
+                                    pom.MotionZones.Add(pomZone);
+                                }
+                            }
                         }
+                        for (int i = 0; i < pom.VideoCapture.MotionZones.Count; i++)
+                        {
+                            pom.MotionZones[i].Zone = pom.VideoCapture.MotionZones.Item[i];
+                        };
                         AddVideoCapture(pom);
                     }
                     if (node.Name == "DeveloperKey")
