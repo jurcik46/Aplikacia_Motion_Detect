@@ -196,7 +196,7 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
             }
             catch (COMException)
             {
-                Messenger.Default.Send<NotifiMessage>(new NotifiMessage()
+                Messenger.Default.Send(new NotifiMessage()
                 {
                     Msg = "Error: " + videoSource.VideoCapture.LastErrorCode
                 });

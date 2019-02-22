@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using DTKVideoCapLib;
+using System.Windows.Threading;
 
 namespace Aplikacia_Motion_Detect.Interfaces.Models
 {
@@ -16,6 +17,7 @@ namespace Aplikacia_Motion_Detect.Interfaces.Models
         private string _name;
         private int _timer;
         private int _number;
+        private DispatcherTimer _dispatcherTimer;
         public MotionZone Zone
         {
             get { return _motionZone; }
@@ -54,6 +56,12 @@ namespace Aplikacia_Motion_Detect.Interfaces.Models
                 _number = value;
                 OnPropertyChanged();
             }
+        }
+
+        public DispatcherTimer DispatcherTimer
+        {
+            get { return _dispatcherTimer; }
+            set { _dispatcherTimer = value; }
         }
 
         #region INotifyPropertyChanged Impl
