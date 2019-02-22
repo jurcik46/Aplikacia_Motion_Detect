@@ -53,9 +53,9 @@
 
         <!--VideoDisplay Controler-->
 
-        <!-- <local:VideoDisplayMotionZoneControl Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" -->
-        <!-- VideoCapture="{Binding DataContext.VideoDevice.VideoCapture, ElementName=MotionZoneWindow}" -->
-        <!-- SelectedMotionZone="{Binding DataContext.SelectedMotionZone.Zone, ElementName=MotionZoneWindow}"/> -->
+         <local:VideoDisplayMotionZoneControl Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" 
+         VideoCapture="{Binding DataContext.VideoDevice.VideoCapture, ElementName=MotionZoneWindow}" 
+         SelectedMotionZone="{Binding DataContext.SelectedMotionZone.Zone, ElementName=MotionZoneWindow}"/> 
 
         <!--Finish Button-->
         <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Width="200" Margin="8" Content="OK"  IsDefault="True" Command="{Binding OkCommand}" CommandParameter="{Binding ElementName=MotionZoneWindow}"/>

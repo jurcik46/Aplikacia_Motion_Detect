@@ -149,11 +149,11 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                     {
                         string error = errorCode.ToString("X8");
                         Logger.Error(VideoServiceEvents.VideoCaptureError, $"Video device {vidCap.Name} raised error {error} ");
-                        if (error.Equals("FFFFFFFB") || error.Equals("80008004"))
-                        {
+                        //if (error.Equals("FFFFFFFB") || error.Equals("80008004"))
+                        //{
                             Logger.Warning(VideoServiceEvents.VideoDeviceDisconnected, $"Video device {vidCap.Name}");
                             Task.Run(() => { ReconnectDevice(vidCap); });
-                        }
+                        //}
 
                         pom.LastError = "Error " + "0x" + error;
                     }
@@ -272,13 +272,30 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
             foreach (var row in VideoCaptureList)
             {
                 VideoCapture videoCapture = row.VideoCapture;
-
                 // get configuration XML string
                 string xmlConfig;
                 videoCapture.GetConfigXml(out xmlConfig);
 
                 node = xmlDoc.CreateNode(XmlNodeType.Element, "VideoCapture", "");
                 node.InnerText = xmlConfig;
+                var motionZonesNode = xmlDoc.CreateNode(XmlNodeType.Element, "MotionZones", "");
+
+                if (row.MotionZones != null && row.MotionZones.Count != 0){
+                    foreach (var zone in row.MotionZones) {
+                        var zoneNode = xmlDoc.CreateNode(XmlNodeType.Element, "Zone", "");
+                        var number = xmlDoc.CreateNode(XmlNodeType.Element, "Number", "");
+                        number.InnerText = zone.Number.ToString();
+                        zoneNode.AppendChild(number);
+                        var name = xmlDoc.CreateNode(XmlNodeType.Element, "Name", "");
+                        name.InnerText = zone.Name;
+                        zoneNode.AppendChild(name);
+                        var timer = xmlDoc.CreateNode(XmlNodeType.Element, "Timer", "");
+                        timer.InnerText = zone.Timer.ToString();
+                        zoneNode.AppendChild(timer);
+                        motionZonesNode.AppendChild(zoneNode);
+                    }
+                }
+                node.AppendChild(motionZonesNode);
                 var enableNode = xmlDoc.CreateNode(XmlNodeType.Element, "Enable", "");
                 enableNode.InnerText = (string)boolConvert.Convert(row.Enable);
                 node.AppendChild(enableNode);
@@ -290,7 +307,7 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
             xmlDoc.Save(configFilePath);
         }
 
-        private void LoadConfig()
+        public void LoadConfig()
         {
             if (File.Exists(configFilePath))
             {
@@ -309,13 +326,14 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                         videoCapture.SetConfigXml(node.InnerText);
                         var pom = new VideoInfoDataGridModel()
                         {
-                            VideoCapture = videoCapture
+                            VideoCapture = videoCapture,
+                            MotionZones = new List<MotionZoneInfoDataGridModel>()
                         };
-                        foreach (XmlNode enable in node.ChildNodes)
+                        foreach (XmlNode childNode in node.ChildNodes)
                         {
-                            if (enable.Name == "Enable")
+                            if (childNode.Name == "Enable")
                             {
-                                var a = boolConvert.ConvertBack(enable.InnerText);
+                                var a = boolConvert.ConvertBack(childNode.InnerText);
                                 if (a == null)
                                 {
                                     pom.Enable = false;
@@ -334,8 +352,6 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                         if (this.DeveloperKey.Length > 0)
                             utils.SetDeveloperLicenseKey(this._developerKey);
                     }
-
-
                 }
             }
             SetInfoData();
@@ -440,7 +456,7 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                 });
         }
 
-        private VideoInfoDataGridModel FoundEqualsVideoCapture(VideoCapture vidCap)
+        public VideoInfoDataGridModel FoundEqualsVideoCapture(VideoCapture vidCap)
         {
             foreach (var row in VideoCaptureList)
             {

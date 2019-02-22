@@ -23,6 +23,10 @@ namespace Aplikacia_Motion_Detect.Interfaces.Models
         private int _fps;
         private bool _enable = true;
         private VideoCapture _videoCapture;
+        private List<MotionZoneInfoDataGridModel> _motionZones;
+
+        public List<MotionZoneInfoDataGridModel> MotionZones { get; set; }
+
         [CanBeNull] private Queue<int> _frameTick;
 
         public VideoCapture VideoCapture

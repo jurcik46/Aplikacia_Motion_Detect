@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Aplikacia_Motion_Detect.Interfaces.Models;
+using DTKVideoCapLib;
+
 
 namespace Aplikacia_Motion_Detect.Interfaces.Interface.Services
 {
@@ -19,6 +21,8 @@ namespace Aplikacia_Motion_Detect.Interfaces.Interface.Services
         void StopCaptureOne(VideoInfoDataGridModel videoSource);
         void StopCaptureAll();
         void SaveConfig();
+        void LoadConfig();
+        VideoInfoDataGridModel FoundEqualsVideoCapture(VideoCapture vidCap);
     }
 
 

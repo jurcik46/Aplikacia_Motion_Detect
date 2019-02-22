@@ -69,6 +69,7 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MotionZones
 
         public MotionZonesViewModel(IVideoService videoService, VideoInfoDataGridModel selectedDevice)
         {
+
             Logger.Debug(MotionZonesViewModelEvents.Create, "Creating new instance of MotionZonesViewModel");
 
             this.VideoDevice = selectedDevice;
@@ -76,13 +77,13 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MotionZones
             VideoService = videoService;
             this.CommandInit();
             this.MessageRegistration();
-
             for (int i = 0; i < VideoDevice.VideoCapture.MotionZones.Count; i++)
             {
                 MotionZone zone = VideoDevice.VideoCapture.MotionZones.Item[i];
                 string name = "Zone " + MotionZoneList.Count;
                 MotionZoneList.Add(new MotionZoneInfoDataGridModel()
                 {
+                    Number = MotionZoneList.Count,
                     Name = name,
                     Zone = zone,
                 });
@@ -118,7 +119,12 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MotionZones
         private void ExecuteOk(IClosable win)
         {
             Logger.Debug(MotionZonesViewModelEvents.OkCommand);
-
+            var pomVideoZones = VideoService.FoundEqualsVideoCapture(VideoDevice.VideoCapture);
+            pomVideoZones.MotionZones = new System.Collections.Generic.List<MotionZoneInfoDataGridModel>();
+            foreach (var pomZone in MotionZoneList)
+            {
+                pomVideoZones.MotionZones.Add(pomZone);
+            }
             VideoService.SaveConfig();
             if (win != null)
             {
@@ -136,11 +142,12 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MotionZones
             string name = "Zone " + MotionZoneList.Count;
             MotionZoneList.Add(new MotionZoneInfoDataGridModel()
             {
+                Number = MotionZoneList.Count,
                 Name = name,
                 Zone = zone,
+                Timer = 0,
             });
-            Logger.Information(MotionZonesViewModelEvents.AddCommand, "Name of zone {name} \n{@zone}", name, zone);
-
+            Logger.Information(MotionZonesViewModelEvents.AddCommand, "Name of zone {name} number {number} \n{@zone}", name, MotionZoneList.Count, zone);
             VideoDevice.VideoCapture.MotionZones.Add(zone);
             SetSelectToLast();
         }
