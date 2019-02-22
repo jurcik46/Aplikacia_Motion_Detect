@@ -14,6 +14,7 @@ namespace Aplikacia_Motion_Detect.Interfaces.Models
 
         private MotionZone _motionZone;
         private string _name;
+        private int _timer;
 
         public MotionZone Zone
         {
@@ -34,6 +35,16 @@ namespace Aplikacia_Motion_Detect.Interfaces.Models
                 _name = value;
                 OnPropertyChanged();
 
+            }
+        }
+
+        public int Timer
+        {
+            get { return _timer; }
+            set
+            {
+                _timer = value;
+                OnPropertyChanged();
             }
         }
 

@@ -37,18 +37,7 @@ namespace Aplikacia_Motion_Detect.V1.Extensions
             logger.Debug(ApplicationEvents.DispatcherThread, "Dispatcher thread: {ThreadId}", DispatcherHelper.UIDispatcher.Thread.ManagedThreadId);
             var errorsTimer = new DispatcherTimer(Constants.ErrorCountInterval, DispatcherPriority.ApplicationIdle, (sender, args) => Interfaces.Extensions.LoggerExtensions.SendErrorsWarningMessage(logger), DispatcherHelper.UIDispatcher);
             errorsTimer.Start();
-            //var settingsService = ViewModelLocator.SettingsService;
-            //if (settingsService != null)
-            //{
-            //    SetLanguage(logger, settingsService.UserSettings.Culture, false, app, null, appResourcesAction);
-            //}
-            //Messenger.Default.Register<ChangeLanguageMessage>(app, message =>
-            //{
-            //    logger.LogMessage(message, app);
-            //    var culture = message.Content;
-            //    SetLanguage(logger, culture, true, app, newWindowFunc, appResourcesAction);
-            //});
-            //RegisterClassHandlers();
+
         }
 
         public static void OnExit(ILogger logger)
