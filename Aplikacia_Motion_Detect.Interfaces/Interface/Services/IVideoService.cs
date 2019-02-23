@@ -22,6 +22,7 @@ namespace Aplikacia_Motion_Detect.Interfaces.Interface.Services
         void StopCaptureAll();
         void SaveConfig();
         void LoadConfig();
+        void VideoZoneDispatcherTimer_Tick(VideoInfoDataGridModel video, MotionZoneInfoDataGridModel zone);
         VideoInfoDataGridModel FoundEqualsVideoCapture(VideoCapture vidCap);
     }
 

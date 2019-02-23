@@ -18,6 +18,8 @@ using Serilog;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading;
+using System.Windows;
+using System.Windows.Threading;
 
 namespace Aplikacia_Motion_Detect.Interfaces.Service
 {
@@ -39,8 +41,8 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
         private string configFilePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
                                         "\\CCSIPRO\\" + LoggerInit.ApplicationName + "\\DTKVideoCapture.xml";
 
-        //private string pa = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
-        //                    "\\CCSIPRO\\" + LoggerInit.ApplicationName + "\\img";
+        private string pa = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
+        "\\CCSIPRO\\" + LoggerInit.ApplicationName + "\\img";
 
         private string _developerKey = "";
 
@@ -78,10 +80,10 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
 
             SetInfoData();
             SaveConfig();
-            //if (!Directory.Exists(pa))
-            //{
-            //    Directory.CreateDirectory(pa);
-            //}
+            if (!Directory.Exists(pa))
+            {
+                Directory.CreateDirectory(pa);
+            }
         }
 
         private void FrameReceived(VideoCapture vidCap, FrameImage frame)
@@ -107,9 +109,103 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
             //    test = IntPtr.Zero;
             //    k = 0;
             //});
-
             Marshal.ReleaseComObject(frame);
+        }
 
+        public void VideoZoneDispatcherTimer_Tick(VideoInfoDataGridModel video, MotionZoneInfoDataGridModel zone)
+        {
+            //            Console.WriteLine("------------------------------------");
+            FrameImage frame = null;
+
+            try
+            {
+
+                DispatcherHelper.CheckBeginInvokeOnUI(() => { video.VideoCapture.GetCurrentFrame(out frame); });
+                if (frame != null)
+                {
+
+                    long k;
+                    frame.GetHBitmap(out k);
+                    IntPtr test = new IntPtr(k);
+                    Bitmap bmp = Image.FromHbitmap(test);
+
+                    DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                    {
+                        Color pixelColor;
+                        pixelColor = bmp.GetPixel(zone.Zone.X, zone.Zone.X);
+                        Console.WriteLine(pixelColor.ToString());
+
+                    });
+
+                    //                using (Bitmap bmp = Image.FromHbitmap(test))
+                    //                {
+                    //                    bmp.Save(pa + "\\ " + frame.Timestamp + ".bmp", ImageFormat.Bmp);
+                    //                }
+
+
+
+                    //try
+                    //{
+                    //    //videoCapture.GetCurrentFrame(out frame);
+                    //    if (frame != null)
+                    //    {
+                    //        long hBmp;
+                    //        //Marshal.ReleaseComObject(frame);
+
+                    //        frame.GetHBitmap(out hBmp);
+                    //        //Marshal.ReleaseComObject(frame);
+
+                    //        Bitmap bmpFrame = (Bitmap)Bitmap.FromHbitmap((IntPtr)hBmp);
+                    //        //                    CapturedImageAction(bmpFrame, row.Cells["colName"].Value.ToString(), rectangleRecognition);
+
+                    //        //UpdateVideoSourceInfo(vidCap, frameInfo);
+                    //        //                    DeleteObject((IntPtr)hBmp);
+                    //        // AddSourceToWindow();
+                    //    }
+                    //}
+
+                    //catch (COMException e)
+                    //{
+                    //    //TODO change logs 
+                    //    MessageBox.Show("Error: " + video.VideoCapture.LastErrorCode.ToString());
+                    //    Log.Error(String.Format("#ERR_LOG18 Bitmap could not be resized >>{0}<< >>{1}<< ", e.Message, video.VideoCapture.LastErrorCode.ToString()));
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    MessageBox.Show("Error: " + ex.Message);
+                    //}
+                    DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                    {
+                        Console.WriteLine(video.Description);
+                        Console.WriteLine(zone.Name);
+
+                    });
+
+                    Console.WriteLine("------------------------------------");
+                    // Updating the Label which displays the current second
+                    //lblSeconds.Content = DateTime.Now.Second;
+
+                    // Forcing the CommandManager to raise the RequerySuggested event
+                    //CommandManager.InvalidateRequerySuggested();
+
+                }
+            }
+            catch (COMException e)
+            {
+                MessageBox.Show("Error: " + video.VideoCapture.LastErrorCode.ToString());
+                Log.Error(String.Format("#ERR_LOG18 Bitmap could not be resized >>{0}<< >>{1}<< ", e.Message, video.VideoCapture.LastErrorCode.ToString()));
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                if (frame != null)
+                    Marshal.ReleaseComObject(frame);
+
+            }
         }
 
 
@@ -151,10 +247,9 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                         Logger.Error(VideoServiceEvents.VideoCaptureError, $"Video device {vidCap.Name} raised error {error} ");
                         //if (error.Equals("FFFFFFFB") || error.Equals("80008004"))
                         //{
-                            Logger.Warning(VideoServiceEvents.VideoDeviceDisconnected, $"Video device {vidCap.Name}");
-                            Task.Run(() => { ReconnectDevice(vidCap); });
+                        Logger.Warning(VideoServiceEvents.VideoDeviceDisconnected, $"Video device {vidCap.Name}");
+                        Task.Run(() => { ReconnectDevice(vidCap); });
                         //}
-
                         pom.LastError = "Error " + "0x" + error;
                     }
                 });
@@ -164,10 +259,9 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
         {
             while (vidCap.State != VideoCaptureStateEnum.VCS_Started)
             {
-                System.Threading.Thread.Sleep(1000);
+                Thread.Sleep(5000);
                 Logger.Warning(VideoServiceEvents.TryingRestartCapturing, $"Video device {vidCap.Name}");
                 vidCap.StartCapture();
-                System.Threading.Thread.Sleep(4000);
             }
         }
 
@@ -193,6 +287,14 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                     return;
                 Logger.Information(VideoServiceEvents.StartCapture, "Video device {Name} ", videoSource.Name);
                 videoSource.VideoCapture.StartCapture();
+                if (videoSource.MotionZones == null)
+                    return;
+                foreach (var zone in videoSource.MotionZones)
+                {
+                    zone.DispatcherTimer.Start();
+                    zone.DispatcherTimer.Tick += (s, args) => VideoZoneDispatcherTimer_Tick(videoSource, zone);
+
+                }
             }
             catch (COMException)
             {
@@ -212,11 +314,12 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                 try
                 {
                     Logger.Information(VideoServiceEvents.StartCapture, "Video device {Name} ", item.Name);
-                    item.VideoCapture.StartCapture();
+                    StartCaptureOne(item);
+                    //                    item.VideoCapture.StartCapture();
                 }
                 catch (COMException)
                 {
-                    Messenger.Default.Send<NotifiMessage>(new NotifiMessage()
+                    Messenger.Default.Send(new NotifiMessage()
                     {
                         Msg = "Error: " + item.VideoCapture.LastErrorCode
                     });
@@ -229,7 +332,11 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
             if (!videoSource.Enable)
                 return;
             Logger.Information(VideoServiceEvents.StopCapture, "Video device {Name} ", videoSource.Name);
-
+            foreach (var zone in videoSource.MotionZones)
+            {
+                zone.DispatcherTimer.Stop();
+                zone.DispatcherTimer.Tick += null;
+            }
             videoSource.VideoCapture.FrameReceived -= FrameReceived;
             videoSource.VideoCapture.StateChanged -= VideoCaptureStateChanged;
             videoSource.VideoCapture.Error -= VideoCaptureError;
@@ -252,7 +359,6 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                     continue;
                 Logger.Information(VideoServiceEvents.StopCapture, "Video device {Name} ", item.Name);
                 StopCaptureOne(item);
-                //item.VideoCapture.StopCapture();
 
             }
         }
@@ -280,8 +386,10 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                 node.InnerText = xmlConfig;
                 var motionZonesNode = xmlDoc.CreateNode(XmlNodeType.Element, "MotionZones", "");
 
-                if (row.MotionZones != null && row.MotionZones.Count != 0){
-                    foreach (var zone in row.MotionZones) {
+                if (row.MotionZones != null && row.MotionZones.Count != 0)
+                {
+                    foreach (var zone in row.MotionZones)
+                    {
                         var zoneNode = xmlDoc.CreateNode(XmlNodeType.Element, "Zone", "");
                         var number = xmlDoc.CreateNode(XmlNodeType.Element, "Number", "");
                         number.InnerText = zone.Number.ToString();
@@ -329,6 +437,7 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                             VideoCapture = videoCapture,
                             MotionZones = new List<MotionZoneInfoDataGridModel>()
                         };
+                        //others data in VideoCapture block
                         foreach (XmlNode childNode in node.ChildNodes)
                         {
                             if (childNode.Name == "Enable")
@@ -343,13 +452,18 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                                     pom.Enable = (bool)a;
                                 }
                             }
-                            if(childNode.Name == "MotionZones")
+                            //Motion Zones block 
+                            if (childNode.Name == "MotionZones")
                             {
-                                foreach(XmlNode motionZ in childNode.ChildNodes)
+                                //Zones block in Motion Zones
+                                foreach (XmlNode motionZ in childNode.ChildNodes)
                                 {
                                     var pomZone = new MotionZoneInfoDataGridModel();
-                                    foreach (XmlNode zoneData in motionZ.ChildNodes) {
-                                        switch (zoneData.Name) {
+                                    //Data in Zone
+                                    foreach (XmlNode zoneData in motionZ.ChildNodes)
+                                    {
+                                        switch (zoneData.Name)
+                                        {
                                             case "Number":
                                                 pomZone.Number = int.Parse(zoneData.InnerText);
                                                 break;
@@ -363,6 +477,8 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                                                 break;
                                         }
                                     }
+                                    pomZone.DispatcherTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(pomZone.Timer) };
+                                    //                                    pomZone.DispatcherTimer.Tick += (s, args) => VideoZoneDispatcherTimer_Tick(pom, pomZone);
                                     pom.MotionZones.Add(pomZone);
                                 }
                             }
@@ -446,8 +562,6 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                             case PixelFormatEnum.PIXFMT_YUV420:
                                 pom.Pixel = "YUV420";
                                 break;
-                            default:
-                                break;
                         }
 
                         // increment frames count 
@@ -459,7 +573,7 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                         int fps = 0;
                         if (pom.FrameTick == null)
                             pom.FrameTick = new Queue<int>();
-                        Queue<int> ticksQueue = (Queue<int>)pom.FrameTick;
+                        Queue<int> ticksQueue = pom.FrameTick;
                         int curTicks = Environment.TickCount;
                         ticksQueue.Enqueue(curTicks);
                         if (ticksQueue.Count > 10)
@@ -487,7 +601,7 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
         {
             foreach (var row in VideoCaptureList)
             {
-                if (object.ReferenceEquals(row.VideoCapture, vidCap))
+                if (ReferenceEquals(row.VideoCapture, vidCap))
                 {
                     return row;
                 }

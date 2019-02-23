@@ -1,6 +1,5 @@
 ﻿using Aplikacia_Motion_Detect.API.Enums;
 using Aplikacia_Motion_Detect.Interfaces.Extensions;
-using GalaSoft.MvvmLight.Messaging;
 using RestSharp;
 using Serilog;
 using System;
@@ -8,7 +7,7 @@ using System.Net;
 
 namespace Aplikacia_Motion_Detect.API
 {
-     public class Api
+    public class Api
     {
         private Uri _apiLink;
         private string _apiKey;
@@ -35,18 +34,18 @@ namespace Aplikacia_Motion_Detect.API
         public T Execute<T>(RestRequest request) where T : class, new()
         {
             Logger.Debug(ApiEvents.ExecuteType, "API.Execute<{T}>({@request})", typeof(T).FullName, request);
-            var client = new RestClient { BaseUrl = this.ApiLink };
-            request.AddParameter("api_key", this.Apikey, ParameterType.QueryString);
+            var client = new RestClient { BaseUrl = ApiLink };
+            request.AddParameter("api_key", Apikey, ParameterType.QueryString);
             var response = client.Execute<T>(request);
             if (response.ErrorException != null)
             {
                 if (response.StatusCode == 0)
                     //Messenger.Default.Send<NotifiMessage>(new NotifiMessage() { Title = ViewModels.ViewModelLocator.rm.GetString("connectionTitle"), Msg = ViewModels.ViewModelLocator.rm.GetString("connectionMsg"), IconType = Notifications.Wpf.NotificationType.Error, ExpTime = 10 });
 
-                Logger.With("Request", request)
-                    .With("Response", response)
-                    .With("Type", typeof(T).FullName)
-                    .Error(response.ErrorException, ApiEvents.ExecuteTypeError);
+                    Logger.With("Request", request)
+                        .With("Response", response)
+                        .With("Type", typeof(T).FullName)
+                        .Error(response.ErrorException, ApiEvents.ExecuteTypeError);
                 return null;
             }
 

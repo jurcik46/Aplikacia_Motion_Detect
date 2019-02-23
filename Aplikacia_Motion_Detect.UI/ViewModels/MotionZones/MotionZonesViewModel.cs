@@ -1,5 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Threading;
 using Aplikacia_Motion_Detect.Interfaces.Enums;
 using Aplikacia_Motion_Detect.Interfaces.Extensions;
 using Aplikacia_Motion_Detect.Interfaces.Interface;
@@ -69,25 +71,28 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MotionZones
 
         public MotionZonesViewModel(IVideoService videoService, VideoInfoDataGridModel selectedDevice)
         {
-
             Logger.Debug(MotionZonesViewModelEvents.Create, "Creating new instance of MotionZonesViewModel");
-
             this.VideoDevice = selectedDevice;
             MotionZoneList = new ObservableCollection<MotionZoneInfoDataGridModel>();
             VideoService = videoService;
             this.CommandInit();
             this.MessageRegistration();
+            if (VideoService.FoundEqualsVideoCapture(VideoDevice.VideoCapture).MotionZones == null)
+                return;
             foreach (var vidDiv in VideoService.FoundEqualsVideoCapture(VideoDevice.VideoCapture).MotionZones)
             {
                 //MotionZone zone = VideoDevice.VideoCapture.MotionZones.Item[i];
                 //string name = "Zone " + MotionZoneList.Count;
-                MotionZoneList.Add(new MotionZoneInfoDataGridModel()
+                var pomMotZone = new MotionZoneInfoDataGridModel()
                 {
                     Number = vidDiv.Number,
                     Name = vidDiv.Name,
                     Zone = vidDiv.Zone,
-                    Timer = vidDiv.Timer
-                });
+                    Timer = vidDiv.Timer,
+                    DispatcherTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(vidDiv.Timer) }
+                };
+                //                pomMotZone.DispatcherTimer.Tick += (s, args) => VideoService.VideoZoneDispatcherTimer_Tick(VideoDevice, pomMotZone);
+                MotionZoneList.Add(pomMotZone);
             }
             SetSelectToLast();
         }
@@ -141,13 +146,17 @@ namespace Aplikacia_Motion_Detect.UI.ViewModels.MotionZones
             zone.Width = 100;
             zone.Height = 100;
             string name = "Zone " + MotionZoneList.Count;
-            MotionZoneList.Add(new MotionZoneInfoDataGridModel()
+            var pomZone = new MotionZoneInfoDataGridModel()
             {
                 Number = MotionZoneList.Count,
                 Name = name,
                 Zone = zone,
-                Timer = 0,
-            });
+                Timer = 5000,
+                DispatcherTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(5000) }
+            };
+            //            pomZone.DispatcherTimer.Tick += (s, args) => VideoService.VideoZoneDispatcherTimer_Tick(VideoDevice, pomZone);
+            pomZone.DispatcherTimer.Start();
+            MotionZoneList.Add(pomZone);
             Logger.Information(MotionZonesViewModelEvents.AddCommand, "Name of zone {name} number {number} \n{@zone}", name, MotionZoneList.Count, zone);
             VideoDevice.VideoCapture.MotionZones.Add(zone);
             SetSelectToLast();

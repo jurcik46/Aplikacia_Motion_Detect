@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using DTKVideoCapLib;
 using System.Windows.Threading;
@@ -45,6 +46,13 @@ namespace Aplikacia_Motion_Detect.Interfaces.Models
             {
                 _timer = value;
                 OnPropertyChanged();
+                if (DispatcherTimer != null)
+                {
+                    DispatcherTimer.Stop();
+                    DispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, value);
+                    DispatcherTimer.Start();
+                }
+
             }
         }
 

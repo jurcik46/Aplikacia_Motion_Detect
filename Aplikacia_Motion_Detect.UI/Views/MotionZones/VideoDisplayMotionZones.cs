@@ -34,7 +34,8 @@ namespace Aplikacia_Motion_Detect.UI.Views.MotionZones
         {
             if (dragStartPoint == Point.Empty)
                 return;
-
+            if (_zone == null)
+                return;
             MotionZone zone = this._zone;
 
             // allow minimum zone 5x5
