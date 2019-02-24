@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ namespace Aplikacia_Motion_Detect.Interfaces.Interface.Services
     public interface IVideoService
     {
         List<VideoInfoDataGridModel> VideoCaptureList { get; set; }
+        ObservableCollection<MovieInZoneModel> MovieOnVideo { get; set; }
         string DeveloperKey { get; set; }
         void AddVideoCapture(VideoInfoDataGridModel videoDevice);
         void ModifyVideoCapture(VideoInfoDataGridModel videoDevice);

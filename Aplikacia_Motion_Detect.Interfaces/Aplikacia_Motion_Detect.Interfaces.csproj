@@ -114,6 +114,7 @@
     <Compile Include="Messages\ReloadDeviceMessage.cs" />
     <Compile Include="Models\Diagnostics.cs" />
     <Compile Include="Models\MotionZoneInfoDataGridModel.cs" />
+    <Compile Include="Models\MovieInZoneModel.cs" />
     <Compile Include="Models\VideoInfoDataGridModel.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

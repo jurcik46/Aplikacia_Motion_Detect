@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -37,6 +38,7 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
 
         public VideoCaptureUtils utils = new VideoCaptureUtils();
         public List<VideoInfoDataGridModel> _videoCaptureList;
+        public ObservableCollection<MovieInZoneModel> MovieOnVideo { get; set; }
 
         private string configFilePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
                                         "\\CCSIPRO\\" + LoggerInit.ApplicationName + "\\DTKVideoCapture.xml";
@@ -65,8 +67,9 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
         public VideoService()
         {
             Logger.Debug(VideoServiceEvents.Create, "Creating new instance of VideoService");
-            this.VideoCaptureList = new List<VideoInfoDataGridModel>();
-            this.LoadConfig();
+            VideoCaptureList = new List<VideoInfoDataGridModel>();
+            MovieOnVideo = new ObservableCollection<MovieInZoneModel>();
+            LoadConfig();
         }
 
         public void AddVideoCapture(VideoInfoDataGridModel videoDevice)
@@ -99,12 +102,9 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
 
         public void VideoZoneDispatcherTimer_Tick(VideoInfoDataGridModel video, MotionZoneInfoDataGridModel zone)
         {
-            //            Console.WriteLine("------------------------------------");
             FrameImage frame = null;
-
             try
             {
-
                 DispatcherHelper.CheckBeginInvokeOnUI(() => { video.VideoCapture.GetCurrentFrame(out frame); });
                 if (frame != null)
                 {
@@ -122,21 +122,21 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                     {
                         Console.WriteLine(pixelColor.ToString());
                         Logger.Information(VideoServiceEvents.MovieInZoneDetected, $"VideoDevice name: {video.Name} Zone name: {zone.Name} Timer: {zone.Timer} Sensitivity: {zone.Zone.Sensitivity} ");
-
-                        Rectangle rectangleRecognition = new Rectangle(zone.Zone.X, zone.Zone.Y, zone.Zone.Width, zone.Zone.Height);
-                        Bitmap bmpFrameForRecognition = CropImage(bmp, rectangleRecognition);
-                        using (bmpFrameForRecognition)
-                        {
-                            bmpFrameForRecognition.Save(pa + "\\ " + frame.Timestamp + ".bmp", ImageFormat.Jpeg);
-                        }
+                        MovieOnVideo.Insert(0, new MovieInZoneModel() { Time = DateTime.Now, VideoDeviceName = video.Name, VideoDeviceDescription = video.Description, ZoneName = zone.Name });
+                        //                        Rectangle rectangleRecognition = new Rectangle(zone.Zone.X, zone.Zone.Y, zone.Zone.Width, zone.Zone.Height);
+                        //                        Bitmap bmpFrameForRecognition = CropImage(bmp, rectangleRecognition);
+                        //                        using (bmpFrameForRecognition)
+                        //                        {
+                        //                            bmpFrameForRecognition.Save(pa + "\\ " + frame.Timestamp + ".bmp", ImageFormat.Jpeg);
+                        //                        }
 
                     }
+                    Console.WriteLine("------------------------------------");
                     //                    });
                     //                    DispatcherHelper.CheckBeginInvokeOnUI(() =>
                     //                    {
                     Console.WriteLine(video.Description);
                     Console.WriteLine(zone.Name);
-
                     //                    });
 
                     Console.WriteLine("------------------------------------");
@@ -160,7 +160,7 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
             }
         }
 
-        public Bitmap CropImage(Bitmap source, Rectangle section)
+        private Bitmap CropImage(Bitmap source, Rectangle section)
         {
             Logger.Debug(VideoServiceEvents.CutImage);
             Bitmap bmp = source.Clone(section, source.PixelFormat);
