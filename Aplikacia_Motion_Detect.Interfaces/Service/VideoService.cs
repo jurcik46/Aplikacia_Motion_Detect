@@ -89,27 +89,12 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
         private void FrameReceived(VideoCapture vidCap, FrameImage frame)
         {
             //Logger.Debug(VideoServiceEvents.FrameReceived, $"Width {frame.Width} Height {frame.Height} PixelFormat {frame.PixelFormat} from device  {vidCap.Name} ");
-            FrameImageInfo frameInfo = new FrameImageInfo();
-            frameInfo.width = frame.Width;
-            frameInfo.height = frame.Height;
-            frameInfo.pixelFormat = frame.PixelFormat;
-            SetInfoDataOne(vidCap, frameInfo);
-
-            //Task.Run(() =>
-            //{
-            //    FrameImage f = frame;
-            //    long k = 0;
-            //    f.GetHBitmap(out k);
-            //    IntPtr test = new IntPtr(k);
-
-            //    using (Bitmap bmp = Image.FromHbitmap(test))
-            //    {
-            //        bmp.Save(pa + "\\ " + f.Timestamp + ".jpg", ImageFormat.Jpeg);
-            //    }
-            //    test = IntPtr.Zero;
-            //    k = 0;
-            //});
-            Marshal.ReleaseComObject(frame);
+            //            FrameImageInfo frameInfo = new FrameImageInfo();
+            //            frameInfo.width = frame.Width;
+            //            frameInfo.height = frame.Height;
+            //            frameInfo.pixelFormat = frame.PixelFormat;
+            //            SetInfoDataOne(vidCap, frameInfo);
+            //            Marshal.ReleaseComObject(frame);
         }
 
         public void VideoZoneDispatcherTimer_Tick(VideoInfoDataGridModel video, MotionZoneInfoDataGridModel zone)
@@ -129,65 +114,30 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                     IntPtr test = new IntPtr(k);
                     Bitmap bmp = Image.FromHbitmap(test);
 
-                    DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                    //                    DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                    //                    {
+                    Color pixelColor;
+                    pixelColor = bmp.GetPixel(zone.Zone.X, zone.Zone.Y);
+                    if (pixelColor.R != 16 && pixelColor.G != 16 && pixelColor.B != 16)
                     {
-                        Color pixelColor;
-                        pixelColor = bmp.GetPixel(zone.Zone.X, zone.Zone.X);
                         Console.WriteLine(pixelColor.ToString());
+                        Rectangle rectangleRecognition = new Rectangle(zone.Zone.X, zone.Zone.Y, zone.Zone.Width, zone.Zone.Height);
+                        Bitmap bmpFrameForRecognition = CropImage(bmp, rectangleRecognition);
+                        using (bmpFrameForRecognition)
+                        {
+                            bmpFrameForRecognition.Save(pa + "\\ " + frame.Timestamp + ".bmp", ImageFormat.Jpeg);
+                        }
 
-                    });
+                    }
+                    //                    });
+                    //                    DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                    //                    {
+                    Console.WriteLine(video.Description);
+                    Console.WriteLine(zone.Name);
 
-                    //                using (Bitmap bmp = Image.FromHbitmap(test))
-                    //                {
-                    //                    bmp.Save(pa + "\\ " + frame.Timestamp + ".bmp", ImageFormat.Bmp);
-                    //                }
-
-
-
-                    //try
-                    //{
-                    //    //videoCapture.GetCurrentFrame(out frame);
-                    //    if (frame != null)
-                    //    {
-                    //        long hBmp;
-                    //        //Marshal.ReleaseComObject(frame);
-
-                    //        frame.GetHBitmap(out hBmp);
-                    //        //Marshal.ReleaseComObject(frame);
-
-                    //        Bitmap bmpFrame = (Bitmap)Bitmap.FromHbitmap((IntPtr)hBmp);
-                    //        //                    CapturedImageAction(bmpFrame, row.Cells["colName"].Value.ToString(), rectangleRecognition);
-
-                    //        //UpdateVideoSourceInfo(vidCap, frameInfo);
-                    //        //                    DeleteObject((IntPtr)hBmp);
-                    //        // AddSourceToWindow();
-                    //    }
-                    //}
-
-                    //catch (COMException e)
-                    //{
-                    //    //TODO change logs 
-                    //    MessageBox.Show("Error: " + video.VideoCapture.LastErrorCode.ToString());
-                    //    Log.Error(String.Format("#ERR_LOG18 Bitmap could not be resized >>{0}<< >>{1}<< ", e.Message, video.VideoCapture.LastErrorCode.ToString()));
-                    //}
-                    //catch (Exception ex)
-                    //{
-                    //    MessageBox.Show("Error: " + ex.Message);
-                    //}
-                    DispatcherHelper.CheckBeginInvokeOnUI(() =>
-                    {
-                        Console.WriteLine(video.Description);
-                        Console.WriteLine(zone.Name);
-
-                    });
+                    //                    });
 
                     Console.WriteLine("------------------------------------");
-                    // Updating the Label which displays the current second
-                    //lblSeconds.Content = DateTime.Now.Second;
-
-                    // Forcing the CommandManager to raise the RequerySuggested event
-                    //CommandManager.InvalidateRequerySuggested();
-
                 }
             }
             catch (COMException e)
@@ -198,7 +148,7 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show("Error: " + ex.Message + ex.Source);
             }
             finally
             {
@@ -206,6 +156,12 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                     Marshal.ReleaseComObject(frame);
 
             }
+        }
+
+        public Bitmap CropImage(Bitmap source, Rectangle section)
+        {
+            Bitmap bmp = source.Clone(section, source.PixelFormat);
+            return bmp;
         }
 
 
@@ -337,18 +293,24 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                 zone.DispatcherTimer.Stop();
                 zone.DispatcherTimer.Tick += null;
             }
+            Logger.Debug(VideoServiceEvents.StopCapture, "Video device {Name} stoped dispatcher timer ", videoSource.Name);
+
             videoSource.VideoCapture.FrameReceived -= FrameReceived;
             videoSource.VideoCapture.StateChanged -= VideoCaptureStateChanged;
             videoSource.VideoCapture.Error -= VideoCaptureError;
-            Thread.Sleep(100);
+            Logger.Debug(VideoServiceEvents.StopCapture, "Video device {Name} unbinding event video divace", videoSource.Name);
+
+            DispatcherHelper.CheckBeginInvokeOnUI(() => { videoSource.VideoCapture.StopCapture(); });
             videoSource.VideoCapture.StopCapture();
-            Thread.Sleep(100);
+            Logger.Debug(VideoServiceEvents.StopCapture, "Video device {Name} stoped divace", videoSource.Name);
 
             videoSource.VideoCapture.FrameReceived += FrameReceived;
             videoSource.VideoCapture.StateChanged += VideoCaptureStateChanged;
             videoSource.VideoCapture.Error += VideoCaptureError;
+            Logger.Debug(VideoServiceEvents.StopCapture, "Video device {Name} binding event for divace", videoSource.Name);
 
             UpdateState(videoSource);
+            Logger.Debug(VideoServiceEvents.StopCapture, "Video device {Name} update state for divace", videoSource.Name);
         }
 
         public void StopCaptureAll()
@@ -357,8 +319,10 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
             {
                 if (!item.Enable)
                     continue;
+
                 Logger.Information(VideoServiceEvents.StopCapture, "Video device {Name} ", item.Name);
                 StopCaptureOne(item);
+                Thread.Sleep(1000);
 
             }
         }
