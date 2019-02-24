@@ -108,7 +108,7 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                 DispatcherHelper.CheckBeginInvokeOnUI(() => { video.VideoCapture.GetCurrentFrame(out frame); });
                 if (frame != null)
                 {
-
+                    Logger.Debug(VideoServiceEvents.VideoZoneTick, $"VideoDevice name: {video.Name} Zone name: {zone.Name}");
                     long k;
                     frame.GetHBitmap(out k);
                     IntPtr test = new IntPtr(k);
@@ -121,6 +121,8 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
                     if (pixelColor.R != 16 && pixelColor.G != 16 && pixelColor.B != 16)
                     {
                         Console.WriteLine(pixelColor.ToString());
+                        Logger.Information(VideoServiceEvents.MovieInZoneDetected, $"VideoDevice name: {video.Name} Zone name: {zone.Name} Timer: {zone.Timer} Sensitivity: {zone.Zone.Sensitivity} ");
+
                         Rectangle rectangleRecognition = new Rectangle(zone.Zone.X, zone.Zone.Y, zone.Zone.Width, zone.Zone.Height);
                         Bitmap bmpFrameForRecognition = CropImage(bmp, rectangleRecognition);
                         using (bmpFrameForRecognition)
@@ -142,8 +144,8 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
             }
             catch (COMException e)
             {
-                MessageBox.Show("Error: " + video.VideoCapture.LastErrorCode.ToString());
-                Log.Error(String.Format("#ERR_LOG18 Bitmap could not be resized >>{0}<< >>{1}<< ", e.Message, video.VideoCapture.LastErrorCode.ToString()));
+                MessageBox.Show("Error: " + video.VideoCapture.LastErrorCode);
+                Log.Error($"#ERR_LOG18 Bitmap could not be resized >>{e.Message}<< >>{video.VideoCapture.LastErrorCode.ToString()}<< ");
 
             }
             catch (Exception ex)
@@ -160,6 +162,7 @@ namespace Aplikacia_Motion_Detect.Interfaces.Service
 
         public Bitmap CropImage(Bitmap source, Rectangle section)
         {
+            Logger.Debug(VideoServiceEvents.CutImage);
             Bitmap bmp = source.Clone(section, source.PixelFormat);
             return bmp;
         }

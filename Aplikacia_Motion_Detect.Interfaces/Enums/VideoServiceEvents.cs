@@ -23,7 +23,10 @@ namespace Aplikacia_Motion_Detect.Interfaces.Enums
         SavingConfig,
         LoadingConfig,
         SettingGUIDeviceDataAll,
-        UpdateStateVideoDevice
+        UpdateStateVideoDevice,
+        CutImage,
+        MovieInZoneDetected,
+        VideoZoneTick
 
     }
 }
